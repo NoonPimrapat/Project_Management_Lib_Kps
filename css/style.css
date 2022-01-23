@@ -1,0 +1,194 @@
+body {
+    font-family: 'Prompt', sans-serif;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    position: relative;
+    margin: -8px;
+    /* text-align: center; */
+}
+
+.container {
+    position: relative;
+    margin: -8px;
+    text-align: center;
+}
+
+.grid-item {
+    background-color: #fff;
+    width: 794.6px;
+}
+
+.color-bar {
+    background-color: #00766a;
+    height: 60px;
+    width: 1536px;
+    margin: -8px;
+    margin-top: 20px;
+    justify-items: center;
+    display: flex;
+    align-items: center;
+}
+
+.triangleBottom {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 15px 7.5px 0 7.5px;
+    border-color: #000000 transparent transparent transparent;
+    line-height: 0px;
+    margin-left: 15px;
+}
+
+.logo-container {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    margin-inline-start: 50px;
+}
+
+.profile-logo {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-inline-end: 100px;
+}
+
+.mini-logo {
+    width: 80px;
+    height: 80px;
+}
+
+.mini-logo-ku {
+    width: 80px;
+    height: 90px;
+}
+
+.profile {
+    width: 80px;
+    height: 80px;
+    margin: 10px;
+}
+
+.img-resize {
+    width: 794.6px;
+    height: 650px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.imgDisplay {
+    width: 794.6px;
+    height: auto;
+}
+
+.logoDisplay {
+    margin-top: 50px;
+    width: 150px;
+    height: 180px;
+    margin-left: 315px;
+}
+
+.textTitle {
+    font-family: 'Prompt', sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+    color: #00766a;
+    text-align: center;
+}
+
+.subTitle {
+    margin-left: -50%;
+}
+
+.title {
+    font-family: 'Prompt', sans-serif;
+    font-weight: normal;
+    font-size: 24px;
+    color: #FFFFFF;
+    margin-left: 20px;
+}
+
+.text {
+    font-size: 18px;
+    font-family: 'Prompt', sans-serif;
+    color: #00766a;
+}
+
+label {
+    font-family: 'Prompt', sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    margin-left: 150px;
+}
+
+.inputFill {
+    width: 484px;
+    height: 71px;
+    background: #FFFFFF;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    border-radius: 64px;
+    margin: 15px;
+    font-size: 15px;
+    text-align: center;
+    margin-left: 150px;
+}
+
+.summitButton {
+    font-family: 'Prompt', sans-serif;
+    width: 484px;
+    height: 71px;
+    border-radius: 64px;
+    background: #00766A;
+    border: 1px solid #ffffff;
+    box-sizing: border-box;
+    align-items: center;
+    place-items: center;
+    font-style: normal;
+    font-size: 25px;
+    font-weight: bold;
+    place-items: center;
+    color: #ffffff;
+    margin-left: 150px;
+}
+
+.menuButton {
+    font-family: 'Prompt', sans-serif;
+    width: 450px;
+    height: 70px;
+    border-radius: 64px;
+    background: #E5E5E5;
+    border: 1px solid #000000;
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
+    font-style: normal;
+    font-size: 25px;
+    font-weight: bold;
+    color: #000000;
+    margin-top: 30px;
+}
+
+.menuButton2 {
+    font-family: 'Prompt', sans-serif;
+    width: 450px;
+    height: 70px;
+    margin-left: -50%;
+    border-radius: 64px;
+    background: #E5E5E5;
+    border: 1px solid #000000;
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
+    font-style: normal;
+    font-size: 25px;
+    font-weight: bold;
+    color: #000000;
+}
