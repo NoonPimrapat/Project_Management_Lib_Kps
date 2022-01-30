@@ -16,6 +16,11 @@ body {
     text-align: center;
 }
 
+.information-container {
+    margin-left: -10%;
+    margin-top: 30px;
+}
+
 .grid-item {
     background-color: #fff;
     width: 794.6px;
@@ -24,7 +29,18 @@ body {
 .color-bar {
     background-color: #00766a;
     height: 60px;
-    width: 1536px;
+    width: 790%;
+    margin: -8px;
+    margin-top: 20px;
+    justify-items: center;
+    display: flex;
+    align-items: center;
+}
+
+.color-small-bar {
+    background-color: #00766a;
+    height: 15px;
+    width: 790%;
     margin: -8px;
     margin-top: 20px;
     justify-items: center;
@@ -44,7 +60,7 @@ body {
 
 .logo-container {
     display: grid;
-    grid-template-columns: 200px 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
 .logo {
@@ -95,6 +111,14 @@ body {
     margin-left: 315px;
 }
 
+.headline {
+    font-family: 'Prompt', sans-serif;
+    font-weight: bold;
+    font-size: 38px;
+    color: #014039;
+    text-align: center;
+}
+
 .textTitle {
     font-family: 'Prompt', sans-serif;
     font-weight: bold;
@@ -113,6 +137,15 @@ body {
     font-size: 24px;
     color: #FFFFFF;
     margin-left: 20px;
+}
+
+.topic {
+    font-family: 'Prompt', sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+    color: #000000;
+    margin-left: 20%;
+    padding-top: 20px;
 }
 
 .text {
@@ -141,8 +174,31 @@ label {
     margin-left: 150px;
 }
 
-.summitButton {
+.inputFill-Information {
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 20px;
+    text-align: center;
+    align-items: baseline;
+    width: 484px;
+    height: 45px;
+    background: #FFFFFF;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    border-radius: 64px;
+    align-self: center;
+}
+
+button {
     font-family: 'Prompt', sans-serif;
+    cursor: pointer;
+    position: relative;
+    background: transparent;
+    transition: all 0.25s ease;
+    border: 1px solid #000000;
+}
+
+.summitButton {
     width: 484px;
     height: 71px;
     border-radius: 64px;
@@ -160,7 +216,7 @@ label {
 }
 
 .menuButton {
-    font-family: 'Prompt', sans-serif;
+    transition: all 0.25s ease;
     width: 450px;
     height: 70px;
     border-radius: 64px;
@@ -176,7 +232,14 @@ label {
     margin-top: 30px;
 }
 
+.menuButton:hover {
+    transform: translate(-12px, -12px);
+}
+
 .menuButton2 {
+    cursor: pointer;
+    position: relative;
+    transition: all 0.25s ease;
     font-family: 'Prompt', sans-serif;
     width: 450px;
     height: 70px;
@@ -191,4 +254,8 @@ label {
     font-size: 25px;
     font-weight: bold;
     color: #000000;
+}
+
+.menuButton2:hover {
+    transform: translate(-12px, -12px);
 }

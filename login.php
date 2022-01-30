@@ -25,11 +25,11 @@
             <h2 class="textTitle">
             เข้าสู่ระบบด้วยอีเมลผู้ใช้งาน </h2>
             <form action="/action_page.php">
-                <label for="fname">E-mail:</label><br>
-                <input type="email" id="fname" name="fname" value="E-mail" class="inputFill"><br>
-                <label for="lname"  >Password:</label><br>
-                <input type="password" id="lname" name="lname" value="Password" class="inputFill"><br><br>
-                <input type="submit" value="Login" class="summitButton">
+                <label for="email">E-mail:</label><br>
+                <input type="email" id="fname" name="fname" placeholder="E-mail" class="inputFill"><br>
+                <label for="password"  >Password:</label><br>
+                <input type="password" id="lname" name="lname" placeholder="Password"  class="inputFill"><br><br>
+                <input type="submit" value="Login" class="summitButton" onclick="parent.location='home.php'">
             </form>
         </div>
     </div>
