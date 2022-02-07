@@ -1,3 +1,13 @@
+/* Reset Browse */
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+/* Reset Browse */
+
 body {
     font-family: 'Prompt', sans-serif;
 }
@@ -119,6 +129,24 @@ body {
     text-align: center;
 }
 
+.error {
+    width: 92px;
+    margin: 0px auto;
+    padding: 0px auto;
+    border: 1px solid #a94442;
+    color: #a94442;
+    background: #f2dede;
+    border-radius: 5px;
+    text-align: left;
+}
+
+.success {
+    color: #3c763d;
+    background: #dff9d8;
+    border: 1px solid #3c763d;
+    margin-bottom: 20px;
+}
+
 .textTitle {
     font-family: 'Prompt', sans-serif;
     font-weight: bold;
@@ -205,6 +233,7 @@ button {
     background: #00766A;
     border: 1px solid #ffffff;
     box-sizing: border-box;
+    cursor: pointer;
     align-items: center;
     place-items: center;
     font-style: normal;
