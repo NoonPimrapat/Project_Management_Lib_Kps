@@ -23,7 +23,7 @@ include('config/db.php') ?>
     <div class="grid-container">
         <div class="grid-item"><img src="img/display.jpg" alt="logo ku" class="imgDisplay">
         </div>
-        <div class="grid-item">
+        <div class="grid-center">
             <img src="img/ku_logo.jpg" alt="logo ku" class="logoDisplay">
 
             <h2 class="textTitle">
@@ -39,9 +39,9 @@ include('config/db.php') ?>
                     </h3>
                 </div>
                 <?php endif ?>
-                <label>E-mail:</label><br>
+                <h2>E-mail:</h2><br>
                 <input type="email" name="email" placeholder="E-mail" class="inputFill"><br>
-                <label>Password:</label><br>
+                <h2>Password:</h2><br>
                 <input type="password" name="password" placeholder="Password" class="inputFill"><br><br>
                 <button type="submit" name="Login" class="summitButton">Login</button>
             </form>

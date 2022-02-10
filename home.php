@@ -65,11 +65,10 @@ if (isset($_GET['logout'])) {
             <Button onclick="myFunction()" class="menuButton">6. สรุปการดำเนินงานตามแผน</Button>
             <Button onclick="myFunction()" class="menuButton">7. แก้ไข/ตรวจสอบสถานะโครงการ</Button>
     </div>
-    <div class="logo-container">
+    <div class="container">
         <div class="color-bar">
             <p class="title">แผนปฎิบัติการประจำปีงบประมาณ พ.ศ. </p>
         </div>
-
     </div>
     <div class="container">
 
