@@ -1,7 +1,7 @@
 <?php
 session_start();
-
-if(!isset($_SESSION['user_email'])) {
+// ถ้าไม่loginก็จะเข้าหน้านี้ไม่ได้
+if(!isset($_SESSION['user_email'])) { 
     $_SESSION['msg'] = "You must log in first";
     header('location: login.php');
 }
@@ -11,7 +11,12 @@ if (isset($_GET['logout'])) {
     header('location: login.php');
 }
 
-?>
+// // ดึงข้อมูลผู้ใช้ออกมาจากEmail
+// //2. query ข้อมูลจากตาราง tb_member:
+// $query = "SELECT * FROM user_details ORDER BY project_style_id asc" or die("Error:" . mysqli_error());
+// //3.เก็บข้อมูลที่ query ออกมาไว้ในตัวแปร result .
+// $result_style = mysqli_query($conn, $query);
+// ?>
 
 
 <!DOCTYPE html>
@@ -41,12 +46,16 @@ if (isset($_GET['logout'])) {
 
         </div>
         <div class="profile-logo">
-            <!-- logged in user information -->
+            <!-- logged in user information เช็คว่ามีการล็อคอินเข้ามาไหม-->
             <?php if (isset($_SESSION['email'])) :?>
-            <img src="img/ku.jpg" alt="logo ku" class="profile">
-            <p><strong>
-                    <?php echo $_SESSION['username'];?></strong></p>
+            <?php echo $_SESSION['user_email'];?>
+            <!-- <img src="img/ku.jpg" alt="logo ku" class="profile"> -->
+            <p>Welcome<strong>
+                    <?php echo $_SESSION['user_email'];?></strong></p>
+            <!-- ส่วน logout -->
+            <p> <a href="home.php?logout='1'">Logout</a></p>
             <?php endif?>
+
             <div class="triangleBottom"></div>
 
         </div>
@@ -56,14 +65,15 @@ if (isset($_GET['logout'])) {
             <p class="title">แผนปฎิบัติการประจำปีงบประมาณ ปัจจุบัน </p>
         </div>
     </div>
+    <?php echo $_SESSION['user_email'];?></strong></p>
     <div class="grid-container">
-        <Button onclick="parent.location='approval.php'" class="menuButton"> 1. ขออนุมัติโครงการ</ฺutton>
-            <Button onclick="myFunction()" class="menuButton">4. ขออนุมัติเบิก-จ่าย รายครั้ง</Button>
-            <Button onclick="myFunction()" class="menuButton">2. รายงานผลการดำเนินงาน</Button>
-            <Button onclick="myFunction()" class="menuButton"> 5. ขอนุมัติปิดโครงการ</Button>
-            <Button onclick="myFunction()" class="menuButton">3. ขออนุมัติปรับแผนโครงการ</Button>
-            <Button onclick="myFunction()" class="menuButton">6. สรุปการดำเนินงานตามแผน</Button>
-            <Button onclick="myFunction()" class="menuButton">7. แก้ไข/ตรวจสอบสถานะโครงการ</Button>
+        <Button onclick="parent.location='approval.php'" class="menuButton"> 1. ขออนุมัติโครงการ</Button>
+        <Button onclick="myFunction()" class="menuButton">4. ขออนุมัติเบิก-จ่าย รายครั้ง</Button>
+        <Button onclick="myFunction()" class="menuButton">2. รายงานผลการดำเนินงาน</Button>
+        <Button onclick="myFunction()" class="menuButton"> 5. ขอนุมัติปิดโครงการ</Button>
+        <Button onclick="myFunction()" class="menuButton">3. ขออนุมัติปรับแผนโครงการ</Button>
+        <Button onclick="myFunction()" class="menuButton">6. สรุปการดำเนินงานตามแผน</Button>
+        <Button onclick="myFunction()" class="menuButton">7. แก้ไข/ตรวจสอบสถานะโครงการ</Button>
     </div>
     <div class="container">
         <div class="color-bar">

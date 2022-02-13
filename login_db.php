@@ -19,23 +19,33 @@
             $password = md5($password);
             $query = "SELECT * FROM user_details WHERE user_email = '$email' AND user_password = '$password'";
             $result = mysqli_query($conn,$query);
-         
+            $row = mysqli_fetch_array($result);
 
             if (mysqli_num_rows($result) == 1) {
                 $_SESSION['user_email']=$email;
+            
+            if ($row["user_status"]) {
                 $_SESSION['success']='Your are now loggen in';
                 header("location: home.php");
+            }else{
+                array_push($errors, "Wrong Username or Password");
+                $_SESSION['error'] = "Wrong Username or Password!";
+                header("location: login.php");
+            }
+
+                // $_SESSION['success']='Your are now loggen in';
+                // header("location: home.php");
             }else {
                 array_push($errors, "Wrong Username or Password");
                 $_SESSION['error'] = "Wrong Username or Password!";
                 header("location: login.php");
-                echo "Wrong Username or Password!";
+                // echo "Wrong Username or Password!";
             }
      
         }
         else{
             array_push($errors,"Wrong email/password combination");
-    }
+    } 
 
 }
 ?>
