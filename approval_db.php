@@ -97,6 +97,11 @@
         $user_check_query = "SELECT * FROM project_info WHERE project_name = '$pro_name'  LIMIT 1";
         $query = mysqli_query($conn, $user_check_query);
         $result = mysqli_fetch_assoc($query);
+
+        if ($result) { // if user exists
+            if ($result['project_name'] === $pro_name) {
+                array_push($errors, "project_name already exists");
+            }}
         
         if (empty($pro_name)) {
             array_push($errors, "pro_name is required");
