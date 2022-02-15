@@ -54,11 +54,7 @@
 
         var cell1 = row.insertCell(0);
 
-
-
-
-        cell1.innerHTML = "<input type='text' name='project_name'class='inputFill-Information'" + count_rows +
-            " value required>";
+        cell1.innerHTML = "<input class='none-border' type='text'>" + count_rows + "value required>";
 
     }
 
@@ -140,7 +136,7 @@
                         <label for="ภายใต้ยุทธศาสตร์" class=" topic">ภายใต้ยุทธศาสตร์ : </label>
                     </div>
                     <div class="col-65">
-                        <input type="text" name="pro_strategy" class="inputFill-Information" required>
+                        <input type="text" name="pro_strategy" class="inputFill-Information">
                     </div>
                 </div>
                 <div class="row">
@@ -148,7 +144,7 @@
                         <label for="ภายใต้แผนงานประจำ" class="topic">ภายใต้แผนงานประจำ : </label>
                     </div>
                     <div class="col-65">
-                        <input type="text" name="pro_routine" class="inputFill-Information" required>
+                        <input type="text" name="pro_routine" class="inputFill-Information">
                     </div>
                 </div>
                 <div class="row">
@@ -214,7 +210,7 @@
                         <input type="text" name="pro_place" class="inputFill-Information" required>
                     </div>
                 </div>
-                <!-- <div class="row">
+                <div class="row">
                     <div class="col-25">
                         <label for="งบประมาณ " class="topic">งบประมาณ : </label>
                     </div>
@@ -229,13 +225,6 @@
                         <label for="งบประมาณ " class="topic">1. ค่าตอบแทน : </label>
                     </div>
                     <div class="col-65">
-                        <tr><input type="text" id="project_name" name="project_compensation"
-                                class="inputFill-Information" required>
-                            <td>รายการ</td>
-                            <td>จำนวน</td>
-                            <td>ราคา</td>
-                        </tr>
-
 
                         <table class="budget">
                             <tr>
@@ -244,42 +233,43 @@
                                 <th>ราคา</th>
                             </tr>
                             <tr>
-                                <th>รายการ</th>
-                                <th>จำนวน</th>
-                                <th>ราคา</th>
+                                <th><input class="none-border" type="text"></th>
+                                <th><input class="none-border" type="text"></th>
+                                <th><input class="none-border" type="text"></th>
                             </tr>
-                        </table> -->
+                        </table>
 
-                <!-- <button class="add-drop-tableButton" onclick="add_row()">+</button>
-                <button class="add-drop-tableButton" onclick="del_row()">-</button>
+                        <button class="add-drop-tableButton" onclick="add_row()">+</button>
+                        <button class="add-drop-tableButton" onclick="del_row()">-</button>
 
-            </div>
-    </div>
-    <div class="row">
-        <div class="col-25">
-            <label for="งบประมาณ" class="topic">2. ค่าใช้สอย : </label>
-        </div>
-        <div class="col-65">
-            <input type="text" id="project_cost" name="project_cost" class="inputFill-Information" required>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-25">
-            <label for="งบประมาณ" class="topic">2. ค่าวัสดุ : </label>
-        </div>
-        <div class="col-65">
-            <input type="text" id="project_material" name="project_material" class="inputFill-Information" required>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-65">
-            <label class="topic">หมายเหตุ </label><br>
-            <label class="topic">1. ใช้งบประมาณเงินรายได้
-                โครงการตามแผนยุทธศาสตร์<br>2. ขอถัวเฉลี่ยจ่ายทุกรายการ </label><br>
-        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="งบประมาณ" class="topic">2. ค่าใช้สอย : </label>
+                    </div>
+                    <div class="col-65">
+                        <input type="text" id="project_cost" name="project_cost" class="inputFill-Information" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="งบประมาณ" class="topic">3. ค่าวัสดุ : </label>
+                    </div>
+                    <div class="col-65">
+                        <input type="text" id="project_material" name="project_material" class="inputFill-Information"
+                            required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-65">
+                        <label class="topic">หมายเหตุ </label><br>
+                        <label class="topic">1. ใช้งบประมาณเงินรายได้
+                            โครงการตามแผนยุทธศาสตร์<br>2. ขอถัวเฉลี่ยจ่ายทุกรายการ </label><br>
+                    </div>
 
-    </div> -->
-                <!-- <div class="row">
+                </div>
+                <div class="row">
                     <div class="col-25">
                         <label for="ตัวชี้วัดโครงการ" class="topic">ตัวชี้วัดโครงการ : </label>
                     </div>
@@ -317,7 +307,7 @@
                             class="inputFill-Information-Datepicker" required>
                     </div>
                 </div>
- -->
+
 
                 <div class="row">
                     <div class="col-25">

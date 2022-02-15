@@ -146,6 +146,7 @@
             array_push($errors, "responsible_man is required");
             $_SESSION['error'] = "responsible_man is required";
         }
+        echo ("error:");
         echo  count($errors);
 
         if (count($errors)==0) {
