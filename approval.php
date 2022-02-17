@@ -43,29 +43,28 @@
     <link rel="stylesheet" href="css/style.css">
 
     <script>
-    function add_row() {
+    function addRow() {
+        "use strict";
 
-        var table = document.getElementById("myTable");
+        var table = document.getElementById("table");
 
-        count_rows = table.getElementsByTagName("tr").length;
+        var row = document.createElement("tr");
+        var td1 = document.createElement("td");
+        var td2 = document.createElement("td");
+        var td3 = document.createElement("td");
 
+        td1.innerHTML = document.getElementById("item").value;
+        td2.innerHTML = document.getElementById("quantity").value;
+        td3.innerHTML = document.getElementById("price").value;
 
-        var row = table.insertRow(count_rows);
+        row.appendChild(td1);
+        row.appendChild(td2);
+        row.appendChild(td3);
 
-        var cell1 = row.insertCell(0);
+        table.children[0].appendChild(row);
+        reset(table);
 
-        cell1.innerHTML = "<input class='none-border' type='text'>" + count_rows + "value required>";
-
-    }
-
-    function del_row() {
-
-        var table = document.getElementById("myTable");
-
-        count_rows = table.getElementsByTagName("tr").length;
-
-        document.getElementById("myTable").deleteRow(count_rows - 1);
-    }
+    };
     </script>
     <title>
         สำนักงานหอสมุดกำแพงแสน
@@ -225,24 +224,40 @@
                         <label for="งบประมาณ " class="topic">1. ค่าตอบแทน : </label>
                     </div>
                     <div class="col-65">
-
                         <table class="budget">
+                            <tr>
+                                <th>
+                                    รายการ
+                                    <input type="text" name="item" id="item" />
+                                </th>
+                                <th>
+                                    จำนวน
+                                    <input type="text" name="quantity" id="quantity" />
+                                </th>
+                                <th>
+                                    ราคา
+                                    <input type="text" name="price" id="price" />
+                                </th>
+                            </tr>
+                        </table>
+                    </div>
+                    <input type="button" value="เพิ่มรายการ" onClick="addRow()" id="add" class="add-drop-tableButton">
+
+                    <div class="col-25">
+
+
+                    </div>
+                    <div class="col-65">
+                        <table id="table" class="budget">
                             <tr>
                                 <th>รายการ</th>
                                 <th>จำนวน</th>
                                 <th>ราคา</th>
                             </tr>
-                            <tr>
-                                <th><input class="none-border" type="text"></th>
-                                <th><input class="none-border" type="text"></th>
-                                <th><input class="none-border" type="text"></th>
-                            </tr>
                         </table>
-
-                        <button class="add-drop-tableButton" onclick="add_row()">+</button>
-                        <button class="add-drop-tableButton" onclick="del_row()">-</button>
-
                     </div>
+
+
                 </div>
                 <div class="row">
                     <div class="col-25">
@@ -314,7 +329,8 @@
                         <label for="ลักษณะโครงการ : " class="topic">ผู้รับผิดชอบโครงการ : </label>
                     </div>
                     <div class="col-65">
-                        <input type="text" name="responsible_man" class="inputFill-Information" required>
+                        <input type="text" name="responsible_man" value="{$_SESSION['user_email']}"
+                            class="inputFill-Information" required>
                     </div>
                 </div>
                 <div class="container-button">

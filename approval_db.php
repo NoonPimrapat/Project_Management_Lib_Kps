@@ -152,7 +152,14 @@
             $_SESSION['error'] = "responsible_man is required";
         }
         echo ("error:");
-        echo  count($errors);
+        foreach($errors as $value){
+
+            //Print the element out.
+        
+            echo  $value; '<br>';
+        
+        }
+       
 
         if (count($errors)==0) {
          

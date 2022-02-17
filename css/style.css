@@ -409,8 +409,8 @@ button {
 }
 
 .add-drop-tableButton {
-    width: 35px;
-    height: 35px;
+    width: auto;
+    height: auto;
     border-radius: 64px;
     background: #00766a;
     border: 2px solid #000;
@@ -423,7 +423,8 @@ button {
     justify-content: center;
     justify-self: center;
     font-style: normal;
-    font-size: 25px;
+    font-size: 15px;
+    padding: 2px;
     font-weight: bold;
     color: #ffffff;
 }
