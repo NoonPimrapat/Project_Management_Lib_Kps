@@ -20,32 +20,37 @@
             $query = "SELECT * FROM user_details WHERE user_email = '$email' AND user_password = '$password'";
             $result = mysqli_query($conn,$query);
             $row = mysqli_fetch_array($result);
+            // echo $row . "\n";
+            foreach($row as $rows){
+                // echo $row . "\n";
+                echo("<script>console.log('result ".$row."');</script>");
+};
 
-            if (mysqli_num_rows($result) == 1) {
-                $_SESSION['user_email']=$email;
-            
-            if ($row["user_status"]) {
-                $_SESSION['success']='Your are now loggen in';
-                header("location: home.php");
-            }else{
-                array_push($errors, "Wrong Username or Password");
-                $_SESSION['error'] = "Wrong Username or Password!";
-                header("location: login.php");
-            }
+if (mysqli_num_rows($result) == 1) {
+$_SESSION['user_email']=$email;
+$_SESSION['user_id']=$row["user_id"];
+if ($row["user_status"]) {
+$_SESSION['success']='Your are now loggen in';
+header("location: home.php");
+}else{
+array_push($errors, "Wrong Username or Password");
+$_SESSION['error'] = "Wrong Username or Password!";
+header("location: login.php");
+}
 
-                // $_SESSION['success']='Your are now loggen in';
-                // header("location: home.php");
-            }else {
-                array_push($errors, "Wrong Username or Password");
-                $_SESSION['error'] = "Wrong Username or Password!";
-                header("location: login.php");
-                // echo "Wrong Username or Password!";
-            }
-     
-        }
-        else{
-            array_push($errors,"Wrong email/password combination");
-    } 
+// $_SESSION['success']='Your are now loggen in';
+// header("location: home.php");
+}else {
+array_push($errors, "Wrong Username or Password");
+$_SESSION['error'] = "Wrong Username or Password!";
+header("location: login.php");
+// echo "Wrong Username or Password!";
+}
+
+}
+else{
+array_push($errors,"Wrong email/password combination");
+}
 
 }
 ?>

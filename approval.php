@@ -1,6 +1,9 @@
 <?php
         session_start(); 
+
         include('config/db.php');
+        $user_email = $_SESSION['user_email'];
+        $user_id=$_SESSION['user_id'];
         // ถ้าไม่loginก็จะเข้าหน้านี้ไม่ได้
         if(!isset($_SESSION['user_email'])) { 
             $_SESSION['msg'] = "You must log in first";
@@ -24,6 +27,13 @@
         //3.เก็บข้อมูลที่ query ออกมาไว้ในตัวแปร result .
         $result_style = mysqli_query($conn, $query2);
 ?>
+<?php
+        //2. query ข้อมูลจากตาราง tb_member:
+        $queryUsername = "SELECT * FROM user_details WHERE user_email = '$user_email'" or die("Error:" . mysqli_error());
+        //3.เก็บข้อมูลที่ query ออกมาไว้ในตัวแปร result .
+        $result_Username = mysqli_query($conn, $queryUsername);
+       
+?>
 <!DOCTYPE html>
 <html>
 
@@ -32,7 +42,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@200;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
         integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -57,14 +67,35 @@
         td2.innerHTML = document.getElementById("quantity").value;
         td3.innerHTML = document.getElementById("price").value;
 
-        row.appendChild(td1);
-        row.appendChild(td2);
-        row.appendChild(td3);
 
-        table.children[0].appendChild(row);
-        reset(table);
-
+        if (document.getElementById("item").value == '' ||
+            document.getElementById("quantity").value == '' ||
+            document.getElementById("price").value == '') {
+            <?php
+                 $errorsAdd = array();
+                array_push($errorsAdd, "Enter is required");
+                $_SESSION['errorAdd'] = "Enter is required";
+                
+            ?>
+        } else {
+            row.appendChild(td1);
+            row.appendChild(td2);
+            row.appendChild(td3);
+            table.children[0].appendChild(row);
+            // Reset Value in table after submit
+            document.getElementById("item").value = '';
+            document.getElementById("quantity").value = '';
+            document.getElementById("price").value = '';
+        }
     };
+
+    function del_row() {
+
+        var table = document.getElementById("table");
+
+        table.removeChild(table.lastElementChild);
+
+    }
     </script>
     <title>
         สำนักงานหอสมุดกำแพงแสน
@@ -72,18 +103,60 @@
 </head>
 
 <body>
-    <div class="logo-container">
-        <div class="logo">
-            <img src="img/ku.jpg" alt="logo ku" class="mini-logo">
-            <img src="img/ku_logo.jpg" alt="logo ku" class="mini-logo-ku">
+    <header>
+        <!-- partial:index.partial.html -->
+        <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+
+        <div class="wrapper">
+            <div class="navbar">
+                <div class="navbar_left">
+                    <div class="logo">
+                        <img src="img/ku.jpg" alt="logo ku" class="mini-logo">
+                        <img src="img/ku_logo.jpg" alt="logo ku" class="mini-logo-ku">
+                    </div>
+                </div>
+                <div>
+                    <div class="logo">
+                        <p class="headline">ขออนุมัติโครงการ</p>
+                    </div>
+
+                </div>
+
+                <div class="navbar_right">
+                    <div class="profile">
+                        <div class="icon_wrap">
+                            <img src="img/ku.jpg" alt="profile_pic">
+                            <span class="name"><?php echo $_SESSION['user_email'];?></span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+
+                        <div class="profile_dd">
+                            <ul class="profile_ul">
+                                <!-- logged in user information เช็คว่ามีการล็อคอินเข้ามาไหม -->
+                                <?php if (isset($_SESSION['email'])) :?>
+                                <?php endif?>
+                                <li class="profile_li"><a class="profile" href="#"><span class="picon"><i
+                                                class="fas fa-user-alt"></i>
+                                        </span>Profile</a>
+                                    <div class="btn">My Account</div>
+                                </li>
+                                <li><a class="address" href="#"><span class="picon"><i
+                                                class="fas fa-map-marker"></i></span>Address</a></li>
+
+                                <li><a class="logout" href="home.php?logout='1'"><span class="picon"><i
+                                                class="fas fa-sign-out-alt"></i></span>Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <p class="headline">ขออนุมัติโครงการ</p>
-        <div class="profile-logo">
-            <img src="img/ku.jpg" alt="logo ku" class="profile">
-            <p><strong></strong></p>
-            <div class="triangleBottom"></div>
-        </div>
-    </div>
+        <!-- partial -->
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+        <script src="script.js"></script>
+
+    </header>
+
     <div class="logo-container">
         <div class="color-small-bar">
         </div>
@@ -232,19 +305,35 @@
                                 </th>
                                 <th>
                                     จำนวน
-                                    <input type="text" name="quantity" id="quantity" />
+                                    <input type="number" name="quantity" id="quantity" />
                                 </th>
                                 <th>
                                     ราคา
-                                    <input type="text" name="price" id="price" />
+                                    <input type="number" name="price" id="price" />
                                 </th>
                             </tr>
                         </table>
+
                     </div>
+
+
+
                     <input type="button" value="เพิ่มรายการ" onClick="addRow()" id="add" class="add-drop-tableButton">
+                    <input type="button" value="ลบรายการ" onClick="del_row()" id="del" class="add-drop-tableButton">
 
+                </div>
+                <?php if (isset($_SESSION['errorAdd'])) : ?>
+                <div class="error">
+                    <h3>
+                        <?php 
+                        echo $_SESSION['errorAdd'];
+                        unset($_SESSION['errorAdd']);
+                    ?>
+                    </h3>
+                </div>
+                <?php endif ?>
+                <div class="row">
                     <div class="col-25">
-
 
                     </div>
                     <div class="col-65">
@@ -255,10 +344,11 @@
                                 <th>ราคา</th>
                             </tr>
                         </table>
+                        <label for="รวม" class="topic">รวม : </label>
+
                     </div>
-
-
                 </div>
+
                 <div class="row">
                     <div class="col-25">
                         <label for="งบประมาณ" class="topic">2. ค่าใช้สอย : </label>
@@ -329,8 +419,11 @@
                         <label for="ลักษณะโครงการ : " class="topic">ผู้รับผิดชอบโครงการ : </label>
                     </div>
                     <div class="col-65">
-                        <input type="text" name="responsible_man" value="{$_SESSION['user_email']}"
-                            class="inputFill-Information" required>
+
+                        <input type="text" name="responsible_man"
+                            value="<?php foreach($result_Username as $results){?><?php  echo $results["user_firstname"];?> &nbsp; <?php echo $results["user_lastname"]?> <?php } ?>"
+                            class="inputFill-Information" readonly>
+
                     </div>
                 </div>
                 <div class="container-button">
@@ -340,6 +433,7 @@
             </div>
 
         </form>
+
     </div>
 
 

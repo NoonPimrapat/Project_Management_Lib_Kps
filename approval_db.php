@@ -3,6 +3,9 @@
     // include('config/db.php');
     session_start();
     include('config/db.php');
+    $user_id=$_SESSION['user_id'];
+    // echo  ("$user_id");
+    // echo  $user_id;
     // echo '<pre>';
     // print_r($_POST);
     // echo '</pre>';
@@ -64,25 +67,25 @@
     // ค่าเป้าหมาย
 
     // ผู้รับผิดชอบโครงการ
-    isset($_REQUEST['responsible_man']) ? $responsible_man = $_REQUEST['responsible_man'] : $responsible_man = '';
-    echo $responsible_man;
+    isset($_REQUEST['user_id']) ? $user_id = $_REQUEST['user_id'] : $user_id = '';
+    echo $user_id;
     // แผนการดำเนินงาน
     
-        $pro_name = mysqli_real_escape_string($conn,$_POST['pro_name']);
-        $pro_style = mysqli_real_escape_string($conn,$_POST['pro_style']);
-        $pro_strategy = mysqli_real_escape_string($conn,$_POST['pro_strategy']);
-        $pro_routine = mysqli_real_escape_string($conn,$_POST['pro_routine']);
-        $pro_department = mysqli_real_escape_string($conn,$_POST['pro_department']);
-        $pro_reason = mysqli_real_escape_string($conn,$_POST['pro_reason']);
-        $pro_objective = mysqli_real_escape_string($conn,$_POST['pro_objective']);
-        $pro_operation = mysqli_real_escape_string($conn,$_POST['pro_operation']);
-        $pro_dateStart = mysqli_real_escape_string($conn,$_POST['pro_dateStart']);
-        $pro_dateEnd = mysqli_real_escape_string($conn,$_POST['pro_dateEnd']);
-        $pro_place = mysqli_real_escape_string($conn,$_POST['pro_place']);
+        // $pro_name = mysqli_real_escape_string($conn,$_POST['pro_name']);
+        // $pro_style = mysqli_real_escape_string($conn,$_POST['pro_style']);
+        // $pro_strategy = mysqli_real_escape_string($conn,$_POST['pro_strategy']);
+        // $pro_routine = mysqli_real_escape_string($conn,$_POST['pro_routine']);
+        // $pro_department = mysqli_real_escape_string($conn,$_POST['pro_department']);
+        // $pro_reason = mysqli_real_escape_string($conn,$_POST['pro_reason']);
+        // $pro_objective = mysqli_real_escape_string($conn,$_POST['pro_objective']);
+        // $pro_operation = mysqli_real_escape_string($conn,$_POST['pro_operation']);
+        // $pro_dateStart = mysqli_real_escape_string($conn,$_POST['pro_dateStart']);
+        // $pro_dateEnd = mysqli_real_escape_string($conn,$_POST['pro_dateEnd']);
+        // $pro_place = mysqli_real_escape_string($conn,$_POST['pro_place']);
         // $project_compensation = mysqli_real_escape_string($conn,$_POST['compensation']);
         // $project_cost = mysqli_real_escape_string($conn,$_POST['cost_id']);
         // $project_material = mysqli_real_escape_string($conn,$_POST['material']);
-        $responsible_man = mysqli_real_escape_string($conn,$_POST['responsible_man']);
+        // $user_id = mysqli_real_escape_string($conn,$_POST['user_id']);
 
 
         // if (empty($email)) {
@@ -92,12 +95,14 @@
         // if (empty($password)) {
         //     array_push($errors,"Password is required");
         // }
+        $date=date("Y-m-d H:i:s");
 
+  
         
         $user_check_query = "SELECT * FROM project_info WHERE project_name = '$pro_name'  LIMIT 1";
         $query = mysqli_query($conn, $user_check_query);
         $result = mysqli_fetch_assoc($query);
-
+        $user_id=$_SESSION['user_id'];
         if ($result) { // if user exists
             if ($result['project_name'] === $pro_name) {
                 array_push($errors, "project_name already exists");
@@ -147,9 +152,9 @@
             array_push($errors, "pro_place is required");
             $_SESSION['error'] = "pro_place is required";
         }
-        if (empty($responsible_man)) {
-            array_push($errors, "responsible_man is required");
-            $_SESSION['error'] = "responsible_man is required";
+        if (empty($user_id)) {
+            array_push($errors, "user_id is required");
+            $_SESSION['error'] = "user_id is required";
         }
         echo ("error:");
         foreach($errors as $value){
@@ -163,14 +168,52 @@
 
         if (count($errors)==0) {
          
-            $sql = "INSERT INTO project_info(project_name, project_style, routine_plan, department_id, reason, period_op, period_ed, user_id, project_place, project_strategy) 
-            VALUES ('$pro_name','$pro_style','$pro_routine','$pro_department','$pro_reason','$pro_dateStart','$pro_dateEnd','$responsible_man','$pro_place','$pro_strategy')";
+            $sql = "INSERT INTO project_info(project_name, project_style, routine_plan, department_id, reason, period_op, period_ed, user_id, project_place, project_strategy,submit_date) 
+            VALUES ('$pro_name','$pro_style','$pro_routine','$pro_department','$pro_reason','$pro_dateStart','$pro_dateEnd','$user_id','$pro_place','$pro_strategy','$date')";
             mysqli_query($conn,$sql);
 
             $_SESSION['pro_name'] = $pro_name;
             $_SESSION['success'] = "You are save project name";
+            
+if ($_SESSION['success']=="You are save project name") {
+    # code...
+
+// ส่วนของการเก็บข้อมูลเข้าในตาราง
+            $sqlGetID = "SELECT * FROM project_info WHERE project_name = '$pro_name' ";
+            $result = mysqli_query($conn,$sqlGetID);
+            // เช็คไอดีโปรเจค
+            foreach($result as $values){
+
+                //Print the element out.
+            
+                echo  $values["project_id"];
+            
+            }
+      
+
+            // for ($i = 1; $i<= (int)$_POST["hdnCount"]; $i++){
+            //     if(isset($_POST["txtCustomerID$i"]))
+            //     {
+            //     if($_POST["txtCustomerID$i"] != "" &&
+            //     $_POST["txtName$i"] != "" &&
+            //     $_POST["txtEmail$i"] != "" &&
+            //     $_POST["txtCountryCode$i"] != "" &&
+            //     $_POST["txtBudget$i"] != "" &&
+            //     $_POST["txtUsed$i"] != "")
+            //     {
+            //     $sql = "INSERT INTO customer (CustomerID, Name, Email, CountryCode, Budget, Used)
+            //     VALUES ('".$_POST["txtCustomerID$i"]."','".$_POST["txtName$i"]."','".$_POST["txtEmail$i"]."'
+            //     ,'".$_POST["txtCountryCode$i"]."','".$_POST["txtBudget$i"]."','".$_POST["txtUsed$i"]."')";
+            //     $query = mysqli_query($conn,$sql);
+            //     }
+            //     }
+            //     }  
+                // ส่วนของการเก็บข้อมูลเข้าในตาราง
+            }
         }
-    
+  
 
 }
+
+
 ?>
