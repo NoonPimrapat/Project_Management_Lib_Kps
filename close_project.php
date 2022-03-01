@@ -78,7 +78,7 @@ $result_Username = mysqli_query($conn, $queryUsername);
                 </div>
                 <div>
                     <div class="logo">
-                        <p class="headline">ขออนุมัติโครงการ</p>
+                        <p class="headline">ขออนุมัติปิดโครงการ</p>
                     </div>
 
                 </div>

@@ -31,7 +31,7 @@ p {
 }
 
 
-/* ลอก */
+/* header  */
 
 a {
     color: #7f8db0;
@@ -338,6 +338,18 @@ a {
     margin-top: 6px;
 }
 
+.col-50 {
+    float: left;
+    margin-top: 6px;
+    margin-left: 20%;
+}
+
+.col-50-2 {
+    float: right;
+    width: 50%;
+    margin-top: 6px;
+}
+
 .row:after {
     content: "";
     display: table;
@@ -361,7 +373,6 @@ table#profile {
 th,
 td,
 tr {
-    border: 1px solid black;
     border-collapse: collapse;
     text-align: center;
     align-items: center;
@@ -618,12 +629,22 @@ h2 {
     padding-top: 20px;
 }
 
+.Profiletopic {
+    font-family: 'Prompt', sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+    color: #000000;
+    /* margin-left: 20%; */
+    padding-top: 20px;
+    text-align: left;
+}
+
 .detail {
     font-family: 'Prompt', sans-serif;
     font-weight: normal;
     font-size: 24px;
     color: #000000;
-    /* margin-left: 20%; */
+    margin-left: 10%;
     padding-top: 20px;
     text-align: left;
 }
@@ -804,4 +825,63 @@ button {
 
 .menuButton2:hover {
     transform: translate(-12px, -12px);
+}
+
+.checkbox {
+    width: 100%;
+    display: inline-block;
+}
+
+
+/* checkbox */
+
+.checkboxContainer {
+    float: left;
+    width: 50%;
+    margin-top: 6px;
+    margin-right: 25px;
+}
+
+.checkboxLabel {
+    font-family: 'Prompt', sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+    color: #000000;
+    padding-top: 6px;
+    text-align: left;
+    display: inline-block;
+}
+
+label-1 {
+    font-family: 'Prompt', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    display: inline-block;
+    margin-left: 6.5%;
+}
+
+
+/* ไฟล์อัพโหลด */
+
+.custom-file-upload {
+    width: 152px;
+    height: 38px;
+    border-radius: 64px;
+    position: relative;
+    background: #fff;
+    border: 1px solid #000;
+    box-sizing: border-box;
+    display: inline-block;
+    cursor: pointer;
+    align-items: center;
+    place-items: center;
+    font-family: 'Prompt', sans-serif;
+    font-style: normal;
+    font-size: 25px;
+    font-weight: bold;
+    color: #000;
+    text-align: center;
+    /* margin-left: 360px;
+    margin-top: 20px; */
+    /* padding-left: 25px; */
 }

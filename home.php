@@ -63,7 +63,7 @@ if (isset($_GET['logout'])) {
                                 <!-- logged in user information เช็คว่ามีการล็อคอินเข้ามาไหม -->
                                 <?php if (isset($_SESSION['email'])) :?>
                                 <?php endif?>
-                                <li class="profile_li"><a class="profile" href="#"><span class="picon"><i
+                                <li class="profile_li"><a class="profile" href="profile.php"><span class="picon"><i
                                                 class="fas fa-user-alt"></i>
                                         </span>Profile</a>
                                     <div class="btn">My Account</div>
@@ -92,12 +92,13 @@ if (isset($_GET['logout'])) {
 
     <div class="grid-container">
         <Button onclick="parent.location='approval.php'" class="menuButton"> 1. ขออนุมัติโครงการ</Button>
-        <Button onclick="myFunction()" class="menuButton">4. ขออนุมัติเบิก-จ่าย รายครั้ง</Button>
-        <Button onclick="myFunction()" class="menuButton">2. รายงานผลการดำเนินงาน</Button>
-        <Button onclick="myFunction()" class="menuButton"> 5. ขอนุมัติปิดโครงการ</Button>
-        <Button onclick="myFunction()" class="menuButton">3. ขออนุมัติปรับแผนโครงการ</Button>
-        <Button onclick="myFunction()" class="menuButton">6. สรุปการดำเนินงานตามแผน</Button>
-        <Button onclick="myFunction()" class="menuButton">7. แก้ไข/ตรวจสอบสถานะโครงการ</Button>
+        <Button onclick="parent.location='disbursement.php'" class="menuButton">4. ขออนุมัติเบิก-จ่าย
+            รายครั้ง</Button>
+        <Button onclick="parent.location='performance_report.php'" class="menuButton">2. รายงานผลการดำเนินงาน</Button>
+        <Button onclick="parent.location='close_project.php'" class="menuButton"> 5. ขอนุมัติปิดโครงการ</Button>
+        <Button onclick="parent.location='adjust_project.php'" class="menuButton">3. ขออนุมัติปรับแผนโครงการ</Button>
+        <Button onclick="parent.location='adjust_project.php'" class="menuButton">6. สรุปการดำเนินงานตามแผน</Button>
+        <Button onclick="parent.location='adjust_project.php'" class="menuButton">7. แก้ไข/ตรวจสอบสถานะโครงการ</Button>
     </div>
     <div class="container">
         <div class="color-bar">
