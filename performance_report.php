@@ -60,6 +60,9 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
     <!-- plugin -->
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+    <!-- อัพรูปแสดงรูป -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.wallform.js"></script>
 </head>
 
 <body>
@@ -142,7 +145,7 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                     </div>
 
                     <div class="col-65">
-                        <select name="pro_name" class="inputFill-Information" required>
+                        <select name="pro_name" class="inputFill-Information" id="project_name" required>
                             <option value=""> กรุณาเลือก </option>
                             <?php foreach ($result_ProjectName as $results) { ?>
                             <option value="<?php echo $results["project_id"]; ?>">
@@ -156,7 +159,7 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                 </div>
                 <div class="row">
                     <div class="col-25">
-                        <label for="ลักษณะโครงการ : " class="topic">แผนการดำเนินงาน : </label>
+                        <label for="ลักษณะโครงการ : " class="topic">ผลการดำเนินงาน : </label>
                     </div>
                     <div class="col-65 section-table">
                         <table class="table" style="margin-top: 25px;">
@@ -392,8 +395,26 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                     <button type="submit" name="Add_Project" class="summitButton">Submit</button>
                 </div>
             </div>
+            <!-- ส่วนแสดงภาพที่อัพโหลดเข้าไป -->
+            <div id='preview'>
+            </div>
 
-        </form>
+            <form id="imageform" method="post" enctype="multipart/form-data" action='ajaxImageUpload.php'
+                style="clear:both">
+
+                <div id='imageloadstatus' style='display:none'>
+                    <img src="loading.gif" alt="Uploading...." />
+                </div>
+                <div id='imageloadbutton'>
+                    <!-- เลือกได้หลายๆไฟล์ในครั้งเดียว   name="photos[]"  multiple="true"  -->
+                    <br>
+                    เลือกไฟล์ภาพ :
+                    <input type="file" name="photos[]" id="photoimg" multiple="true" />
+                </div>
+            </form>
+    </div>
+
+    </form>
 
     </div>
     <script src="./bahttex.js"></script>
@@ -529,6 +550,36 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
         $(this).closest('tr').remove();
     })
     </script>
+    <!-- AutoFill -->
+    <!-- <script type="text/javascript">
+    $(document).ready(function() {
+
+        $("#project_name").change(function() {
+            $.ajax({
+                    url: "ajax_auto.php",
+                    type: "POST",
+                    data: 'sCusID=' + $("#project_name").val()
+                })
+                .success(function(result) {
+
+                    if (result == '') {
+                        $('input[type=text]').val('');
+                    } else {
+                        $.each(result, function(key, inval) {
+
+                            $("#txtMemID").val(inval["id_mem"]);
+                            $("#txtUsed").val(inval["user"]);
+                            $("#txtPass").val(inval["pass"]);
+                            $("#txtEmail").val(inval["email"]);
+                        });
+
+                    }
+
+                });
+
+        });
+    });
+    </script> -->
 
 </body>
 

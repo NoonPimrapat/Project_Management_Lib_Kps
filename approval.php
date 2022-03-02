@@ -142,11 +142,15 @@ $result_Username = mysqli_query($conn, $queryUsername);
                     <div class="col-25">
                         <label for="โครงการ" class="topic">โครงการ:</label>
                     </div>
-
                     <div class="col-65">
                         <input type="text" name="pro_name" class="inputFill-Information" required>
                     </div>
-
+                </div>
+                <div class="information-container">
+                    <label-1 for="ตามแผนปฎิบัติการประจำปีงบประมาณพศ" class="topic">ตามแผนปฎิบัติการประจำปีงบประมาณ พ.ศ.
+                        :
+                    </label-1>
+                    <input type="text" name="project_fiscal_year" class="inputFill-Information-small">
                 </div>
                 <div class="row">
                     <div class="col-25">

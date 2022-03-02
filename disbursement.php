@@ -148,7 +148,6 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                             </option>
                             <?php } ?>
                         </select>
-
                     </div>
 
                 </div>

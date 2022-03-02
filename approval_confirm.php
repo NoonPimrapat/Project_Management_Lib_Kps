@@ -27,6 +27,9 @@ foreach ($result_project as $values) {
     $department_id = $values["department_id"]; //ไอดีฝ่าย
     $project_fiscal_year = $values["project_fiscal_year"]; //ชื่อผู้อำนวยการ
     $submit_date = $values["submit_date"]; //วันที่
+    $project_sum_total=$values["project_sum_total"];
+    $project_sum_thai;
+    
     // list($y,$m,$d,$h,$mi)=explode('-',':',$submit_date);
     // // echo$d.'/'.$m.'/'.$y;
     // $date=$d.'/'.$m.'/'.$y;
@@ -105,6 +108,7 @@ foreach ($result_user as $values) {
     <!-- plugin -->
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+    <script src="./bahttex.js"></script>
 </head>
 
 <body>
@@ -197,7 +201,7 @@ foreach ($result_user as $values) {
         </div>
         <div class="inline">
             <p>เรื่อง<u class="border-bottom"> ขออนุมัติจัด
-                    โครงการ<?php echo $project_name?>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u>
+                    โครงการ<?php echo $project_name?>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u>
             </p>
 
         </div>
@@ -214,11 +218,14 @@ foreach ($result_user as $values) {
             </u>
         </div>
         <div class="indent">
+
             <u>
                 ดังนั้น เพื่อให้การดำเนินงานเป็นไปตามแผนปฎิบัติการ ประจำปีงบประมาณ พ.ศ.
                 <?php echo $project_fiscal_year?>และบรรลุตามเป้าหมายที่กำหนดไว้ จึงใคร่ขออนุมัติจัด
                 <?php echo $project_name?>
-                โดยใช้เงินรายได้สำนักหอสมุดกำแพงแสน ภายในงบประมาณจำนวน ($) .- บาท ($)
+                โดยใช้เงินรายได้สำนักหอสมุดกำแพงแสน ภายในงบประมาณจำนวน <?php echo $project_sum_total?> .- บาท
+                (
+                <?$project_sum_thai?>)
                 ทั้งนี้ได้แนบรายละเอียดโครงการดังกล่าวมาด้วยแล้ว
             </u>
         </div>
@@ -293,10 +300,6 @@ foreach ($result_user as $values) {
             ?>
 
         </div>
-
-
-
-
 </body>
 
 </html>

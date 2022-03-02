@@ -112,7 +112,9 @@
                 <tr>
                     <th class="Profiletopic">เพศ :</th>
                     <td>
-                        <p class="detail"> <?php echo $value['user_typeSex']; ?></p>
+                        <p class="detail"> <?php if($value['user_typeSex']=='F'){
+                            echo 'หญิง';
+                        }else echo 'ชาย' ;?></p>
                     </td>
                 </tr>
                 <tr>
@@ -156,8 +158,7 @@
             </table>
         </div>
         <div class="grid-item-center">
-            <img id="output" width="300" height="300" src="data:image/jpeg;base64,/9j/ <?php echo $value['user_pic'];?>"
-                class="show-profile" />
+            <img id="output" width="300" height="300" src="<?php echo $value['user_pic'];?>" class="show-profile" />
 
 
         </div>

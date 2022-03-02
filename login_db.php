@@ -3,6 +3,7 @@
     include('config/db.php');
 
     $errors = array();
+    print_pre($errors);
     if (isset($_POST['Login'])) {
         $email = mysqli_real_escape_string($conn,$_POST['email']);
         $password = mysqli_real_escape_string($conn,$_POST['password']);
@@ -16,7 +17,7 @@
         }
 
         if (count($errors)==0) {
-            $password = md5($password);
+            // $password = md5($password);
             $query = "SELECT * FROM user_details WHERE user_email = '$email' AND user_password = '$password'";
             $result = mysqli_query($conn,$query);
             $row = mysqli_fetch_array($result);

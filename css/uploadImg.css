@@ -1,0 +1,16 @@
+body {
+    font-family: 'Prompt', sans-serif;
+}
+
+#preview {
+    color: #cc0000;
+    font-size: 12px
+}
+
+.imgList {
+    max-height: 150px;
+    margin-left: 5px;
+    border: 1px solid #dedede;
+    padding: 4px;
+    float: left;
+}
