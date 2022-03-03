@@ -465,7 +465,7 @@ $result_Username = mysqli_query($conn, $queryUsername);
                     </div>
                 </div>
                 <div class="container-button">
-                    <button type="reset" value="reset" class="backButton">Back </button>
+                    <button onclick="parent.location='home.php'" class="backButton">Back </button>
                     <button type="submit" name="Add_Project" class="summitButton">Submit</button>
                 </div>
             </div>

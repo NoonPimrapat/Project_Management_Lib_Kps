@@ -149,9 +149,6 @@ foreach ($result_user as $values) {
                                         </span>Profile</a>
                                     <div class="btn">My Account</div>
                                 </li>
-                                <li><a class="address" href="#"><span class="picon"><i
-                                                class="fas fa-map-marker"></i></span>Address</a></li>
-
                                 <li><a class="logout" href="home.php?logout='1'"><span class="picon"><i
                                                 class="fas fa-sign-out-alt"></i></span>Logout</a></li>
                             </ul>
@@ -200,8 +197,8 @@ foreach ($result_user as $values) {
             </div>
         </div>
         <div class="inline">
-            <p>เรื่อง<u class="border-bottom"> ขออนุมัติจัด
-                    โครงการ<?php echo $project_name?>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u>
+            <p>เรื่อง<u class="border-bottom"> ขออนุมัติเบิกจ่ายค่าใช้จ่ายและปิดโครงการ
+                    <?php echo $project_name?>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u>
             </p>
 
         </div>
@@ -211,22 +208,19 @@ foreach ($result_user as $values) {
             <br />
         <div class="indent">
             <u>
-                ตามที่สำนักหอสมุด กำแพงแสน ได้กำหนดแผนปฎิบัติการประจำปีงบประมาณ พ.ศ. <?php echo $project_fiscal_year?>
-                เพื่อเป็นกรอบและทิศทางการดำเนินงานในปีงบประมาณ พ.ศ. <?php echo $project_fiscal_year?>
-                ของแต่ละหน่วยงานภายในสำนักหอสมุดกำแพงแสน
-                อันจะนำไปสู่เป้าหมายและวิสัยทัศน์ที่กำหนดไว้ร่วมกัน
+                ตามที่ได้ขออนุมัติจัด <?php echo $project_name?>
+                ภายในวงเงิน จำนวน <?php echo $project_sum_total?> .-บาท<?php echo $project_fiscal_year?> (
+                <?$project_sum_thai?>)
+                ตามบันทึกที่ อว ๖๕๐๒.๐๘/ ลงวันที่และได้รับอนุมัติแล้วนั้น
             </u>
         </div>
         <div class="indent">
 
             <u>
-                ดังนั้น เพื่อให้การดำเนินงานเป็นไปตามแผนปฎิบัติการ ประจำปีงบประมาณ พ.ศ.
-                <?php echo $project_fiscal_year?>และบรรลุตามเป้าหมายที่กำหนดไว้ จึงใคร่ขออนุมัติจัด
-                <?php echo $project_name?>
-                โดยใช้เงินรายได้สำนักหอสมุดกำแพงแสน ภายในงบประมาณจำนวน <?php echo $project_sum_total?> .- บาท
-                (
-                <?$project_sum_thai?>)
-                ทั้งนี้ได้แนบรายละเอียดโครงการดังกล่าวมาด้วยแล้ว
+                บัดนี้ ได้ดำเนินการจิกกรรมดังกล่าวเสร็จเรียบร้อยแล้ว
+                โดยมีค่าใช้จ่ายรวมเป็นเงินทั้งสิ้น<?php echo $project_sum_total?> .-บาท (
+                <?$project_sum_thai?>) ดังนั้น จึงขออนุมัติเบิกจ่ายค่าใช้จ่ายและปิดโครงการดังกล่าว
+                ทั้งนี้มีรายละเอียดตามเอกสารดังแนบ
             </u>
         </div>
         </p>
@@ -239,60 +233,7 @@ foreach ($result_user as $values) {
                 ผู้รับผิดชอบโครงการ
             </u>
         </div>
-        <div>
-            <p>
-                เรียน หัวหน้า <?php echo $Derpartment_name?>
-            </p>
-        </div>
-        <div class="indent">
-            <u>
-                เพื่อโปรดพิจารณาเสนอผู้อำนวยการสำนักฯ พิจารณาอนุมัติ
-                ทั้งนี้โครงการดังกล่าวเป็นโครงการประจำภายใต้แผนปฎิบัติการประจำปีงบประมาณ
-                พ.ศ.<?php echo $project_fiscal_year?> และได้ตรวจสอบรายละเอียดในเบื้องต้นแล้วเรียบร้อยแล้ว
-            </u>
-        </div>
-        <div class="right">
-            <u>
-                <br />
-                ..................................................
-                <br />
-                นักวิเคราะห์นโยบายและแผน
-            </u>
-        </div>
-        <div class="inline">
-            <div>
-                <p>
-                    เรียน ผู้อำนวยการสำนักหอสมุด กำแพงแสน
-                </p>
-            </div>
-            <div>
-                <p>
-                    อนุมัติ
-                </p>
-            </div>
-        </div>
 
-
-        <div class="indent">
-            <u>
-                เพื่อโปรดพิจารณาลงนามอนุมัติ
-        </div>
-        <div class="inline">
-
-            ........................................... <br>
-            หัวหน้า <?php echo $Derpartment_name?>
-            <div class="right">
-                ( )
-                <br />
-
-                ผู้อำนวยการสำนักหอสมุดกำแพงแสน
-
-                <br />
-
-                ........... / ............ / ..........</u>
-
-            </div>
-        </div>
         <div class="container-button">
             <button onclick="parent.location='home.php'" class="backButton">Back </button>
             <?php

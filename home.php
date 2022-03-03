@@ -25,7 +25,8 @@ if (isset($_GET['logout'])) {
 <head>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
+    <!-- โลโก้ title เว็บ -->
+    <link rel=”icon” type=”image/jpg” href=”img/ku.jpg” />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width ,initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -68,9 +69,6 @@ if (isset($_GET['logout'])) {
                                         </span>Profile</a>
                                     <div class="btn">My Account</div>
                                 </li>
-                                <li><a class="address" href="#"><span class="picon"><i
-                                                class="fas fa-map-marker"></i></span>Address</a></li>
-
                                 <li><a class="logout" href="home.php?logout='1'"><span class="picon"><i
                                                 class="fas fa-sign-out-alt"></i></span>Logout</a></li>
                             </ul>

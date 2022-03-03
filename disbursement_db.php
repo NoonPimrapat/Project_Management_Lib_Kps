@@ -158,43 +158,5 @@ function getVal($datas, $group, $budgets, $project_id)
     return $budgets;
 }
 
-function line_noti($msn)
-{
-    $status = false;
-    $message = "404 error.";
-    if ($msn) :
 
-        $curl = curl_init();
-        $LINE_API_KEY = "LIBWf00oYPIzo4pUDKherAXCQfCiS5NLnE6b8i409eH";//ใส่Key
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://notify-api.line.me/api/notify",
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_SSL_VERIFYHOST => false,
-            CURLOPT_SSL_VERIFYPEER => false,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => "message={$msn}",
-            CURLOPT_HTTPHEADER => array(
-                "authorization: Bearer {$LINE_API_KEY}",
-                "content-type: application/x-www-form-urlencoded"
-            ),
-        ));
-
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
-
-        curl_close($curl);
-
-        if ($err) {
-            $message = "cURL Error #:" . $err;
-        } else {
-            $status = true;
-            $message = "Success";
-        }
-    endif;
-    echo json_encode(array('status' => $status, 'message' => $message, 'response' => $response));
-}
 ?>

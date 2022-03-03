@@ -98,9 +98,6 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                                         </span>Profile</a>
                                     <div class="btn">My Account</div>
                                 </li>
-                                <li><a class="address" href="#"><span class="picon"><i
-                                                class="fas fa-map-marker"></i></span>Address</a></li>
-
                                 <li><a class="logout" href="home.php?logout='1'"><span class="picon"><i
                                                 class="fas fa-sign-out-alt"></i></span>Logout</a></li>
                             </ul>
@@ -275,7 +272,7 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                 <div class="container-button">
                     <button type="reset" value="reset" class="backButton" onclick="parent.location='home.php'">Back
                     </button>
-                    <button type="submit" name="Add_Project" class="summitButton">Submit</button>
+                    <button type="submit" name="disbursement" class="summitButton">Submit</button>
                 </div>
             </div>
         </form>

@@ -96,9 +96,6 @@ $result_Username = mysqli_query($conn, $queryUsername);
                                         </span>Profile</a>
                                     <div class="btn">My Account</div>
                                 </li>
-                                <li><a class="address" href="#"><span class="picon"><i
-                                                class="fas fa-map-marker"></i></span>Address</a></li>
-
                                 <li><a class="logout" href="home.php?logout='1'"><span class="picon"><i
                                                 class="fas fa-sign-out-alt"></i></span>Logout</a></li>
                             </ul>

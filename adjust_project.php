@@ -102,9 +102,6 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                                         </span>Profile</a>
                                     <div class="btn">My Account</div>
                                 </li>
-                                <li><a class="address" href="#"><span class="picon"><i
-                                                class="fas fa-map-marker"></i></span>Address</a></li>
-
                                 <li><a class="logout" href="home.php?logout='1'"><span class="picon"><i
                                                 class="fas fa-sign-out-alt"></i></span>Logout</a></li>
                             </ul>
@@ -169,9 +166,9 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
             <div class=" row">
                 <div class="col-50">
                     <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-                    <label-1 for="vehicle1"> ปรับระยะเวลาดำเนินการ</label-1><br>
+                    <label-1 for="vehicle1">ปรับระยะเวลาดำเนินการ</label-1><br>
                     <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
-                    <label-1 for="vehicle2"> ปรับเป้าหมายตัวชี้วัด</label-1><br>
+                    <label-1 for="vehicle2">ปรับเป้าหมายตัวชี้วัด</label-1><br>
                     <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
                     <label-1 for="vehicle3">ปรับอื่นๆโปรดระบุ</label-1>
                     <input type="text" id="project_name" name="target_value1" class="inputFill-Information-Datepicker">
@@ -179,9 +176,9 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                 </div>
                 <div class="col-50-2">
                     <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-                    <label-1 for="vehicle1"> ปรับระยะเวลาดำเนินการ</label-1><br>
+                    <label-1 for="vehicle1">ปรับตัวชี้วัด</label-1><br>
                     <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
-                    <label-1 for="vehicle2"> ปรับเป้าหมายตัวชี้วัด</label-1><br>
+                    <label-1 for="vehicle2">ปรับงบประมาณ</label-1><br>
 
 
                 </div>
@@ -201,7 +198,7 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                     <label for="ฝ่ายงาน" class="topic">ขอเปลี่ยนเป็น : </label>
                 </div>
                 <div class="col-65">
-
+                    <input type="text" name="pro_routine" class="inputFill-Information">
                 </div>
             </div>
             <div class="information-container">
@@ -220,7 +217,7 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
             <div class="container-button">
                 <button type="reset" value="reset" class="backButton" onclick="parent.location='home.php'">Back
                 </button>
-                <button type="submit" name="Add_Project" class="summitButton">Submit</button>
+                <button type="submit" name="adjust_project" class="summitButton">Submit</button>
             </div>
         </form>
 

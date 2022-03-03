@@ -30,6 +30,9 @@ $queryUsername = "SELECT * FROM user_details WHERE user_email = '$user_email'" o
 //เก็บข้อมูลที่ query ออกมาไว้ในตัวแปร result .
 $result_Username = mysqli_query($conn, $queryUsername);
 
+$queryProjectName = "SELECT * FROM project_info WHERE user_id = '$user_id'" or die("Error:" . mysqli_error());
+//เก็บข้อมูลที่ query ออกมาไว้ในตัวแปร result .
+$result_ProjectName = mysqli_query($conn, $queryProjectName);
 ?>
 
 <!DOCTYPE html>
@@ -101,9 +104,6 @@ $result_Username = mysqli_query($conn, $queryUsername);
                                         </span>Profile</a>
                                     <div class="btn">My Account</div>
                                 </li>
-                                <li><a class="address" href="#"><span class="picon"><i
-                                                class="fas fa-map-marker"></i></span>Address</a></li>
-
                                 <li><a class="logout" href="home.php?logout='1'"><span class="picon"><i
                                                 class="fas fa-sign-out-alt"></i></span>Logout</a></li>
                             </ul>
@@ -144,7 +144,14 @@ $result_Username = mysqli_query($conn, $queryUsername);
                     </div>
 
                     <div class="col-65">
-                        <input type="text" name="pro_name" class="inputFill-Information" required>
+                        <select name="pro_name" class="inputFill-Information" required>
+                            <option value=""> กรุณาเลือก </option>
+                            <?php foreach ($result_ProjectName as $results) { ?>
+                            <option value="<?php echo $results["project_id"]; ?>">
+                                <?php echo $results["project_name"]; ?>
+                            </option>
+                            <?php } ?>
+                        </select>
                     </div>
 
                 </div>
@@ -194,15 +201,6 @@ $result_Username = mysqli_query($conn, $queryUsername);
                         </select>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-25">
-                        <label for="หลักการและเหตุผล" class="topic">หลักการและเหตุผล : </label>
-                    </div>
-                    <div class="col-65">
-                        <textarea name="pro_reason" rows="4" cols="50" class="inputFill-Information-large"
-                            required></textarea>
-                    </div>
-                </div>
                 <div class=" row">
                     <div class="col-25">
                         <label for="วัตถุประสงค์" class="topic">วัตถุประสงค์ : </label>
@@ -213,7 +211,7 @@ $result_Username = mysqli_query($conn, $queryUsername);
                 </div>
                 <div class="row">
                     <div class="col-25">
-                        <label for="ลักษณะการดำเนินงาน" class="topic">ลักษณะการดำเนินงาน : </label>
+                        <label for="ลักษณะการดำเนินงาน" class="topic">รายละเอียดจัดโครงการ : </label>
                     </div>
                     <div class="col-65">
                         <textarea name="pro_operation" rows="4" cols="50" class="inputFill-Information-large"
@@ -371,14 +369,6 @@ $result_Username = mysqli_query($conn, $queryUsername);
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-65">
-                        <label class="topic">หมายเหตุ </label><br>
-                        <label class="topic">1. ใช้งบประมาณเงินรายได้
-                            โครงการตามแผนยุทธศาสตร์<br>2. ขอถัวเฉลี่ยจ่ายทุกรายการ </label><br>
-                    </div>
-
-                </div>
-                <div class="row">
                     <div class="col-25">
                         <label for="ตัวชี้วัดโครงการ" class="topic">ตัวชี้วัดโครงการ : </label>
                     </div>
@@ -396,10 +386,28 @@ $result_Username = mysqli_query($conn, $queryUsername);
                 </div>
                 <div class="row">
                     <div class="col-65">
-                        <label for="ลักษณะโครงการ : " class="topic">ค่าเป้าหมาย : </label>
-                        <input type="text" id="project_name" name="target_value1"
+                        <label for="ลักษณะโครงการ : " class="topic">เป้าหมายที่กำหนดไว้ : </label>
+                        <input type="text" id="project_name" name="target_value2"
                             class="inputFill-Information-Datepicker" required>
                     </div>
+                    <div class="col-65">
+                        <label for="ลักษณะโครงการ : " class="topic">ผลการดำเนินงาน : </label>
+                        <input type="text" id="project_name" name="target_value2"
+                            class="inputFill-Information-Datepicker" required>
+                    </div>
+
+                    <div class="col-65">
+                        <label for="ลักษณะโครงการ : " class="topic">ผลการประเมินความสำเร็จของโครงการ
+                            <br> (ผลการดำเนินงานเทียบกับค่าเป้าหมาย) : </label>
+                        <select type="text" id="project_name" name="target_value2"
+                            class="inputFill-Information-Datepicker" required>
+                            <option value=""> กรุณาเลือก </option>
+                            <option value="1"> สำเร็จ </option>
+                            <option value="2"> ไม่สำเร็จ </option>
+                        </select>
+                    </div>
+
+
                 </div>
                 <div class="row">
 
@@ -411,10 +419,28 @@ $result_Username = mysqli_query($conn, $queryUsername);
                 </div>
                 <div class="row">
                     <div class="col-65">
-                        <label for="ลักษณะโครงการ : " class="topic">ค่าเป้าหมาย : </label>
+                        <label for="ลักษณะโครงการ : " class="topic">เป้าหมายที่กำหนดไว้ : </label>
                         <input type="text" id="project_name" name="target_value2"
                             class="inputFill-Information-Datepicker" required>
                     </div>
+                    <div class="col-65">
+                        <label for="ลักษณะโครงการ : " class="topic">ผลการดำเนินงาน : </label>
+                        <input type="text" id="project_name" name="target_value2"
+                            class="inputFill-Information-Datepicker" required>
+                    </div>
+
+                    <div class="col-65">
+                        <label for="ลักษณะโครงการ : " class="topic">ผลการประเมินความสำเร็จของโครงการ
+                            <br> (ผลการดำเนินงานเทียบกับค่าเป้าหมาย) : </label>
+                        <select type="text" id="project_name" name="target_value2"
+                            class="inputFill-Information-Datepicker" required>
+                            <option value=""> กรุณาเลือก </option>
+                            <option value="1"> สำเร็จ </option>
+                            <option value="2"> ไม่สำเร็จ </option>
+                        </select>
+                    </div>
+
+
                 </div>
 
                 <div class="row">
@@ -429,40 +455,17 @@ $result_Username = mysqli_query($conn, $queryUsername);
 
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-25">
-                        <label for="ลักษณะโครงการ : " class="topic">แผนการดำเนินงาน : </label>
-                    </div>
-                    <div class="col-65 section-table">
-                        <table class="table" style="margin-top: 25px;">
-                            <thead>
-                                <tr>
-                                    <th>กิจกรรม</th>
-                                    <th>ระยะเวลาดำเนินการ</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="box-input checked">
-                                    <td>
-                                        <input type="text" name="plant_detail[]">
-                                        <span class="textplant_detail"></span>
-                                    </td>
-                                    <td>
-                                        <input type="text" name="plant_time[]">
-                                        <span class="textplant_time"></span>
-                                        <a href="#" data-action="clone-plant" data-target="material"><i
-                                                class="fa fa-plus" aria-hidden="true"></i></a>
-                                        <a href="#" data-action="remove-plant"><i class="fa fa-minus"
-                                                aria-hidden="true"></i></a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                <div class="information-container">
+                    <label-1 for="ลักษณะโครงการ" class="topic">เอกสารแนบ </label>
                 </div>
+                <div class="information-container">
+                    <label-1 for="ลักษณะโครงการ" class="topic">1.ภาพกิจกรรม (3-5 ภาพ) </label>
+                        <input id="file-upload" name="activity_pictures" type="file" accept="image/*" multiple />
+                </div>
+
                 <div class="container-button">
-                    <button type="reset" value="reset" class="backButton">Back </button>
-                    <button type="submit" name="Add_Project" class="summitButton">Submit</button>
+                    <button onclick="parent.location='home.php'" class="backButton">Back </button>
+                    <button type="submit" name="close_project" class="summitButton">Submit</button>
                 </div>
             </div>
 
