@@ -84,6 +84,10 @@ if (isset($_POST['Add_Project'])) {
     $pro_place = mysqli_real_escape_string($conn, $_POST['pro_place']);
     $project_sum_total = mysqli_real_escape_string($conn, $_POST['project_sum_total']);
     $project_fiscal_year=mysqli_real_escape_string($conn, $_POST['project_fiscal_year']);
+    $indicator_1=mysqli_real_escape_string($conn, $_POST['indicator_1']);
+    $indicator_1_value=mysqli_real_escape_string($conn, $_POST['indicator_1_value']);
+    $indicator_2=mysqli_real_escape_string($conn, $_POST['indicator_2']);
+    $indicator_2_value=mysqli_real_escape_string($conn, $_POST['indicator_2_value']);
 
     // if (empty($email)) {
     //     array_push($errors,"Email is required");
@@ -158,6 +162,23 @@ if (isset($_POST['Add_Project'])) {
         $_SESSION['error'] = "project_fiscal_year is required";
     }
 
+    if (empty($indicator_1)) {
+        array_push($errors, "indicator_1 is required");
+        $_SESSION['error'] = "indicator_1 is required";
+    }
+    if (empty($indicator_1_value)) {
+        array_push($errors, "indicator_1_value is required");
+        $_SESSION['error'] = "indicator_1_value is required";
+    }
+    if (empty($indicator_2)) {
+        array_push($errors, "indicator_2 is required");
+        $_SESSION['error'] = "indicator_2 is required";
+    }
+    if (empty($indicator_2_value)) {
+        array_push($errors, "indicator_2_value is required");
+        $_SESSION['error'] = "indicator_2_value is required";
+    }
+
 
     foreach ($errors as $value) {
         //Print the element out.
@@ -166,9 +187,11 @@ if (isset($_POST['Add_Project'])) {
         '<br>';
     }
 
+    
     if (count($errors) == 0) {
 
-        $sql = "INSERT INTO project_info(project_name, project_style, routine_plan, department_id, reason, period_op, period_ed, user_id, project_place, project_strategy,submit_date,project_sum_total,status_project,project_fiscal_year) VALUES ('$pro_name','$pro_style','$pro_routine','$pro_department','$pro_reason','$pro_dateStart','$pro_dateEnd','$user_id','$pro_place','$pro_strategy','$date','$project_sum_total','ขออนุมัติโครงการ',$project_fiscal_year)";
+        $sql = "INSERT INTO project_info(project_name, project_style, routine_plan, department_id, reason, period_op, period_ed, user_id, project_place, project_strategy,submit_date,project_sum_total,status_project,project_fiscal_year,indicator_1,indicator_1_value,indicator_2,indicator_2_value,operation) 
+        VALUES ('$pro_name','$pro_style','$pro_routine','$pro_department','$pro_reason','$pro_dateStart','$pro_dateEnd','$user_id','$pro_place','$pro_strategy','$date','$project_sum_total','ขออนุมัติโครงการ','$project_fiscal_year','$indicator_1','$indicator_1_value','$indicator_2','$indicator_2_value','$pro_operation')";
         print_pre($sql);
         mysqli_query($conn, $sql);
 
@@ -181,13 +204,15 @@ if (isset($_POST['Add_Project'])) {
 
             // ส่วนของการเก็บข้อมูลเข้าในตาราง
             $sqlGetID = "SELECT * FROM project_info WHERE project_name = '$pro_name' ";
-            $result = mysqli_query($conn, $sqlGetID);
+            $resultID = mysqli_query($conn, $sqlGetID);
 
-            foreach ($result as $values) {
+            foreach ($resultID as $values) {
                 $project_id = $values["project_id"];
                $_SESSION['project_id']=$values["project_id"];
-
+         
             }
+            echo "IDD";   
+            echo $project_id;
 
             // งบประมาณ
             $budgets = array();

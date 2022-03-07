@@ -61,6 +61,7 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
     <!-- plugin -->
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 </head>
 
@@ -104,8 +105,9 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                                         </span>Profile</a>
                                     <div class="btn">My Account</div>
                                 </li>
-                                <li><a class="logout" href="home.php?logout='1'"><span class="picon"><i
-                                                class="fas fa-sign-out-alt"></i></span>Logout</a></li>
+                                <li><a class="logout" href="home.php?logout='1'"><span class="picon">
+                                            <iw class="fas fa-sign-out-alt"></iw>
+                                        </span>Logout</a></li>
                             </ul>
                         </div>
                     </div>
@@ -144,7 +146,7 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                     </div>
 
                     <div class="col-65">
-                        <select name="pro_name" class="inputFill-Information" required>
+                        <select name="pro_name" class="inputFill-Information" id="pro_name" required>
                             <option value=""> กรุณาเลือก </option>
                             <?php foreach ($result_ProjectName as $results) { ?>
                             <option value="<?php echo $results["project_id"]; ?>">
@@ -160,14 +162,7 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                         <label for="ลักษณะโครงการ" class="topic">ลักษณะโครงการ : </label>
                     </div>
                     <div class="col-65">
-                        <select name="pro_style" class="inputFill-Information" required>
-                            <option value=""> กรุณาเลือก </option>
-                            <?php foreach ($result_style as $results) { ?>
-                            <option value="<?php echo $results["project_style_id"]; ?>">
-                                <?php echo $results["project_style_name"]; ?>
-                            </option>
-                            <?php } ?>
-                        </select>
+                        <input type="text" name="pro_style" class="inputFill-Information" id="pro_style">
                     </div>
                 </div>
                 <div class="row">
@@ -175,7 +170,7 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                         <label for="ภายใต้ยุทธศาสตร์" class=" topic">ภายใต้ยุทธศาสตร์ : </label>
                     </div>
                     <div class="col-65">
-                        <input type="text" name="pro_strategy" class="inputFill-Information">
+                        <input type="text" name="pro_strategy" class="inputFill-Information" id="pro_strategy">
                     </div>
                 </div>
                 <div class="row">
@@ -183,7 +178,7 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                         <label for="ภายใต้แผนงานประจำ" class="topic">ภายใต้แผนงานประจำ : </label>
                     </div>
                     <div class="col-65">
-                        <input type="text" name="pro_routine" class="inputFill-Information">
+                        <input type="text" name="pro_routine" class="inputFill-Information" id="routine_plan">
                     </div>
                 </div>
                 <div class="row">
@@ -191,14 +186,8 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                         <label for="ฝ่ายงาน" class="topic">ฝ่ายงาน : </label>
                     </div>
                     <div class="col-65">
-                        <select name="pro_department" class="inputFill-Information" required>
-                            <option value=""> กรุณาเลือก </option>
-                            <?php foreach ($result as $results) { ?>
-                            <option value="<?php echo $results["department_id"]; ?>">
-                                <?php echo $results["department_name"]; ?>
-                            </option>
-                            <?php } ?>
-                        </select>
+                        <input type="text" name="pro_department" class="inputFill-Information" id="department">
+
                     </div>
                 </div>
                 <div class=" row">
@@ -206,7 +195,8 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                         <label for="วัตถุประสงค์" class="topic">วัตถุประสงค์ : </label>
                     </div>
                     <div class="col-65">
-                        <input type="text" name="pro_objective" class="inputFill-Information" required>
+                        <input type="text" name="pro_objective" class="inputFill-Information" id="pro_objective"
+                            required>
                     </div>
                 </div>
                 <div class="row">
@@ -215,7 +205,7 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                     </div>
                     <div class="col-65">
                         <textarea name="pro_operation" rows="4" cols="50" class="inputFill-Information-large"
-                            required></textarea>
+                            id="reason" required></textarea>
                     </div>
                 </div>
                 <div class="row">
@@ -237,7 +227,7 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                         <label for="สถานที่ " class="topic">สถานที่ : </label>
                     </div>
                     <div class="col-65">
-                        <input type="text" name="pro_place" class="inputFill-Information" required>
+                        <input type="text" name="pro_place" class="inputFill-Information" id="pro_place" required>
                     </div>
                 </div>
                 <div class="row">
@@ -261,11 +251,11 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                                     <th>ราคา</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr class="box-input act-input">
+                            <tbody id="tbodyCompensation">
+                                <!-- <tr class="box-input act-input">
                                     <td class="text-left">
-                                        <input type="text" name="compensation[item][]">
-                                        <span for="" class="item"></span>
+                                        <input type="text" name="compensation[item][]" id="compensation[item][]">
+                                        <span for="" class="item" id="compensation[item][]"></span>
                                     </td>
                                     <td>
                                         <input type="number" name="compensation[quantity][]">
@@ -279,7 +269,7 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                                         <a href="#" data-action="remove"><i class="fa fa-minus"
                                                 aria-hidden="true"></i></a>
                                     </td>
-                                </tr>
+                                </tr> -->
                             </tbody>
                         </table>
                     </div>
@@ -297,25 +287,8 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                                     <th>ราคา</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr class="box-input act-input">
-                                    <td class="text-left">
-                                        <input type="text" name="cost[item][]">
-                                        <span for="" class="item"></span>
-                                    </td>
-                                    <td>
-                                        <input type="number" name="cost[quantity][]">
-                                        <span for="" class="quantity"></span>
-                                    </td>
-                                    <td>
-                                        <input type="number" class="input-price" name="cost[price][]">
-                                        <span for="" class="price"></span>
-                                        <a href="#" data-action="clone" data-target="cost"><i class="fa fa-plus"
-                                                aria-hidden="true"></i></a>
-                                        <a href="#" data-action="remove"><i class="fa fa-minus"
-                                                aria-hidden="true"></i></a>
-                                    </td>
-                                </tr>
+                            <tbody id="tbodyCost">
+
                             </tbody>
                         </table>
                     </div>
@@ -333,25 +306,8 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                                     <th>ราคา</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr class="box-input act-input">
-                                    <td class="text-left">
-                                        <input type="text" name="material[item][]">
-                                        <span for="" class="item"></span>
-                                    </td>
-                                    <td>
-                                        <input type="number" name="material[quantity][]">
-                                        <span for="" class="quantity"></span>
-                                    </td>
-                                    <td>
-                                        <input type="number" class="input-price" name="material[price][]">
-                                        <span for="" class="price"></span>
-                                        <a href="#" data-action="clone" data-target="material"><i class="fa fa-plus"
-                                                aria-hidden="true"></i></a>
-                                        <a href="#" data-action="remove"><i class="fa fa-minus"
-                                                aria-hidden="true"></i></a>
-                                    </td>
-                                </tr>
+                            <tbody id="tbodyMaterial">
+
                             </tbody>
                         </table>
                     </div>
@@ -380,26 +336,25 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
 
                     <div class="col-65">
                         <label for="ตัวชี้วัดโครงการ" class="topic">1. </label>
-                        <input type="text" id="project_name" name="project_metrics1" class="inputFill-Information"
-                            required>
+                        <input type="text" id="indicator_1" name="indicator_1" class="inputFill-Information" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-65">
                         <label for="ลักษณะโครงการ : " class="topic">เป้าหมายที่กำหนดไว้ : </label>
-                        <input type="text" id="project_name" name="target_value2"
+                        <input type="text" id="indicator_1_value" name="indicator_1_value"
                             class="inputFill-Information-Datepicker" required>
                     </div>
                     <div class="col-65">
                         <label for="ลักษณะโครงการ : " class="topic">ผลการดำเนินงาน : </label>
-                        <input type="text" id="project_name" name="target_value2"
+                        <input type="text" id="indicator_performance1" name="indicator_performance1"
                             class="inputFill-Information-Datepicker" required>
                     </div>
 
                     <div class="col-65">
                         <label for="ลักษณะโครงการ : " class="topic">ผลการประเมินความสำเร็จของโครงการ
                             <br> (ผลการดำเนินงานเทียบกับค่าเป้าหมาย) : </label>
-                        <select type="text" id="project_name" name="target_value2"
+                        <select type="text" id="indicator_success1" name="indicator_success1"
                             class="inputFill-Information-Datepicker" required>
                             <option value=""> กรุณาเลือก </option>
                             <option value="1"> สำเร็จ </option>
@@ -413,26 +368,25 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
 
                     <div class="col-65">
                         <label for="ลักษณะโครงการ : " class="topic">2. </label>
-                        <input type="text" id="project_name" name="project_metrics2" class="inputFill-Information"
-                            required>
+                        <input type="text" id="indicator_2" name="indicator_2" class="inputFill-Information" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-65">
                         <label for="ลักษณะโครงการ : " class="topic">เป้าหมายที่กำหนดไว้ : </label>
-                        <input type="text" id="project_name" name="target_value2"
+                        <input type="text" id="indicator_2_value" name="indicator_1_value"
                             class="inputFill-Information-Datepicker" required>
                     </div>
                     <div class="col-65">
                         <label for="ลักษณะโครงการ : " class="topic">ผลการดำเนินงาน : </label>
-                        <input type="text" id="project_name" name="target_value2"
+                        <input type="text" id="indicator_performance1" name="indicator_performance2"
                             class="inputFill-Information-Datepicker" required>
                     </div>
 
                     <div class="col-65">
                         <label for="ลักษณะโครงการ : " class="topic">ผลการประเมินความสำเร็จของโครงการ
                             <br> (ผลการดำเนินงานเทียบกับค่าเป้าหมาย) : </label>
-                        <select type="text" id="project_name" name="target_value2"
+                        <select type="text" id="indicator_success2" name="indicator_success2"
                             class="inputFill-Information-Datepicker" required>
                             <option value=""> กรุณาเลือก </option>
                             <option value="1"> สำเร็จ </option>
@@ -591,8 +545,119 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
         e.preventDefault();
         $(this).closest('tr').remove();
     })
-    </script>
+    // auto fill
+    $('#pro_name').click(function() {
+        var id_project = $(this).val();
+        if (id_project == "") {
 
+        } else {
+            $.ajax({
+                url: "autofill.php",
+                method: "post",
+                data: {
+                    id: id_project,
+                },
+                dataType: "json", //ดาต้าที่จะเอาออกมา
+                success: function(data) {
+                    console.log(data);
+                    $('#reason').html(data[0].reason)
+                    $('#pro_style').val(data[0].project_style_name)
+                    $('#routine_plan').val(data[0].routine_plan)
+                    $('#pro_strategy').val(data[0].project_strategy)
+                    $('#department').val(data[0].department_name)
+                    $('#pro_objective').val(data[0].objective)
+                    $('#dateStart').val(data[0].period_op)
+                    $('#dateEnd').val(data[0].period_ed)
+                    $('#pro_place').val(data[0].project_place)
+                    $('#indicator_1').val(data[0].indicator_1)
+                    $('#indicator_1_value').val(data[0].indicator_1_value)
+                    $('#indicator_2').val(data[0].indicator_2)
+                    $('#indicator_2_value').val(data[0].indicator_2_value)
+                    var html = '',
+                        html2 = '',
+                        html3 = '';
+                    var i = 0;
+                    var compensation = [];
+                    var cost = [];
+                    var material = [];
+                    for (let index = 0; index < data.length; index++) {
+                        i += 1;
+                        console.log(index);
+                        if (data[index].budget_group == "compensation") {
+                            compensation.push({
+                                items: data[index].item,
+                                quantitys: data[index].quantity,
+                                prices: data[index].price
+                            });
+                            console.log("compensation");
+                            console.log(compensation);
+                        } else if (data[index].budget_group == "cost") {
+                            cost.push({
+                                items: data[index].item,
+                                quantitys: data[index].quantity,
+                                prices: data[index].price
+                            });
+                        } else if (data[index].budget_group == "material") {
+                            material.push({
+                                items: data[index].item,
+                                quantitys: data[index].quantity,
+                                prices: data[index].price
+                            });
+                        }
+                    }
+                    if (compensation != '') {
+                        compensation.forEach(element => {
+                            html += `<tr class="box-input act-input">
+                            <td class="text-left">
+                                <span for="" class="item">${element.items}</span>
+                            </td>
+                            <td>
+                                <span for="" class="quantity">${element.quantitys}</span>
+                            </td>
+                            <td>
+                                <span for="" class="price">${element.prices}</span>
+                            </td>
+                        </tr>`
+                            $('#tbodyCompensation').html(html);
+                        });
+                    }
+                    if (cost != '') {
+                        cost.forEach(element => {
+                            html2 += `<tr class="box-input act-input">
+                            <td class="text-left">
+                                <span for="" class="item">${element.items}</span>
+                            </td>
+                            <td>
+                                <span for="" class="quantity">${element.quantitys}</span>
+                            </td>
+                            <td>
+                                <span for="" class="price">${element.prices}</span>
+                            </td>
+                        </tr>`
+                            $('#tbodyCost').html(html2);
+                        });
+                    }
+                    if (material != '') {
+                        material.forEach(element => {
+                            html3 += `<tr class="box-input act-input">
+                            <td class="text-left">
+                                <span for="" class="item">${element.items}</span>
+                            </td>
+                            <td>
+                                <span for="" class="quantity">${element.quantitys}</span>
+                            </td>
+                            <td>
+                                <span for="" class="price">${element.prices}</span>
+                            </td>
+                        </tr>`
+                            $('#tbodyMaterial').html(html3);
+                        });
+                    }
+                }
+            })
+        }
+    })
+    </script>
 </body>
 
 </html>

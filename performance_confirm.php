@@ -21,9 +21,9 @@ $query = "SELECT * FROM department_info ORDER BY department_id asc" or die("Erro
 $result = mysqli_query($conn, $query);
 
 //2. query ข้อมูลจากตาราง project_style_info:
-$query2 = "SELECT * FROM project_style_info ORDER BY project_style_id asc" or die("Error:" . mysqli_error());
+$queryProgress = "SELECT * FROM progress_info ORDER BY user_id asc" or die("Error:" . mysqli_error());
 // เก็บข้อมูลที่ query ออกมาไว้ในตัวแปร result .
-$result_style = mysqli_query($conn, $query2);
+$result_Progress = mysqli_query($conn, $queryProgress);
 
 //3. query ข้อมูลจากตาราง user_details:
 $queryProject = "SELECT * FROM project_info WHERE user_id = '$user_id'" or die("Error:" . mysqli_error());
@@ -115,31 +115,20 @@ $result_Project = mysqli_query($conn, $queryProject);
         <div class="color-small-bar"></div>
     </div>
     <br>
-    <div class="logo-container">
-        <div><Button class="label_title">ตรวจสอบสถานะโครงการ</Button></div>
-        <div><label></label></div>
-        <div><select class="styleButton" required> <i class="fas fa-chevron-down"></i>
-                <option value=""> กรุณาเลือก </option>
-                <option value="project_style">ลักษณะโครงการ</option>
-                <option value="status_project">สถานะโครงการ</option>
-                <option value="">เอกสารโครงการ</option>
-                <option value="document_status">สถานะเอกสาร</option>
-            </select>
-            <input type="text"><i class="fas fa-search"></i>
-        </div>
-    </div>
+
     <div style="text-align: center;">
         <table>
-
+            <caption> รายงานผลการดำเนินงานรายไตรมาส</caption>
             <thead>
                 <tr>
                     <th>ชื่อโครงการ</th>
-                    <th>ลักษณะโครงการ</th>
-                    <th>สถานะโครงการ</th>
-                    <th>เอกสารโครงการ</th>
-                    <th>สถานะเอกสาร</th>
+                    <th>ผลการดำเนินงาน</th>
+                    <th>ระยะเวลา</th>
+                    <th>ตัวชี้วัด</th>
+                    <th>ผลการดำเนินงานตามตัวชี้วัด</th>
+                    <th>ผู้รับผิดชอบ</th>
                 </tr>
-                <?php foreach ($result_Project as $value) { ?>
+                <?php foreach ($result_Progress as $value) { ?>
             <tbody>
                 <tr>
                     <td><?php echo $value['project_name']; ?></td>

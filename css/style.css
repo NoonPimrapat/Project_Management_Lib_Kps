@@ -900,3 +900,16 @@ label-1 {
     margin-top: 20px; */
     /* padding-left: 25px; */
 }
+
+#preview {
+    color: #cc0000;
+    font-size: 12px
+}
+
+.imgList {
+    max-height: 150px;
+    margin-left: 5px;
+    border: 1px solid #dedede;
+    padding: 4px;
+    float: left;
+}

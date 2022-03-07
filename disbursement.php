@@ -58,6 +58,7 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
     <!-- plugin -->
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+    
 </head>
 
 <body>
@@ -118,7 +119,7 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
 
     <div class="information-container">
         <!-- <p class="topic">โครงการ</p> -->
-        <form action="approval_db.php" method="post">
+        <form action="disbursement_db.php" method="post">
             <?php include('errors.php'); ?>
             <?php if (isset($_SESSION['error'])) : ?>
             <div class="error">
@@ -277,6 +278,77 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
             </div>
         </form>
     </div>
+    <script src="./bahttex.js"></script>
+    <script>
+    var quantityAll = 0;
+    var priceAll = 0;
+    $(document).on('click', 'a[data-action="clone"]', function(e) {
+        e.preventDefault();
+        var err = false;
+        var section, tr, item, quantity, price;
+        var group = $(this).data('target');
+        section = $(this).closest('.section-table');
+        tr = $(this).closest('.box-input');
+
+        item = $(tr).find('input[name="' + group + '[item][]"]').val();
+        quantity = $(tr).find('input[name="' + group + '[quantity][]"]').val();
+        price = $(tr).find('input[name="' + group + '[price][]"]').val();
+
+        // remove message pop
+        $(section).find('.message-box').remove();
+
+        // has error = true -- message alert pop
+        if (item.length == 0 || quantity.length == 0 || price.length == 0) {
+            $(section).append(
+                `<div class="message message-box"><div class="error"><h3>Enter is required</h3></div></div>`
+            )
+            return;
+        }
+
+        $(tr).find('input').addClass('hiden');
+
+        $(tr).find('span.item').text(item);
+        $(tr).find('span.quantity').text(quantity);
+        $(tr).find('span.price').text(price);
+
+        $(tr).removeClass('act-input');
+
+        var dup = `<tr class="box-input act-input">
+                            <td class="text-left"><input type="text" name="${group}[item][]"><span for="" class="item"></span></td>
+                            <td><input type="number" name="${group}[quantity][]"><span for="" class="quantity"></span></td>
+                            <td>
+                                <input type="number" class="input-price" name="${group}[price][]">
+                                <span for="" class="price"></span>
+                                <a href="#" data-action="remove"><i class="fa fa-minus" aria-hidden="true"></i></a>
+                                <a href="#" data-action="clone" data-target="${group}">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                        </tr>`;
+
+        priceAll += parseFloat(price * quantity);
+        $(section).find('table > tbody').append(dup);
+        var priceTotal = priceAll.toFixed(2);
+        $('#sum-total').html(`${priceTotal}.- บาท`);
+        $('#sum_total').val(priceTotal);
+        $('#bahttex').html('(' + ThaiBaht(priceAll.toFixed(2)) + ')')
+    })
+
+    $(document).on('click', 'a[data-action="remove"]', function(e) {
+        e.preventDefault();
+        // get element tr 
+        var tr = $(this).closest('.box-input');
+        // get price from span
+        var price = $(tr).find('.input-price').val();
+        if (price !== "undefined") {
+            priceAll = parseFloat(priceAll) - parseFloat(price);
+            priceAll = priceAll < 0 ? 0 : priceAll;
+            $(this).closest('tr').remove();
+            $('#sum-total').html(`${priceAll.toFixed(2)}.- บาท`);
+            $('#bahttex').html('(' + ThaiBaht(priceAll.toFixed(2)) + ')')
+        }
+    })
+    </script>
 
 </body>
 

@@ -20,7 +20,7 @@ $user_id = $_SESSION['user_id'];
 
 $errors = array();
 
-if (isset($_POST['Add_Project'])) {
+if (isset($_POST['disbursement'])) {
     // ชื่อโครงการ
     isset($_REQUEST['pro_name']) ? $pro_name = $_REQUEST['pro_name'] : $pro_name = '';
     // echo $pro_name;
@@ -129,7 +129,7 @@ if (isset($_POST['Add_Project'])) {
                 }
             }
             // send line noti
-            line_noti("\nมีการร้องขออนุมัติโครงการ\nโครงการ: {$pro_name}\nเริ่ม: {$pro_dateStart}\nสิ้นสุด: {$pro_dateEnd}");
+            line_noti("\nมีการร้องขออนุมัติเบิก-จ่ายโครงการ\nโครงการ: {$pro_name}\nเริ่ม: {$pro_dateStart}\nสิ้นสุด: {$pro_dateEnd}");
             // header("location:approval_confirm.php");exit;
             echo("<script>location.href ='/Project_Management_Lib_Kps/approval_confirm.php?';</script>");
         }
@@ -157,6 +157,4 @@ function getVal($datas, $group, $budgets, $project_id)
     }
     return $budgets;
 }
-
-
 ?>

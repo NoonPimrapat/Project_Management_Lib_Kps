@@ -95,7 +95,7 @@ if (isset($_GET['logout'])) {
         <Button onclick="parent.location='performance_report.php'" class="menuButton">2. รายงานผลการดำเนินงาน</Button>
         <Button onclick="parent.location='close_project.php'" class="menuButton"> 5. ขอนุมัติปิดโครงการ</Button>
         <Button onclick="parent.location='adjust_project.php'" class="menuButton">3. ขออนุมัติปรับแผนโครงการ</Button>
-        <Button onclick="parent.location='adjust_project.php'" class="menuButton">6. สรุปการดำเนินงานตามแผน</Button>
+        <Button onclick="parent.location='sum_plan.php'" class="menuButton">6. สรุปการดำเนินงานตามแผน</Button>
         <Button onclick="parent.location='edit_check.php'" class="menuButton">7. แก้ไข/ตรวจสอบสถานะโครงการ</Button>
     </div>
     <div class="container">

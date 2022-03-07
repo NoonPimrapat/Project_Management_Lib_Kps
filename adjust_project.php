@@ -165,20 +165,21 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
             </div>
             <div class=" row">
                 <div class="col-50">
-                    <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-                    <label-1 for="vehicle1">ปรับระยะเวลาดำเนินการ</label-1><br>
-                    <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
-                    <label-1 for="vehicle2">ปรับเป้าหมายตัวชี้วัด</label-1><br>
-                    <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
-                    <label-1 for="vehicle3">ปรับอื่นๆโปรดระบุ</label-1>
-                    <input type="text" id="project_name" name="target_value1" class="inputFill-Information-Datepicker">
+                    <input type="checkbox" id="pro_dateStart" name="pro_dateStart" value="pro_dateStart" class="ckb">
+                    <label-1 for="pro_dateStart">ปรับระยะเวลาดำเนินการ</label-1><br>
+                    <input type="checkbox" id="indicator_value" name="indicator_value" value="indicator_value"
+                        class="ckb">
+                    <label-1 for="indicator_value">ปรับเป้าหมายตัวชี้วัด</label-1><br>
+                    <input type="checkbox" id="another" name="another" value="another" class="ckb">
+                    <label-1 for="another">ปรับอื่นๆโปรดระบุ</label-1>
+                    <input type="text" id="another" name="another" class="inputFill-Information-Datepicker" class="ckb">
 
                 </div>
                 <div class="col-50-2">
-                    <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-                    <label-1 for="vehicle1">ปรับตัวชี้วัด</label-1><br>
-                    <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
-                    <label-1 for="vehicle2">ปรับงบประมาณ</label-1><br>
+                    <input type="checkbox" id="indicator" name="indicator" value="indicator" class="ckb">
+                    <label-1 for="indicator">ปรับตัวชี้วัด</label-1><br>
+                    <input type="checkbox" id="budget" name="budget" value="budget" class="ckb">
+                    <label-1 for="budget">ปรับงบประมาณ</label-1><br>
 
 
                 </div>
@@ -222,7 +223,47 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
         </form>
 
     </div>
+    <script>
+    // auto fill
+    $('#ckb').click(function() {
+        // var id_project = $(this).val();
+        if (this.checked) {
+            console.log(Noon);
+        } else {
 
+        }
+        console.log(id_project);
+        // if (id_project == "") {
+
+        // } else {
+        //     $.ajax({
+        //         url: "autofill.php",
+        //         method: "post",
+        //         data: {
+        //             id: id_project,
+        //         },
+        //         dataType: "json", //ดาต้าที่จะเอาออกมา
+        //         success: function(data) {
+        //             console.log(data);
+        //             // $('#reason').html(data.reason)
+        //             // $('#pro_style').val(data.project_style_name)
+        //             // $('#routine_plan').val(data.routine_plan)
+        //             // $('#pro_strategy').val(data.project_strategy)
+        //             // $('#department').val(data.department_name)
+        //             // $('#pro_objective').val(data.objective)
+        //             // $('#dateStart').val(data.period_op)
+        //             // $('#dateEnd').val(data.period_ed)
+        //             // $('#pro_place').val(data.project_place)
+        //             // $('#indicator_1').val(data.indicator_1)
+        //             // $('#indicator_1_value').val(data.indicator_1_value)
+        //             // $('#indicator_2').val(data.indicator_2)
+        //             // $('#indicator_2_value').val(data.indicator_2_value)
+
+        //         }
+        //     })
+        // }
+    })
+    </script>
 
 
 

@@ -394,14 +394,13 @@ $result_Username = mysqli_query($conn, $queryUsername);
 
                     <div class="col-65">
                         <label for="ตัวชี้วัดโครงการ" class="topic">1. </label>
-                        <input type="text" id="project_name" name="project_metrics1" class="inputFill-Information"
-                            required>
+                        <input type="text" id="indicator_1" name="indicator_1" class="inputFill-Information" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-65">
                         <label for="ลักษณะโครงการ : " class="topic">ค่าเป้าหมาย : </label>
-                        <input type="text" id="project_name" name="target_value1"
+                        <input type="text" id="indicator_1_value" name="indicator_1_value"
                             class="inputFill-Information-Datepicker" required>
                     </div>
                 </div>
@@ -409,14 +408,13 @@ $result_Username = mysqli_query($conn, $queryUsername);
 
                     <div class="col-65">
                         <label for="ลักษณะโครงการ : " class="topic">2. </label>
-                        <input type="text" id="project_name" name="project_metrics2" class="inputFill-Information"
-                            required>
+                        <input type="text" id="indicator_2" name="indicator_2" class="inputFill-Information" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-65">
                         <label for="ลักษณะโครงการ : " class="topic">ค่าเป้าหมาย : </label>
-                        <input type="text" id="project_name" name="target_value2"
+                        <input type="text" id="indicator_2_value" name="indicator_2_value"
                             class="inputFill-Information-Datepicker" required>
                     </div>
                 </div>

@@ -60,9 +60,11 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
     <!-- plugin -->
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <!-- อัพรูปแสดงรูป -->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/jquery.wallform.js"></script>
+    <script src="jquery.min.js"></script>
+    <script src="jquery.wallform.js"></script>
 </head>
 
 <body>
@@ -123,7 +125,7 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
 
     <div class="information-container">
         <!-- <p class="topic">โครงการ</p> -->
-        <form action="approval_db.php" method="post">
+        <form action="performance_report_db.php" method="post">
             <?php include('errors.php'); ?>
             <?php if (isset($_SESSION['error'])) : ?>
             <div class="error">
@@ -142,7 +144,7 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                     </div>
 
                     <div class="col-65">
-                        <select name="pro_name" class="inputFill-Information" id="project_name" required>
+                        <select name="project_id" class="inputFill-Information" id="project_id" required>
                             <option value=""> กรุณาเลือก </option>
                             <?php foreach ($result_ProjectName as $results) { ?>
                             <option value="<?php echo $results["project_id"]; ?>">
@@ -153,6 +155,20 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
 
                     </div>
 
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="โครงการ" class="topic">รายงาน ณ ไตรมาส ที่:</label>
+                    </div>
+                    <div class="col-65">
+                        <select name="progress_quarter" class="inputFill-Information-small" id="project_name" required>
+                            <option value=""> กรุณาเลือก </option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-25">
@@ -333,13 +349,19 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
 
                     <div class="col-65">
                         <label for="ตัวชี้วัดโครงการ" class="topic">1. </label>
-                        <input type="text" id="project_name" name="project_metrics1" class="inputFill-Information"
-                            required>
+                        <input type="text" id="indicator_1" name="indicator_1" class="inputFill-Information" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-65">
                         <label for="ลักษณะโครงการ : " class="topic">ค่าเป้าหมาย : </label>
+                        <input type="text" id="indicator_1_value" name="indicator_1_value"
+                            class="inputFill-Information-Datepicker" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-65">
+                        <label for="ลักษณะโครงการ : " class="topic">ผลการดำเนินงาน : </label>
                         <input type="text" id="project_name" name="target_value1"
                             class="inputFill-Information-Datepicker" required>
                     </div>
@@ -348,14 +370,20 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
 
                     <div class="col-65">
                         <label for="ลักษณะโครงการ : " class="topic">2. </label>
-                        <input type="text" id="project_name" name="project_metrics2" class="inputFill-Information"
-                            required>
+                        <input type="text" id="indicator_2" name="indicator_2" class="inputFill-Information" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-65">
                         <label for="ลักษณะโครงการ : " class="topic">ค่าเป้าหมาย : </label>
-                        <input type="text" id="project_name" name="target_value2"
+                        <input type="text" id="indicator_2_value" name="indicator_2_value"
+                            class="inputFill-Information-Datepicker" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-65">
+                        <label for="ลักษณะโครงการ : " class="topic">ผลการดำเนินงาน : </label>
+                        <input type="text" id="project_name" name="progress_performance2"
                             class="inputFill-Information-Datepicker" required>
                     </div>
                 </div>
@@ -389,7 +417,7 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                 <div class="container-button">
                     <button type="reset" value="reset" class="backButton" onclick="parent.location='home.php'">Back
                     </button>
-                    <button type="submit" name="Add_Project" class="summitButton">Submit</button>
+                    <button type="submit" name="performance_report" class="summitButton">Submit</button>
                 </div>
             </div>
             <!-- ส่วนแสดงภาพที่อัพโหลดเข้าไป -->
@@ -400,7 +428,19 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                 style="clear:both">
 
                 <div id='imageloadstatus' style='display:none'>
-                    <img src="loading.gif" alt="Uploading...." />
+                    <!-- <img src="loading.gif" alt="Uploading...." /> -->
+                    <div id="container">
+                        <svg viewBox="0 0 100 100">
+                            <defs>
+                                <filter id="shadow">
+                                    <feDropShadow dx="0" dy="0" stdDeviation="1.5" flood-color="#00766a" />
+                                </filter>
+                            </defs>
+                            <circle id="spinner"
+                                style="fill:transparent;stroke:#00766a;stroke-width: 7px;stroke-linecap: round;filter:url(#shadow);"
+                                cx="50" cy="50" r="45" />
+                        </svg>
+                    </div>
                 </div>
                 <div id='imageloadbutton'>
                     <!-- เลือกได้หลายๆไฟล์ในครั้งเดียว   name="photos[]"  multiple="true"  -->
@@ -408,6 +448,7 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                     เลือกไฟล์ภาพ :
                     <input type="file" name="photos[]" id="photoimg" multiple="true" />
                 </div>
+
             </form>
     </div>
 
@@ -501,18 +542,18 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
     $(document).on('click', 'a[data-action="clone-plant"]', function(e) {
         e.preventDefault();
         var err = false;
-        var section, tr, detail, time;
+        var section, tr, detail, time, location;
         section = $(this).closest('.section-table');
         tr = $(this).closest('.box-input');
 
         detail = $(tr).find('input[name="plant_detail[]"]').val();
         time = $(tr).find('input[name="plant_time[]"]').val();
-
+        location = $(tr).find('input[name="plant_location[]"]').val();
         // remove message pop
         $(section).find('.message-box').remove();
 
         // has error = true -- message alert pop
-        if (detail.length == 0 || time.length == 0) {
+        if (detail.length == 0 || time.length == 0 || location.length == 0) {
             $(section).append(
                 `<div class="message message-box"><div class="error"><h3>Enter is required</h3></div></div>`
             )
@@ -523,6 +564,7 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
 
         $(tr).find('span.textplant_detail').text(detail);
         $(tr).find('span.textplant_time').text(time);
+        $(tr).find('span.textplant_location').text(location);
 
         $(tr).removeClass('checked');
         var dup = `<tr class="box-input checked">
@@ -533,6 +575,11 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                             <td>
                                 <input type="text" name="plant_time[]">
                                 <span class="textplant_time"></span>
+                               
+                            </td>
+                            <td>
+                                <input type="text" name="plant_location[]">
+                                <span class="textplant_location"></span>
                                 <a href="#" data-action="clone-plant" data-target="material"><i class="fa fa-plus" aria-hidden="true"></i></a>
                                 <a href="#" data-action="remove-plant"><i class="fa fa-minus" aria-hidden="true"></i></a>
                             </td>
@@ -546,37 +593,62 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
         e.preventDefault();
         $(this).closest('tr').remove();
     })
-    </script>
-    <!-- AutoFill -->
-    <!-- <script type="text/javascript">
-    $(document).ready(function() {
+    //สร้าง function สำหรับการแสดงตัวอย่างภาพที่อัพโหลด
+    // $(document).ready(function() {
 
-        $("#project_name").change(function() {
+    //     $('#photoimg').die('click').live('change', function() {
+    //         //$("#preview").html('');
+
+    //         $("#imageform").ajaxForm({
+    //             target: '#preview',
+    //             beforeSubmit: function() {
+    //                 //เมื่ออัพโหลดภาพไปแล้วจะแสดงไฟล์ .gif loading
+    //                 console.log('ttest');
+    //                 $("#imageloadstatus").show();
+    //                 $("#imageloadbutton").hide();
+    //             },
+
+    //             //อัพโหลดเสร็จแล้วซ่อนไฟล์ .gif loading
+    //             success: function() {
+    //                 console.log('test');
+    //                 $("#imageloadstatus").hide();
+    //                 $("#imageloadbutton").show();
+    //             },
+    //             //error
+    //             error: function() {
+    //                 console.log('xtest');
+    //                 $("#imageloadstatus").hide();
+    //                 $("#imageloadbutton").show();
+    //             }
+    //         }).submit();
+    //     });
+    // });
+    // auto fill
+    $('#project_id').click(function() {
+        var id_project = $(this).val();
+        if (id_project == "") {
+
+        } else {
             $.ajax({
-                    url: "ajax_auto.php",
-                    type: "POST",
-                    data: 'sCusID=' + $("#project_name").val()
-                })
-                .success(function(result) {
+                url: "autofill.php",
+                method: "post",
+                data: {
+                    id: id_project,
+                },
+                dataType: "json", //ดาต้าที่จะเอาออกมา
+                success: function(data) {
+                    console.log(data);
+                    $('#indicator_1').val(data.indicator_1)
+                    $('#indicator_1_value').val(data.indicator_1_value)
+                    $('#indicator_2').val(data.indicator_2)
+                    $('#indicator_2_value').val(data.indicator_2_value)
 
-                    if (result == '') {
-                        $('input[type=text]').val('');
-                    } else {
-                        $.each(result, function(key, inval) {
+                }
+            })
+        }
+    })
+    </script>
 
-                            $("#txtMemID").val(inval["id_mem"]);
-                            $("#txtUsed").val(inval["user"]);
-                            $("#txtPass").val(inval["pass"]);
-                            $("#txtEmail").val(inval["email"]);
-                        });
-
-                    }
-
-                });
-
-        });
-    });
-    </script> -->
 
 </body>
 
