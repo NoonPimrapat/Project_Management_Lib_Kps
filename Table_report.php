@@ -1,0 +1,42 @@
+<link rel="stylesheet" href="css/Table_report.css">
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@200;400;600&display=swap" rel="stylesheet">
+<table>
+    <tbody>
+        <tr>
+            <th>
+                โครงการ
+            </th>
+            <th>
+                รายงานสถานะการดำเนินโครงการ
+            </th>
+            <th>
+                ผลการประเมินตัวชี้วัดโครงการ
+            </th>
+            <th>
+                ผู้รับผิดชอบ
+            </th>
+        </tr>
+        <tr>
+            <th>
+                โครงการ
+            </th>
+            <th>
+                รายงานสถานะการดำเนินโครงการ
+            </th>
+            <th>
+                ผลการประเมินตัวชี้วัดโครงการ
+            </th>
+            <th>
+                ผู้รับผิดชอบ
+            </th>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td>รวม</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tfoot>
+</table>

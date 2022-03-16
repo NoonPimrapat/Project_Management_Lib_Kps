@@ -1,5 +1,6 @@
 <?php
 session_start();
+include('config/db.php');
 // ถ้าไม่loginก็จะเข้าหน้านี้ไม่ได้
 if(!isset($_SESSION['user_email'])) { 
     $_SESSION['msg'] = "You must log in first";
@@ -10,12 +11,11 @@ if (isset($_GET['logout'])) {
     unset($_SESSION['user_email']);
     header('location: login.php');
 }
+$user_email=$_SESSION['user_email'];
 
-// // ดึงข้อมูลผู้ใช้ออกมาจากEmail
-// //2. query ข้อมูลจากตาราง tb_member:
-// $query = "SELECT * FROM user_details ORDER BY project_style_id asc" or die("Error:" . mysqli_error());
-// //3.เก็บข้อมูลที่ query ออกมาไว้ในตัวแปร result .
-// $result_style = mysqli_query($conn, $query);
+$query = "SELECT * FROM user_details WHERE user_email='$user_email'";
+    $result = mysqli_query($conn, $query) or die("Error in sql : $query". mysqli_error($conn));
+    $row = mysqli_fetch_array($result);
 // ?>
 
 
@@ -54,8 +54,8 @@ if (isset($_GET['logout'])) {
                 <div class="navbar_right">
                     <div class="profile">
                         <div class="icon_wrap">
-                            <img src="img/ku.jpg" alt="profile_pic">
-                            <span class="name"><?php echo $_SESSION['user_email'];?></span>
+                            <img src="<?php echo $row['user_pic'];?>" alt="profile_pic">
+                            <span class="name"><?php echo $row['user_firstname'];?></span>
                             <i class="fas fa-chevron-down"></i>
                         </div>
 
@@ -86,6 +86,9 @@ if (isset($_GET['logout'])) {
         <div class="color-bar">
             <p class="title">แผนปฎิบัติการประจำปีงบประมาณ ปัจจุบัน </p>
         </div>
+
+
+
     </div>
 
     <div class="grid-container">
@@ -110,7 +113,17 @@ if (isset($_GET['logout'])) {
             <h2>ตามแผนปฎิบัติการประจำปี งบประมาณ ......</h2>
         </div>
         <h2 class="subTitle">รายงานผลการดำเนินงานในรอบไตรมาส ........</h2>
-        <Button onclick="myFunction()" class="menuButton2">รายงานโครงการตามแผนงานประจำ</Button>
+        <div>
+            <Button onclick="myFunction()" class="menuButton2">รายงานโครงการตามแผนงานประจำ</Button>
+            <?php include('Table_report.php');?>
+        </div>
+
+        <br>
+        <div>
+            <Button onclick="myFunction()" class="menuButton2">รายงานสถานะการดำเนินโครงการ</Button>
+            <?php include('BarCharts.php');?>
+        </div>
+
     </div>
 
 </body>

@@ -190,8 +190,8 @@ if (isset($_POST['Add_Project'])) {
     
     if (count($errors) == 0) {
 
-        $sql = "INSERT INTO project_info(project_name, project_style, routine_plan, department_id, reason, period_op, period_ed, user_id, project_place, project_strategy,submit_date,project_sum_total,status_project,project_fiscal_year,indicator_1,indicator_1_value,indicator_2,indicator_2_value,operation) 
-        VALUES ('$pro_name','$pro_style','$pro_routine','$pro_department','$pro_reason','$pro_dateStart','$pro_dateEnd','$user_id','$pro_place','$pro_strategy','$date','$project_sum_total','ขออนุมัติโครงการ','$project_fiscal_year','$indicator_1','$indicator_1_value','$indicator_2','$indicator_2_value','$pro_operation')";
+        $sql = "INSERT INTO project_info(project_name, project_style, routine_plan, department_id, reason, period_op, period_ed, user_id, project_place, project_strategy,submit_date,project_sum_total,status_project,project_fiscal_year,indicator_1,indicator_1_value,indicator_2,indicator_2_value,operation,objective) 
+        VALUES ('$pro_name','$pro_style','$pro_routine','$pro_department','$pro_reason','$pro_dateStart','$pro_dateEnd','$user_id','$pro_place','$pro_strategy','$date','$project_sum_total','ขออนุมัติโครงการ','$project_fiscal_year','$indicator_1','$indicator_1_value','$indicator_2','$indicator_2_value','$pro_operation','$pro_objective')";
         print_pre($sql);
         mysqli_query($conn, $sql);
 

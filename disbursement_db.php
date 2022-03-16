@@ -22,11 +22,10 @@ $errors = array();
 
 if (isset($_POST['disbursement'])) {
     // ชื่อโครงการ
-    isset($_REQUEST['pro_name']) ? $pro_name = $_REQUEST['pro_name'] : $pro_name = '';
+    isset($_REQUEST['project_id']) ? $pro_name = $_REQUEST['project_id'] : $project_id = '';
     // echo $pro_name;
 
-    $pro_name = mysqli_real_escape_string($conn, $_POST['pro_name']);
-    $project_sum_total = mysqli_real_escape_string($conn, $_POST['project_sum_total']);
+    $project_id = mysqli_real_escape_string($conn, $_POST['project_id']);
 
 
     // if (empty($email)) {
@@ -39,25 +38,18 @@ if (isset($_POST['disbursement'])) {
 
     $date = date("Y-m-d H:i:s");
 
-    $user_check_query = "SELECT * FROM project_info WHERE project_name = '$pro_name'  LIMIT 1";
+    $user_check_query = "SELECT * FROM project_info WHERE project_id = '$project_id'  LIMIT 1";
     $query = mysqli_query($conn, $user_check_query);
     $result = mysqli_fetch_assoc($query);
     $user_id = $_SESSION['user_id'];
-    if ($result) { // if user exists
-        if ($result['project_name'] === $pro_name) {
-            array_push($errors, "project_name already exists");
-        }
-    }
+ 
 
-    if (empty($pro_name)) {
-        array_push($errors, "pro_name is required");
-        $_SESSION['error'] = "pro_name is required";
+    if (empty($project_id)) {
+        array_push($errors, "project_id is required");
+        $_SESSION['error'] = "project_id is required";
     }
     
-    if (empty($project_fiscal_year)) {
-        array_push($errors, "project_fiscal_year is required");
-        $_SESSION['error'] = "project_fiscal_year is required";
-    }
+  
 
 
     foreach ($errors as $value) {
@@ -69,29 +61,34 @@ if (isset($_POST['disbursement'])) {
 
     if (count($errors) == 0) {
 
-        $sql = "INSERT INTO project_info(project_name, project_style, routine_plan, department_id, reason, period_op, period_ed, user_id, project_place, project_strategy,submit_date,project_sum_total,status_project,project_fiscal_year) VALUES ('$pro_name','$pro_style','$pro_routine','$pro_department','$pro_reason','$pro_dateStart','$pro_dateEnd','$user_id','$pro_place','$pro_strategy','$date','$project_sum_total','ขออนุมัติโครงการ',$project_fiscal_year)";
+        $sql = "INSERT INTO project_info(project_id,  user_id) VALUES ('$project_id','$user_id')";
         print_pre($sql);
         mysqli_query($conn, $sql);
-
-        $_SESSION['pro_name'] = $pro_name;
-        $_SESSION['success'] = "You are save project name";
 
         if ($_SESSION['success'] == "You are save project name") {
 
             echo "in";
 
             // ส่วนของการเก็บข้อมูลเข้าในตาราง
-            $sqlGetID = "SELECT * FROM project_info WHERE project_name = '$pro_name' ";
+            $sqlGetID = "SELECT * FROM project_info WHERE project_id = '$project_id' ";
             $result = mysqli_query($conn, $sqlGetID);
 
             foreach ($result as $values) {
                 $project_id = $values["project_id"];
-               $_SESSION['project_id']=$values["project_id"];
+                $project_name = $values["project_name"];
+               $_SESSION['project_name']=$values["project_name"];
 
             }
+$search_project_id="SELECT DISTINCT $project_id FROM report_budget WHERE report_project_id ='$project_id'" ; /**DISTINCT คือ ถ้าข้อมูลซ้ำกันเอามาอันเดียว */
+$result_search_project_id = mysqli_query($conn, $search_project_id);
+$result_search = mysqli_fetch_assoc($result_search_project_id);
 
-            // งบประมาณ
+    if ($result_search==0) {
+    # code...
+    echo ('เข้ามาแล้วจ่ะ');
+// งบประมาณ
             $budgets = array();
+            $report_num=1;
             $compensation = $_REQUEST['compensation'] ? $_REQUEST['compensation'] : '';
             $budgets = getVal($compensation, 'compensation', $budgets, $project_id);
 
@@ -102,38 +99,85 @@ if (isset($_POST['disbursement'])) {
             $budgets = getVal($material, 'material', $budgets, $project_id);
 
             foreach ($budgets as $key => $value) {
-                $sql = "INSERT INTO project_budget(project_id, budget_group, item, price, quantity) VALUES('{$value['project_id']}', '{$value['budget_group']}', '{$value['item']}', '{$value['price']}', '{$value['quantity']}')";
+                $sql = "INSERT INTO report_budget(report_project_id, report_budget_group, report_item, report_price, report_quantity,report_status,report_num) VALUES('{$value['project_id']}', '{$value['budget_group']}', '{$value['item']}', '{$value['price']}', '{$value['quantity']}','0','$report_num')";
                 print_pre($sql);
                 mysqli_query($conn, $sql);
             }
+    }else {
+    # code...
+    echo ('ไม่เข้าจ่ะ');
+    $search_report_num="SELECT * FROM report_budget WHERE report_project_id ='$project_id' ORDER BY report_num DESC " ; /**DISTINCT คือ ถ้าข้อมูลซ้ำกันเอามาอันเดียว */
+    $result_search_report_num = mysqli_query($conn, $search_report_num);
+    $result_search = mysqli_fetch_assoc($result_search_report_num);
+    $report_num=$result_search['report_num'];
+    echo $report_num;
+    $budgets = array();
+            $report_num=$report_num+1;
+            $compensation = $_REQUEST['compensation'] ? $_REQUEST['compensation'] : '';
+            $budgets = getVal($compensation, 'compensation', $budgets, $project_id);
 
-            // แผนการดำเนินงาน
-            $plant_detail = isset($_REQUEST['plant_detail']) ? $_REQUEST['plant_detail'] : array();
-            $plant_time = isset($_REQUEST['plant_time']) ? $_REQUEST['plant_time'] : array();
+            $costs = $_REQUEST['cost'] ? $_REQUEST['cost'] : '';
+            $budgets = getVal($costs, 'cost', $budgets, $project_id);
 
-            $loop = count($plant_detail);
-            if ($loop) {
-                echo "insert table plant ...";
-                $valueUpsert = array();
-                for ($i = 0; $i < $loop; $i++) {
-                    # code...
-                    $detail = isset($plant_detail[$i]) ? $plant_detail[$i] : "";
-                    $time = isset($plant_time[$i]) ? $plant_time[$i] : "";
-                    if ($detail && $time) $valueUpsert[] = "('{$project_id}', '{$detail}', '{$time}')";
-                }
-                if ($valueUpsert) {
-                    $value = join(",", $valueUpsert);
-                    $sql = "INSERT INTO project_plant(project_id, plant_detail, plant_time) VALUES $value";
-                    print_pre($sql);
-                    mysqli_query($conn, $sql);
-                }
+            $material = $_REQUEST['material'] ? $_REQUEST['material'] : '';
+            $budgets = getVal($material, 'material', $budgets, $project_id);
+
+            foreach ($budgets as $key => $value) {
+                $sql = "INSERT INTO report_budget(report_project_id, report_budget_group, report_item, report_price, report_quantity,report_status,report_num,report_submit_date) VALUES('{$value['project_id']}', '{$value['budget_group']}', '{$value['item']}', '{$value['price']}', '{$value['quantity']}','0','$report_num','$date')";
+                print_pre($sql);
+                mysqli_query($conn, $sql);
             }
+}
+// if (condition) {
+//     # code...
+// }
             // send line noti
-            line_noti("\nมีการร้องขออนุมัติเบิก-จ่ายโครงการ\nโครงการ: {$pro_name}\nเริ่ม: {$pro_dateStart}\nสิ้นสุด: {$pro_dateEnd}");
+            line_noti("\nมีการเบิกงบประมาณโครงการ\nโครงการ: {$project_name}\n");
             // header("location:approval_confirm.php");exit;
-            echo("<script>location.href ='/Project_Management_Lib_Kps/approval_confirm.php?';</script>");
+            // echo("<script>location.href ='/Project_Management_Lib_Kps/disbursement_confirm.php?';</script>");
+            echo("<script>window.open('disbursement_confirm.php?id={$project_id}','_self');</script>");
         }
     }
+}
+
+function line_noti($msn)
+{
+    $status = false;
+    $message = "404 error.";
+    if ($msn) :
+
+        $curl = curl_init();
+        $LINE_API_KEY = "LIBWf00oYPIzo4pUDKherAXCQfCiS5NLnE6b8i409eH";//ใส่Key
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://notify-api.line.me/api/notify",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_SSL_VERIFYHOST => false,
+            CURLOPT_SSL_VERIFYPEER => false,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => "message={$msn}",
+            CURLOPT_HTTPHEADER => array(
+                "authorization: Bearer {$LINE_API_KEY}",
+                "content-type: application/x-www-form-urlencoded"
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+            $message = "cURL Error #:" . $err;
+        } else {
+            $status = true;
+            $message = "Success";
+        }
+    endif;
+    echo json_encode(array('status' => $status, 'message' => $message, 'response' => $response));
 }
 
 

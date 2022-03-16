@@ -58,7 +58,7 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
     <!-- plugin -->
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-    
+
 </head>
 
 <body>
@@ -138,7 +138,7 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                     </div>
 
                     <div class="col-65">
-                        <select name="pro_name" class="inputFill-Information" required>
+                        <select name="project_id" class="inputFill-Information" required>
                             <option value=""> กรุณาเลือก </option>
                             <?php foreach ($result_ProjectName as $results) { ?>
                             <option value="<?php echo $results["project_id"]; ?>">
@@ -170,7 +170,7 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                                         <span for="" class="item"></span>
                                     </td>
                                     <td>
-                                        <input type="number" name="compensation[quantity][]">
+                                        <input type="number" class="input-quantity " name="compensation[quantity][]">
                                         <span for="" class="quantity"></span>
                                     </td>
                                     <td>
@@ -206,7 +206,7 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                                         <span for="" class="item"></span>
                                     </td>
                                     <td>
-                                        <input type="number" name="cost[quantity][]">
+                                        <input type="number" class="input-quantity" name="cost[quantity][]">
                                         <span for="" class="quantity"></span>
                                     </td>
                                     <td>
@@ -242,7 +242,7 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                                         <span for="" class="item"></span>
                                     </td>
                                     <td>
-                                        <input type="number" name="material[quantity][]">
+                                        <input type="number" class="input-quantity" name="material[quantity][]">
                                         <span for="" class="quantity"></span>
                                     </td>
                                     <td>
@@ -315,7 +315,7 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
 
         var dup = `<tr class="box-input act-input">
                             <td class="text-left"><input type="text" name="${group}[item][]"><span for="" class="item"></span></td>
-                            <td><input type="number" name="${group}[quantity][]"><span for="" class="quantity"></span></td>
+                            <td><input type="number" class="input-quantity" name="${group}[quantity][]"><span for="" class="quantity"></span></td>
                             <td>
                                 <input type="number" class="input-price" name="${group}[price][]">
                                 <span for="" class="price"></span>
@@ -340,8 +340,9 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
         var tr = $(this).closest('.box-input');
         // get price from span
         var price = $(tr).find('.input-price').val();
+        var quantity = $(tr).find('.input-quantity').val()
         if (price !== "undefined") {
-            priceAll = parseFloat(priceAll) - parseFloat(price);
+            priceAll = parseFloat(priceAll) - parseFloat(price * quantity);
             priceAll = priceAll < 0 ? 0 : priceAll;
             $(this).closest('tr').remove();
             $('#sum-total').html(`${priceAll.toFixed(2)}.- บาท`);

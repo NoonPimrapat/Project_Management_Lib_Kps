@@ -180,8 +180,6 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                     <label-1 for="indicator">ปรับตัวชี้วัด</label-1><br>
                     <input type="checkbox" id="budget" name="budget" value="budget" class="ckb">
                     <label-1 for="budget">ปรับงบประมาณ</label-1><br>
-
-
                 </div>
             </div>
             <br>

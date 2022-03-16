@@ -127,7 +127,7 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
 
     <div class="information-container">
         <!-- <p class="topic">โครงการ</p> -->
-        <form action="approval_db.php" method="post">
+        <form action="close_project_db.php" method="post">
             <?php include('errors.php'); ?>
             <?php if (isset($_SESSION['error'])) : ?>
             <div class="error">
@@ -146,7 +146,7 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                     </div>
 
                     <div class="col-65">
-                        <select name="pro_name" class="inputFill-Information" id="pro_name" required>
+                        <select name="project_id" class="inputFill-Information" id="project_id" required>
                             <option value=""> กรุณาเลือก </option>
                             <?php foreach ($result_ProjectName as $results) { ?>
                             <option value="<?php echo $results["project_id"]; ?>">
@@ -162,7 +162,7 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                         <label for="ลักษณะโครงการ" class="topic">ลักษณะโครงการ : </label>
                     </div>
                     <div class="col-65">
-                        <input type="text" name="pro_style" class="inputFill-Information" id="pro_style">
+                        <input type="text" name="pro_style" class="inputFill-Information" id="pro_style" readonly>
                     </div>
                 </div>
                 <div class="row">
@@ -170,7 +170,7 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                         <label for="ภายใต้ยุทธศาสตร์" class=" topic">ภายใต้ยุทธศาสตร์ : </label>
                     </div>
                     <div class="col-65">
-                        <input type="text" name="pro_strategy" class="inputFill-Information" id="pro_strategy">
+                        <input type="text" name="pro_strategy" class="inputFill-Information" id="pro_strategy" readonly>
                     </div>
                 </div>
                 <div class="row">
@@ -178,7 +178,7 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                         <label for="ภายใต้แผนงานประจำ" class="topic">ภายใต้แผนงานประจำ : </label>
                     </div>
                     <div class="col-65">
-                        <input type="text" name="pro_routine" class="inputFill-Information" id="routine_plan">
+                        <input type="text" name="pro_routine" class="inputFill-Information" id="routine_plan" readonly>
                     </div>
                 </div>
                 <div class="row">
@@ -186,7 +186,7 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                         <label for="ฝ่ายงาน" class="topic">ฝ่ายงาน : </label>
                     </div>
                     <div class="col-65">
-                        <input type="text" name="pro_department" class="inputFill-Information" id="department">
+                        <input type="text" name="pro_department" class="inputFill-Information" id="department" readonly>
 
                     </div>
                 </div>
@@ -196,7 +196,7 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                     </div>
                     <div class="col-65">
                         <input type="text" name="pro_objective" class="inputFill-Information" id="pro_objective"
-                            required>
+                            readonly>
                     </div>
                 </div>
                 <div class="row">
@@ -205,7 +205,7 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                     </div>
                     <div class="col-65">
                         <textarea name="pro_operation" rows="4" cols="50" class="inputFill-Information-large"
-                            id="reason" required></textarea>
+                            id="reason" readonly></textarea>
                     </div>
                 </div>
                 <div class="row">
@@ -215,11 +215,11 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                     <div class="col-65">
 
                         <input type="date" id="dateStart" name="pro_dateStart" class="inputFill-Information-Datepicker"
-                            required>
+                            readonly>
                         <label-inline class="topic">ถึง</label-inline>
 
                         <input type="date" id="dateEnd" name="pro_dateEnd" class="inputFill-Information-Datepicker"
-                            required>
+                            readonly>
                     </div>
                 </div>
                 <div class="row">
@@ -227,7 +227,7 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                         <label for="สถานที่ " class="topic">สถานที่ : </label>
                     </div>
                     <div class="col-65">
-                        <input type="text" name="pro_place" class="inputFill-Information" id="pro_place" required>
+                        <input type="text" name="pro_place" class="inputFill-Information" id="pro_place" readonly>
                     </div>
                 </div>
                 <div class="row">
@@ -336,18 +336,18 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
 
                     <div class="col-65">
                         <label for="ตัวชี้วัดโครงการ" class="topic">1. </label>
-                        <input type="text" id="indicator_1" name="indicator_1" class="inputFill-Information" required>
+                        <input type="text" id="indicator_1" name="indicator_1" class="inputFill-Information" readonly>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-65">
                         <label for="ลักษณะโครงการ : " class="topic">เป้าหมายที่กำหนดไว้ : </label>
                         <input type="text" id="indicator_1_value" name="indicator_1_value"
-                            class="inputFill-Information-Datepicker" required>
+                            class="inputFill-Information-Datepicker" readonly>
                     </div>
                     <div class="col-65">
                         <label for="ลักษณะโครงการ : " class="topic">ผลการดำเนินงาน : </label>
-                        <input type="text" id="indicator_performance1" name="indicator_performance1"
+                        <input type="text" id="indicator_1_result" name="indicator_1_result"
                             class="inputFill-Information-Datepicker" required>
                     </div>
 
@@ -368,18 +368,18 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
 
                     <div class="col-65">
                         <label for="ลักษณะโครงการ : " class="topic">2. </label>
-                        <input type="text" id="indicator_2" name="indicator_2" class="inputFill-Information" required>
+                        <input type="text" id="indicator_2" name="indicator_2" class="inputFill-Information" readonly>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-65">
                         <label for="ลักษณะโครงการ : " class="topic">เป้าหมายที่กำหนดไว้ : </label>
                         <input type="text" id="indicator_2_value" name="indicator_1_value"
-                            class="inputFill-Information-Datepicker" required>
+                            class="inputFill-Information-Datepicker" readonly>
                     </div>
                     <div class="col-65">
                         <label for="ลักษณะโครงการ : " class="topic">ผลการดำเนินงาน : </label>
-                        <input type="text" id="indicator_performance1" name="indicator_performance2"
+                        <input type="text" id="indicator_2_result" name="indicator_2_result"
                             class="inputFill-Information-Datepicker" required>
                     </div>
 
@@ -546,7 +546,7 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
         $(this).closest('tr').remove();
     })
     // auto fill
-    $('#pro_name').click(function() {
+    $('#project_id').click(function() {
         var id_project = $(this).val();
         if (id_project == "") {
 

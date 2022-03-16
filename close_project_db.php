@@ -20,20 +20,22 @@ $user_id = $_SESSION['user_id'];
 
 $errors = array();
 
-if (isset($_POST['performance_report'])) {
+if (isset($_POST['close_project'])) {
 
     // ผู้รับผิดชอบโครงการ
     isset($_REQUEST['project_id']) ? $project_id = $_REQUEST['project_id'] : $project_id = '';
     echo "project_id";
     echo $project_id;
-    isset($_POST['compensation']) ?  $_POST['compensation'] :$compensation ='';
+    // isset($_POST['compensation']) ?  $_POST['compensation'] :$compensation ='';
 
 
     
     $project_id = mysqli_real_escape_string($conn, $_POST['project_id']);
-    $progress_quarter = mysqli_real_escape_string($conn, $_POST['progress_quarter']);
-    $indicator_1  = mysqli_real_escape_string($conn, $_POST['indicator_1']);
-    $indicator_2  = mysqli_real_escape_string($conn, $_POST['indicator_2']);
+
+    $indicator_1_result  = mysqli_real_escape_string($conn, $_POST['indicator_1_result']);
+    $indicator_2_result  = mysqli_real_escape_string($conn, $_POST['indicator_2_result']);
+    $indicator_success1 = mysqli_real_escape_string($conn, $_POST['indicator_success1']);
+    $indicator_success2 = mysqli_real_escape_string($conn, $_POST['indicator_success2']);
     // $activity_pictures  =  $_POST['activity_pictures'];
     // foreach($_FILES['files[]']['tmp_name'] as $key => $val)
 	// {
@@ -90,8 +92,7 @@ if (isset($_POST['performance_report'])) {
         echo "$user_id";   
         echo $user_id;
          
-        $sql = "INSERT INTO progress_info(project_id, progress_quarter, indicator_1, indicator_2,user_id) 
-        VALUES ('$project_id','$progress_quarter','$indicator_1','$indicator_2','$user_id')";
+        $sql = "UPDATE  project_info SET indicator_1_result=$indicator_1_result, indicator_2_result=$indicator_2_result, indicator_success1=$indicator_success1,indicator_success2=$indicator_success2 WHERE report_project_id = $project_id";
         print_pre($sql);
         mysqli_query($conn, $sql);
 
@@ -113,21 +114,7 @@ if (isset($_POST['performance_report'])) {
 
             echo "in";
 
-            // งบประมาณ
-            // $budgets = array();
-            // $compensation = $_REQUEST['compensation'] ? $_REQUEST['compensation'] : '';
-            // $budgets = getVal($compensation, 'compensation', $budgets, $project_id,$progress_id);
-
-            // $costs = $_REQUEST['cost'] ? $_REQUEST['cost'] : '';
-            // $budgets = getVal($costs, 'cost', $budgets, $project_id,$progress_id);
-
-            // $material = $_REQUEST['material'] ? $_REQUEST['material'] : '';
-            // $budgets = getVal($material, 'material', $budgets, $project_id,$progress_id);
-
-            // foreach ($budgets as $key => $value) {
-            //     // $sql = "INSERT INTO report_budget(report_project_id, report_budget_group, report_item, report_price, report_quantity,report_status) VALUES('{$value['project_id']}', '{$value['budget_group']}', '{$value['item']}', '{$value['price']}', '{$value['quantity']}', '{$value['progress_id']}')";
-            //     // print_pre($sql);
-            //     // mysqli_query($conn, $sql);
+           
                 $sqlUPDATE="UPDATE report_budget SET report_status = 1 WHERE report_project_id = $project_id";
                 print_pre($sqlUPDATE);
                 mysqli_query($conn, $sqlUPDATE);
@@ -154,32 +141,11 @@ if (isset($_POST['performance_report'])) {
 
 
             // แผนการดำเนินงาน
-            $plant_detail = isset($_REQUEST['plant_detail']) ? $_REQUEST['plant_detail'] : array();
-            $plant_time = isset($_REQUEST['plant_time']) ? $_REQUEST['plant_time'] : array();
-            $plant_location = isset($_REQUEST['plant_location']) ? $_REQUEST['plant_location'] : array();
-
-            $loop = count($plant_detail);
-            if ($loop) {
-                echo "insert table plant ...";
-                $valueUpsert = array();
-                for ($i = 0; $i < $loop; $i++) {
-                    # code...
-                    $detail = isset($plant_detail[$i]) ? $plant_detail[$i] : "";
-                    $time = isset($plant_time[$i]) ? $plant_time[$i] : "";
-                    $location = isset($plant_location[$i]) ? $plant_location[$i] : "";
-                    if ($detail && $time&&$location) $valueUpsert[] = "('{$project_id}', '{$detail}', '{$time}','{$progress_id}')";
-                }
-                if ($valueUpsert) {
-                    $value = join(",", $valueUpsert);
-                    $sql = "INSERT INTO report_plant(project_id, report_detail, report_time,report_place) VALUES $value";
-                    print_pre($sql);
-                    mysqli_query($conn, $sql);
-                }
-            }
+           
             // send line noti
-            line_noti("\nมีการรายงานผลการดำเนินโครงการ\nโครงการ: {$project_id}");
+            line_noti("\nมีขออนุมัติเบิกค่าใช้จ่ายและปิดโครงการ\nโครงการ: {$project_id}");
             // header("location:approval_confirm.php");exit;
-            echo("<script>location.href ='/Project_Management_Lib_Kps/performance_confirm.php?';</script>");
+            echo("<script>location.href ='/Project_Management_Lib_Kps/close_project_confirm.php?';</script>");
         }
     }
 }

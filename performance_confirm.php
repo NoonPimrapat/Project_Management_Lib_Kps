@@ -4,6 +4,7 @@ session_start();
 include('config/db.php');
 $user_email = $_SESSION['user_email'];
 $user_id = $_SESSION['user_id'];
+$project_id=66;
 // ถ้าไม่loginก็จะเข้าหน้านี้ไม่ได้
 if (!isset($_SESSION['user_email'])) {
     $_SESSION['msg'] = "You must log in first";
@@ -26,9 +27,27 @@ $queryProgress = "SELECT * FROM progress_info ORDER BY user_id asc" or die("Erro
 $result_Progress = mysqli_query($conn, $queryProgress);
 
 //3. query ข้อมูลจากตาราง user_details:
-$queryProject = "SELECT * FROM project_info WHERE user_id = '$user_id'" or die("Error:" . mysqli_error());
+// $queryProject = "SELECT * FROM project_info WHERE user_id = '$user_id'" or die("Error:" . mysqli_error());
+// //เก็บข้อมูลที่ query ออกมาไว้ในตัวแปร result .
+// $result_Project = mysqli_query($conn, $queryProject);
+
+//1. query ข้อมูลจากตาราง user_details:
+$queryUser = "SELECT * FROM user_details WHERE user_id = '$user_id'" or die("Error:" . mysqli_error());
 //เก็บข้อมูลที่ query ออกมาไว้ในตัวแปร result .
-$result_Project = mysqli_query($conn, $queryProject);
+$result_user = mysqli_query($conn, $queryUser);
+foreach ($result_user as $values) {
+$firstname = $values["user_firstname"]; //ชื่อ
+$lastname = $values["user_lastname"]; //นามสกุล
+}
+
+$queryproject = "SELECT * FROM project_info 
+JOIN user_details JOIN report_plant JOIN progress_info 
+ON user_details.user_id=project_info.user_id
+AND project_info.project_id=report_plant.project_id
+AND project_info.project_id=progress_info.project_id
+WHERE project_info.project_id=$project_id";
+$result_project = mysqli_query($conn, $queryproject) or die("Error in sql : $query". mysqli_error($conn));
+$row = mysqli_fetch_array($result_project);
 
 ?>
 
@@ -52,6 +71,7 @@ $result_Project = mysqli_query($conn, $queryProject);
     <!-- custom css -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/eidit_check.css">
+    <link rel="stylesheet" href="css/wordReport.css">
     <link rel="stylesheet" href="css/custom.css?v=<?php echo time(); ?>">
 
     <!-- plugin -->
@@ -74,7 +94,7 @@ $result_Project = mysqli_query($conn, $queryProject);
                 </div>
                 <div>
                     <div class="logo">
-                        <p class="headline">แก้ไข/ตรวจสอบสถานะโครงการ</p>
+                        <p class="headline">รายงานผลการดำเนินการ</p>
                     </div>
 
                 </div>
@@ -97,6 +117,9 @@ $result_Project = mysqli_query($conn, $queryProject);
                                         </span>Profile</a>
                                     <div class="btn">My Account</div>
                                 </li>
+                                <li><a class="address" href="#"><span class="picon"><i
+                                                class="fas fa-map-marker"></i></span>Address</a></li>
+
                                 <li><a class="logout" href="home.php?logout='1'"><span class="picon"><i
                                                 class="fas fa-sign-out-alt"></i></span>Logout</a></li>
                             </ul>
@@ -111,48 +134,30 @@ $result_Project = mysqli_query($conn, $queryProject);
         <script src="script.js"></script>
 
     </header>
-    <div class="logo-container">
-        <div class="color-small-bar"></div>
-    </div>
-    <br>
-
     <div style="text-align: center;">
         <table>
-            <caption> รายงานผลการดำเนินงานรายไตรมาส</caption>
-            <thead>
-                <tr>
-                    <th>ชื่อโครงการ</th>
-                    <th>ผลการดำเนินงาน</th>
-                    <th>ระยะเวลา</th>
-                    <th>ตัวชี้วัด</th>
-                    <th>ผลการดำเนินงานตามตัวชี้วัด</th>
-                    <th>ผู้รับผิดชอบ</th>
-                </tr>
-                <?php foreach ($result_Progress as $value) { ?>
+            <tr>
+                <th>โครงการ</th>
+                <th>ผลการดำเนินการ</th>
+                <th>ระยะเวลา</th>
+                <th>ตัวชี้วัด</th>
+                <th>ผลการดำเนินงานตามตัวชี้วัด</th>
+                <th>ผู้รับผิดชอบ</th>
+            </tr>
+            <?php foreach ($result_project as $value) { ?>
             <tbody>
                 <tr>
                     <td><?php echo $value['project_name']; ?></td>
-                    <td><?php echo $value['project_style']; ?></td>
-                    <td><?php echo $value['status_project']; ?></td>
-                    <td><Button><?php echo $value['project_place']; ?></Button></td>
-                    <td> <?php   if ($value['document_status']==0) {echo'<p style="color: #a94442;">รอตรวจสอบ</p>';}else
-                    {echo'<p style="color: #00766a;">ตรวจสอบแล้ว</p>';}?></td>
+                    <td><?php echo $value['report_detail']; ?></td>
+                    <td><?php echo $value['report_time']; ?></td>
+                    <td><?php echo $value['indicator_1']; ?></td>
+                    <td> <?php echo $value['progress_indicator_1'];?></td>
+                    <td> <?php echo $value['user_firstname'];?>&nbsp;<?php   echo $row['user_lastname'];?></td>
                 </tr>
             </tbody>
-            </thead>
             <?php } ?>
+
         </table>
-        <div class="note">
-            <p>หมายเหตุ</p><br>
-            <p>1.หากสถานะเอกสารเป็นสถานะ
-            <p class="red">รอตรวจสอบ</p> ผู้ใช้จะสามารถ<p class="green">แก้ไขเอกสารได้</p>
-            </p>
-            <br>
-            <p>2.หากสถานะเอกสารเป็นสถานะ
-            <p class="green">ตรวจสอบแล้ว</p> ผู้ใช้จะ<p class="red">ไม่สามารถแก้ไขเอกสารได้
-            </p> หากต้องการแก้ไขโปรติดต่อเจ้าหน้าที่
-            </p>
-        </div>
         <div class="container-button">
             <button onclick="parent.location='home.php'" class="backButton">Back </button>
             <?php
@@ -161,6 +166,7 @@ $result_Project = mysqli_query($conn, $queryProject);
 
         </div>
     </div>
+
 </body>
 
 </html>

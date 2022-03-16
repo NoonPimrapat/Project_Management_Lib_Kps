@@ -65,6 +65,13 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
     <!-- อัพรูปแสดงรูป -->
     <script src="jquery.min.js"></script>
     <script src="jquery.wallform.js"></script>
+    <script type="text/javascript" src='jquery-3.4.1.min.js'></script>
+
+    <style type="text/css">
+    #preview img {
+        margin: 5px;
+    }
+    </style>
 </head>
 
 <body>
@@ -125,7 +132,7 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
 
     <div class="information-container">
         <!-- <p class="topic">โครงการ</p> -->
-        <form action="performance_report_db.php" method="post">
+        <form action="performance_report_db.php" method="post" enctype="multipart/form-data">
             <?php include('errors.php'); ?>
             <?php if (isset($_SESSION['error'])) : ?>
             <div class="error">
@@ -144,7 +151,7 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                     </div>
 
                     <div class="col-65">
-                        <select name="project_id" class="inputFill-Information" id="project_id" required>
+                        <select name="project_id" class="inputFill-Information" id="pro_name" required>
                             <option value=""> กรุณาเลือก </option>
                             <?php foreach ($result_ProjectName as $results) { ?>
                             <option value="<?php echo $results["project_id"]; ?>">
@@ -208,7 +215,7 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                 </div>
                 <div class="row">
                     <div class="col-25">
-                        <label for="งบประมาณ " class="topic">ค่าใช้จ่าย : </label>
+                        <label for="งบประมาณ " class="topic">งบประมาณ : </label>
                     </div>
                     <div class="col-65">
 
@@ -227,11 +234,11 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                                     <th>ราคา</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr class="box-input act-input">
+                            <tbody id="tbodyCompensation">
+                                <!-- <tr class="box-input act-input">
                                     <td class="text-left">
-                                        <input type="text" name="compensation[item][]">
-                                        <span for="" class="item"></span>
+                                        <input type="text" name="compensation[item][]" id="compensation[item][]">
+                                        <span for="" class="item" id="compensation[item][]"></span>
                                     </td>
                                     <td>
                                         <input type="number" name="compensation[quantity][]">
@@ -245,7 +252,7 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                                         <a href="#" data-action="remove"><i class="fa fa-minus"
                                                 aria-hidden="true"></i></a>
                                     </td>
-                                </tr>
+                                </tr> -->
                             </tbody>
                         </table>
                     </div>
@@ -263,25 +270,8 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                                     <th>ราคา</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr class="box-input act-input">
-                                    <td class="text-left">
-                                        <input type="text" name="cost[item][]">
-                                        <span for="" class="item"></span>
-                                    </td>
-                                    <td>
-                                        <input type="number" name="cost[quantity][]">
-                                        <span for="" class="quantity"></span>
-                                    </td>
-                                    <td>
-                                        <input type="number" class="input-price" name="cost[price][]">
-                                        <span for="" class="price"></span>
-                                        <a href="#" data-action="clone" data-target="cost"><i class="fa fa-plus"
-                                                aria-hidden="true"></i></a>
-                                        <a href="#" data-action="remove"><i class="fa fa-minus"
-                                                aria-hidden="true"></i></a>
-                                    </td>
-                                </tr>
+                            <tbody id="tbodyCost">
+
                             </tbody>
                         </table>
                     </div>
@@ -299,25 +289,8 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                                     <th>ราคา</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr class="box-input act-input">
-                                    <td class="text-left">
-                                        <input type="text" name="material[item][]">
-                                        <span for="" class="item"></span>
-                                    </td>
-                                    <td>
-                                        <input type="number" name="material[quantity][]">
-                                        <span for="" class="quantity"></span>
-                                    </td>
-                                    <td>
-                                        <input type="number" class="input-price" name="material[price][]">
-                                        <span for="" class="price"></span>
-                                        <a href="#" data-action="clone" data-target="material"><i class="fa fa-plus"
-                                                aria-hidden="true"></i></a>
-                                        <a href="#" data-action="remove"><i class="fa fa-minus"
-                                                aria-hidden="true"></i></a>
-                                    </td>
-                                </tr>
+                            <tbody id="tbodyMaterial">
+
                             </tbody>
                         </table>
                     </div>
@@ -392,7 +365,11 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                 </div>
                 <div class="information-container">
                     <label-1 for="ลักษณะโครงการ" class="topic">1.ภาพกิจกรรม(5-10 ไฟล์) </label>
-                        <input id="file-upload" name="activity_pictures" type="file" accept="image/*" multiple />
+                        <!-- <input id="pic-upload" name="filUpload[]" type="file" accept="image/*" multiple /> -->
+                        <input type="file" name="files[]" multiple id="files">
+                        <input type="button" id="submit" value='Upload'>
+                        <!-- Preview -->
+                        <div id='preview'></div>
                 </div>
                 <div class=" information-container">
                     <label-1 for="ลักษณะโครงการ" class="topic">
@@ -492,7 +469,7 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
 
         var dup = `<tr class="box-input act-input">
                             <td class="text-left"><input type="text" name="${group}[item][]"><span for="" class="item"></span></td>
-                            <td><input type="number" name="${group}[quantity][]"><span for="" class="quantity"></span></td>
+                            <td><input type="number" class="input-quantity" name="${group}[quantity][]"><span for="" class="quantity"></span></td>
                             <td>
                                 <input type="number" class="input-price" name="${group}[price][]">
                                 <span for="" class="price"></span>
@@ -517,22 +494,9 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
         var tr = $(this).closest('.box-input');
         // get price from span
         var price = $(tr).find('.input-price').val();
+        var quantity = $(tr).find('.input-quantity').val()
         if (price !== "undefined") {
-            priceAll = parseFloat(priceAll) - parseFloat(price);
-            priceAll = priceAll < 0 ? 0 : priceAll;
-            $(this).closest('tr').remove();
-            $('#sum-total').html(`${priceAll.toFixed(2)}.- บาท`);
-            $('#bahttex').html('(' + ThaiBaht(priceAll.toFixed(2)) + ')')
-        }
-    })
-    $(document).on('click', 'a[data-action="remove"]', function(e) {
-        e.preventDefault();
-        // get element tr 
-        var tr = $(this).closest('.box-input');
-        // get price from span
-        var price = $(tr).find('.input-price').val();
-        if (price !== "undefined") {
-            priceAll = parseFloat(priceAll) - parseFloat(price);
+            priceAll = parseFloat(priceAll) - parseFloat(price * quantity);
             priceAll = priceAll < 0 ? 0 : priceAll;
             $(this).closest('tr').remove();
             $('#sum-total').html(`${priceAll.toFixed(2)}.- บาท`);
@@ -593,56 +557,151 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
         e.preventDefault();
         $(this).closest('tr').remove();
     })
-    //สร้าง function สำหรับการแสดงตัวอย่างภาพที่อัพโหลด
-    // $(document).ready(function() {
+    // อัพรูป
+    $(document).ready(function() {
 
-    //     $('#photoimg').die('click').live('change', function() {
-    //         //$("#preview").html('');
+        $('#submit').click(function() {
 
-    //         $("#imageform").ajaxForm({
-    //             target: '#preview',
-    //             beforeSubmit: function() {
-    //                 //เมื่ออัพโหลดภาพไปแล้วจะแสดงไฟล์ .gif loading
-    //                 console.log('ttest');
-    //                 $("#imageloadstatus").show();
-    //                 $("#imageloadbutton").hide();
-    //             },
+            var form_data = new FormData();
 
-    //             //อัพโหลดเสร็จแล้วซ่อนไฟล์ .gif loading
-    //             success: function() {
-    //                 console.log('test');
-    //                 $("#imageloadstatus").hide();
-    //                 $("#imageloadbutton").show();
-    //             },
-    //             //error
-    //             error: function() {
-    //                 console.log('xtest');
-    //                 $("#imageloadstatus").hide();
-    //                 $("#imageloadbutton").show();
-    //             }
-    //         }).submit();
-    //     });
-    // });
+            // Read selected files
+            var totalfiles = document.getElementById('files').files.length;
+            for (var index = 0; index < totalfiles; index++) {
+                form_data.append("files[]", document.getElementById('files').files[index]);
+            }
+
+            // AJAX request
+            $.ajax({
+                url: 'ajaxfile.php',
+                type: 'post',
+                data: form_data,
+                dataType: 'json',
+                contentType: false,
+                processData: false,
+                success: function(response) {
+
+                    for (var index = 0; index < response.length; index++) {
+                        var src = response[index];
+                        console.log("path");
+                        console.log(src);
+                        // Add img element in <div id='preview'>
+                        $('#preview').append('<img src="' + src +
+                            '" width="200px;" height="200px">');
+                    }
+
+                }
+            });
+        });
+    });
+    // อัพรูป
     // auto fill
-    $('#project_id').click(function() {
+    $('#pro_name').click(function() {
         var id_project = $(this).val();
         if (id_project == "") {
 
         } else {
             $.ajax({
-                url: "autofill.php",
+                url: "autofill_report.php",
                 method: "post",
                 data: {
                     id: id_project,
                 },
                 dataType: "json", //ดาต้าที่จะเอาออกมา
                 success: function(data) {
-                    console.log(data);
-                    $('#indicator_1').val(data.indicator_1)
-                    $('#indicator_1_value').val(data.indicator_1_value)
-                    $('#indicator_2').val(data.indicator_2)
-                    $('#indicator_2_value').val(data.indicator_2_value)
-
+                    // console.log(data);
+                    $('#reason').html(data[0].reason)
+                    $('#pro_style').val(data[0].project_style_name)
+                    $('#routine_plan').val(data[0].routine_plan)
+                    $('#pro_strategy').val(data[0].project_strategy)
+                    $('#department').val(data[0].department_name)
+                    $('#pro_objective').val(data[0].objective)
+                    $('#dateStart').val(data[0].period_op)
+                    $('#dateEnd').val(data[0].period_ed)
+                    $('#pro_place').val(data[0].project_place)
+                    $('#indicator_1').val(data[0].indicator_1)
+                    $('#indicator_1_value').val(data[0].indicator_1_value)
+                    $('#indicator_2').val(data[0].indicator_2)
+                    $('#indicator_2_value').val(data[0].indicator_2_value)
+                    var html = '',
+                        html2 = '',
+                        html3 = '';
+                    var i = 0;
+                    var compensation = [];
+                    var cost = [];
+                    var material = [];
+                    for (let index = 0; index < data.length; index++) {
+                        i += 1;
+                        console.log(index);
+                        if (data[index].report_status == 0) {
+                            if (data[index].report_budget_group == "compensation") {
+                                compensation.push({
+                                    items: data[index].report_item,
+                                    quantitys: data[index].report_quantity,
+                                    prices: data[index].report_price
+                                });
+                            } else if (data[index].report_budget_group == "cost") {
+                                cost.push({
+                                    items: data[index].report_item,
+                                    quantitys: data[index].report_quantity,
+                                    prices: data[index].report_price
+                                });
+                            } else if (data[index].report_budget_group == "material") {
+                                material.push({
+                                    items: data[index].report_item,
+                                    quantitys: data[index].report_quantity,
+                                    prices: data[index].report_price
+                                });
+                            }
+                        }
+                    }
+                    if (compensation != '') {
+                        compensation.forEach(element => {
+                            html += `<tr class="box-input act-input">
+                            <td class="text-left">
+                                <span for="" class="item">${element.items}</span>
+                            </td>
+                            <td>
+                                <span for="" class="quantity">${element.quantitys}</span>
+                            </td>
+                            <td>
+                                <span for="" class="price">${element.prices}</span>
+                            </td>
+                        </tr>`
+                            $('#tbodyCompensation').html(html);
+                        });
+                    }
+                    if (cost != '') {
+                        cost.forEach(element => {
+                            html2 += `<tr class="box-input act-input">
+                            <td class="text-left">
+                                <span for="" class="item">${element.items}</span>
+                            </td>
+                            <td>
+                                <span for="" class="quantity">${element.quantitys}</span>
+                            </td>
+                            <td>
+                                <span for="" class="price">${element.prices}</span>
+                            </td>
+                        </tr>`
+                            $('#tbodyCost').html(html2);
+                        });
+                    }
+                    if (material != '') {
+                        material.forEach(element => {
+                            html3 += `<tr class="box-input act-input">
+                            <td class="text-left">
+                                <span for="" class="item">${element.items}</span>
+                            </td>
+                            <td>
+                                <span for="" class="quantity">${element.quantitys}</span>
+                            </td>
+                            <td>
+                                <span for="" class="price">${element.prices}</span>
+                            </td>
+                        </tr>`
+                            $('#tbodyMaterial').html(html3);
+                        });
+                    }
                 }
             })
         }
