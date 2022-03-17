@@ -93,7 +93,7 @@ if (isset($_POST['close_project'])) {
         echo $user_id;
          
         $sql = "UPDATE  project_info SET indicator_1_result=$indicator_1_result, indicator_2_result=$indicator_2_result, indicator_success1=$indicator_success1,indicator_success2=$indicator_success2 WHERE report_project_id = $project_id";
-        print_pre($sql);
+        // print_pre($sql);
         mysqli_query($conn, $sql);
 
         $_SESSION['project_id'] = $project_id;
@@ -116,7 +116,7 @@ if (isset($_POST['close_project'])) {
 
            
                 $sqlUPDATE="UPDATE report_budget SET report_status = 1 WHERE report_project_id = $project_id";
-                print_pre($sqlUPDATE);
+                // print_pre($sqlUPDATE);
                 mysqli_query($conn, $sqlUPDATE);
     
 

@@ -192,7 +192,7 @@ if (isset($_POST['Add_Project'])) {
 
         $sql = "INSERT INTO project_info(project_name, project_style, routine_plan, department_id, reason, period_op, period_ed, user_id, project_place, project_strategy,submit_date,project_sum_total,status_project,project_fiscal_year,indicator_1,indicator_1_value,indicator_2,indicator_2_value,operation,objective) 
         VALUES ('$pro_name','$pro_style','$pro_routine','$pro_department','$pro_reason','$pro_dateStart','$pro_dateEnd','$user_id','$pro_place','$pro_strategy','$date','$project_sum_total','ขออนุมัติโครงการ','$project_fiscal_year','$indicator_1','$indicator_1_value','$indicator_2','$indicator_2_value','$pro_operation','$pro_objective')";
-        print_pre($sql);
+        // print_pre($sql);
         mysqli_query($conn, $sql);
 
         $_SESSION['pro_name'] = $pro_name;
@@ -227,7 +227,7 @@ if (isset($_POST['Add_Project'])) {
 
             foreach ($budgets as $key => $value) {
                 $sql = "INSERT INTO project_budget(project_id, budget_group, item, price, quantity) VALUES('{$value['project_id']}', '{$value['budget_group']}', '{$value['item']}', '{$value['price']}', '{$value['quantity']}')";
-                print_pre($sql);
+                // print_pre($sql);
                 mysqli_query($conn, $sql);
             }
 
@@ -248,7 +248,7 @@ if (isset($_POST['Add_Project'])) {
                 if ($valueUpsert) {
                     $value = join(",", $valueUpsert);
                     $sql = "INSERT INTO project_plant(project_id, plant_detail, plant_time) VALUES $value";
-                    print_pre($sql);
+                    // print_pre($sql);
                     mysqli_query($conn, $sql);
                 }
             }

@@ -62,7 +62,7 @@ if (isset($_POST['disbursement'])) {
     if (count($errors) == 0) {
 
         $sql = "INSERT INTO project_info(project_id,  user_id) VALUES ('$project_id','$user_id')";
-        print_pre($sql);
+        // print_pre($sql);
         mysqli_query($conn, $sql);
 
         if ($_SESSION['success'] == "You are save project name") {
@@ -100,7 +100,7 @@ $result_search = mysqli_fetch_assoc($result_search_project_id);
 
             foreach ($budgets as $key => $value) {
                 $sql = "INSERT INTO report_budget(report_project_id, report_budget_group, report_item, report_price, report_quantity,report_status,report_num) VALUES('{$value['project_id']}', '{$value['budget_group']}', '{$value['item']}', '{$value['price']}', '{$value['quantity']}','0','$report_num')";
-                print_pre($sql);
+                // print_pre($sql);
                 mysqli_query($conn, $sql);
             }
     }else {
@@ -124,7 +124,7 @@ $result_search = mysqli_fetch_assoc($result_search_project_id);
 
             foreach ($budgets as $key => $value) {
                 $sql = "INSERT INTO report_budget(report_project_id, report_budget_group, report_item, report_price, report_quantity,report_status,report_num,report_submit_date) VALUES('{$value['project_id']}', '{$value['budget_group']}', '{$value['item']}', '{$value['price']}', '{$value['quantity']}','0','$report_num','$date')";
-                print_pre($sql);
+                // print_pre($sql);
                 mysqli_query($conn, $sql);
             }
 }

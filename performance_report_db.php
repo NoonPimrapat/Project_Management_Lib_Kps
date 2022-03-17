@@ -92,7 +92,7 @@ if (isset($_POST['performance_report'])) {
          
         $sql = "INSERT INTO progress_info(project_id, progress_quarter, indicator_1, indicator_2,user_id) 
         VALUES ('$project_id','$progress_quarter','$indicator_1','$indicator_2','$user_id')";
-        print_pre($sql);
+        // print_pre($sql);
         mysqli_query($conn, $sql);
 
         $_SESSION['project_id'] = $project_id;
@@ -129,7 +129,7 @@ if (isset($_POST['performance_report'])) {
             //     // print_pre($sql);
             //     // mysqli_query($conn, $sql);
                 $sqlUPDATE="UPDATE report_budget SET report_status = 1 WHERE report_project_id = $project_id";
-                print_pre($sqlUPDATE);
+                // print_pre($sqlUPDATE);
                 mysqli_query($conn, $sqlUPDATE);
     
 
@@ -172,7 +172,7 @@ if (isset($_POST['performance_report'])) {
                 if ($valueUpsert) {
                     $value = join(",", $valueUpsert);
                     $sql = "INSERT INTO report_plant(project_id, report_detail, report_time,report_place) VALUES $value";
-                    print_pre($sql);
+                    // print_pre($sql);
                     mysqli_query($conn, $sql);
                 }
             }

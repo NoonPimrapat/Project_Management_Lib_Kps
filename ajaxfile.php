@@ -28,6 +28,7 @@ for($index = 0;$index < $countfiles;$index++){
 
         	// File path
         	$path = $upload_location.$filename;
+			
 
             // Upload file
     		if(move_uploaded_file($_FILES['files']['tmp_name'][$index],$path)){

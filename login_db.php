@@ -3,7 +3,7 @@
     include('config/db.php');
 
     $errors = array();
-    print_pre($errors);
+    // print_pre($errors);
     if (isset($_POST['Login'])) {
         $email = mysqli_real_escape_string($conn,$_POST['email']);
         $password = mysqli_real_escape_string($conn,$_POST['password']);

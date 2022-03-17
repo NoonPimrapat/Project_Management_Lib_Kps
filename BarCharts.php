@@ -1,3 +1,32 @@
+<?php 
+$project_query = "SELECT * FROM project_info JOIN perdepartment_info JOIN project_style_info
+JOIN department_info JOIN user_details 
+ON project_info.user_id=user_details.user_id 
+AND project_info.project_style=project_style_info.project_style_id
+AND project_info.department_id=department_info.department_id
+";
+$query = mysqli_query($conn, $project_query);
+$result = mysqli_fetch_assoc($query);
+
+
+ $department_query = "SELECT * FROM `department_info` ";
+ $queryDepartment = mysqli_query($conn, $department_query);
+ $result = mysqli_fetch_assoc($queryDepartment);
+ while ($row = mysqli_fetch_array($queryDepartment)) {
+     $data[] = $row['department_name'];
+    
+    //  print_pre($data);
+  }
+
+// function print_pre($data) {
+//     echo "<pre>";
+//     print_r($data);
+//     echo "</pre>";
+// }
+
+
+?>
+
 <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script type="text/javascript">
@@ -13,7 +42,11 @@ $(function() {
         },
 
         xAxis: {
-            categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
+            categories: ['บริหารและธุรการ', 'พัฒนาและจัดการทรัพยากรสารสนเทศ',
+                'เทคโนโลยีสารสนเทศและสื่อการศึกษา', 'บริหารและธุรการ',
+                'พัฒนาและจัดการทรัพยากรสารสนเทศ', 'เทคโนโลยีสารสนเทศและสื่อการศึกษา'
+            ]
+            // categories: [<?php echo join($data,',') ?>]
         },
 
         yAxis: {
