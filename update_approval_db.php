@@ -47,10 +47,14 @@ if (isset($_POST['adjust_project'])) {
   $query = $result->fetch_assoc();
   $data_old = serialize($query);
 
-  $date_start = str_replace("/", "-", $val_date_start);
-  $date_end = str_replace("/", "-", $val_date_end);
-
-  $val_time = date(date('Y-m-d'), strtotime($date_start)) . " / " . date(date('Y-m-d'), strtotime($date_end));
+  $date_start = "";
+  $date_end = "";
+  $val_time = "";
+  if ($val_date_start && $val_date_end) {
+    $date_start = str_replace("/", "-", $val_date_start);
+    $date_end = str_replace("/", "-", $val_date_end);
+    $val_time = date(date('Y-m-d'), strtotime($date_start)) . " / " . date(date('Y-m-d'), strtotime($date_end));
+  }
 
   $indicator_1 = @$_POST['indicator_1'];
   $indicator_2 = @$_POST['indicator_2'];
@@ -60,15 +64,17 @@ if (isset($_POST['adjust_project'])) {
   $val_indicator_goal = @$_POST['val_indicator_goal'];
   $val_indicator = @$_POST['val_indicator'];
   $val_budget = @$_POST['val_budget'];
-  $data_new = serialize(array(
-    'val_time' => $val_time,
-    'indicator_1' => $indicator_1,
-    'indicator_2' => $indicator_2,
-    'indicator_1_value' => $indicator_1_value,
-    'indicator_2_value' => $indicator_2_value,
-    'val_budget' => $val_budget,
-    'val_another' => $val_another
-  ));
+
+  $upsert = array();
+  if ($val_time) $upsert['val_time'] = $val_time;
+  if ($indicator_1) $upsert['indicator_1'] = $indicator_1;
+  if ($indicator_2) $upsert['indicator_2'] = $indicator_2;
+  if ($indicator_1_value) $upsert['indicator_1_value'] = $indicator_1_value;
+  if ($indicator_2_value) $upsert['indicator_2_value'] = $indicator_2_value;
+  if ($val_budget) $upsert['val_budget'] = $val_budget;
+  if ($val_another) $upsert['val_another'] = $val_another;
+
+  $data_new = serialize($upsert);
 
   // insert table project_request_adjust
   // บันทึกรายการปรับแก้ 
