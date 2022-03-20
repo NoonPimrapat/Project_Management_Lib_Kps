@@ -24,30 +24,26 @@ if (isset($_POST['performance_report'])) {
 
     // ผู้รับผิดชอบโครงการ
     isset($_REQUEST['project_id']) ? $project_id = $_REQUEST['project_id'] : $project_id = '';
-    echo "project_id";
-    echo $project_id;
-    isset($_POST['compensation']) ?  $_POST['compensation'] :$compensation ='';
+    isset($_POST['compensation']) ?  $_POST['compensation'] : $compensation = '';
 
-
-    
     $project_id = mysqli_real_escape_string($conn, $_POST['project_id']);
     $progress_quarter = mysqli_real_escape_string($conn, $_POST['progress_quarter']);
     $indicator_1  = mysqli_real_escape_string($conn, $_POST['indicator_1']);
     $indicator_2  = mysqli_real_escape_string($conn, $_POST['indicator_2']);
     // $activity_pictures  =  $_POST['activity_pictures'];
     // foreach($_FILES['files[]']['tmp_name'] as $key => $val)
-	// {
-	// 	$file_name = $_FILES['files[]']['name'][$key];
-	// 	$file_size =$_FILES['files[]']['size'][$key];
-	// 	$file_tmp =$_FILES['files[]']['tmp_name'][$key];
-	// 	$file_type=$_FILES['files[]']['type'][$key];  
-	// 	move_uploaded_file($file_tmp,"myfile/".$file_name);
-	// }
-	// echo "Copy/Upload Complete";
+    // {
+    // 	$file_name = $_FILES['files[]']['name'][$key];
+    // 	$file_size =$_FILES['files[]']['size'][$key];
+    // 	$file_tmp =$_FILES['files[]']['tmp_name'][$key];
+    // 	$file_type=$_FILES['files[]']['type'][$key];  
+    // 	move_uploaded_file($file_tmp,"myfile/".$file_name);
+    // }
+    // echo "Copy/Upload Complete";
     // foreach($activity_pictures as $pictures){
     //     echo $pictures . "<br />"; 
     //  }
- 
+
     // $project_sum_total = mysqli_real_escape_string($conn, $_POST['project_sum_total']);
     // $project_fiscal_year=mysqli_real_escape_string($conn, $_POST['project_fiscal_year']);
     // $project_metrics1=mysqli_real_escape_string($conn, $_POST['project_metrics1']);
@@ -56,9 +52,9 @@ if (isset($_POST['performance_report'])) {
     // $target_value2=mysqli_real_escape_string($conn, $_POST['target_value2']);
 
     if (empty($project_id)) {
-        array_push($errors,"project_id is required");
+        array_push($errors, "project_id is required");
     }
-    
+
 
     // if (empty($password)) {
     //     array_push($errors,"Password is required");
@@ -66,8 +62,8 @@ if (isset($_POST['performance_report'])) {
 
     $date = date("Y-m-d H:i:s");
 
-   
-   
+
+
     foreach ($errors as $value) {
         //Print the element out.
         echo ("<br>Error:");
@@ -75,7 +71,7 @@ if (isset($_POST['performance_report'])) {
         '<br>';
     }
 
-    
+
     if (count($errors) == 0) {
 
         //  // ส่วนของการเก็บข้อมูลเข้าในตาราง
@@ -85,11 +81,9 @@ if (isset($_POST['performance_report'])) {
         //  foreach ($resultID as $values) {
         //      $project_id = $values["project_id"];
         //     $_SESSION['project_id']=$values["project_id"];
-      
+
         //  }
-        echo "$user_id";   
-        echo $user_id;
-         
+
         $sql = "INSERT INTO progress_info(project_id, progress_quarter, indicator_1, indicator_2,user_id) 
         VALUES ('$project_id','$progress_quarter','$indicator_1','$indicator_2','$user_id')";
         // print_pre($sql);
@@ -98,16 +92,14 @@ if (isset($_POST['performance_report'])) {
         $_SESSION['project_id'] = $project_id;
         $_SESSION['success'] = "You are save project name";
 
-         // หาprogress_id
-         $sqlGetID = "SELECT * FROM progress_info WHERE project_id = '$project_id' ";
-         $resultID = mysqli_query($conn, $sqlGetID);
+        // หาprogress_id
+        $sqlGetID = "SELECT * FROM progress_info WHERE project_id = '$project_id' ";
+        $resultID = mysqli_query($conn, $sqlGetID);
 
-         foreach ($resultID as $values) {
-             $progress_id = $values["progress_id"];
-      
-         }
-         echo "ID";   
-         echo $progress_id;
+        foreach ($resultID as $values) {
+            $progress_id = $values["progress_id"];
+        }
+
 
         if ($_SESSION['success'] == "You are save project name") {
 
@@ -128,29 +120,29 @@ if (isset($_POST['performance_report'])) {
             //     // $sql = "INSERT INTO report_budget(report_project_id, report_budget_group, report_item, report_price, report_quantity,report_status) VALUES('{$value['project_id']}', '{$value['budget_group']}', '{$value['item']}', '{$value['price']}', '{$value['quantity']}', '{$value['progress_id']}')";
             //     // print_pre($sql);
             //     // mysqli_query($conn, $sql);
-                $sqlUPDATE="UPDATE report_budget SET report_status = 1 WHERE report_project_id = $project_id";
-                // print_pre($sqlUPDATE);
-                mysqli_query($conn, $sqlUPDATE);
-    
+            $sqlUPDATE = "UPDATE report_budget SET report_status = 1 WHERE report_project_id = $project_id";
+            // print_pre($sqlUPDATE);
+            mysqli_query($conn, $sqlUPDATE);
+
 
             // }
-                // set status ให้เป็น 1 ของงบประมาณ
-                // $budgets = array();
-                // $compensation = $_REQUEST['compensation'] ? $_REQUEST['compensation'] : '';
-                // $budgets = getVal($compensation, 'compensation', $budgets, $project_id);
-    
-                // $costs = $_REQUEST['cost'] ? $_REQUEST['cost'] : '';
-                // $budgets = getVal($costs, 'cost', $budgets, $project_id);
-    
-                // $material = $_REQUEST['material'] ? $_REQUEST['material'] : '';
-                // $budgets = getVal($material, 'material', $budgets, $project_id);
-    
-                // foreach ($budgets as $key => $value) {
-                //     $sql = "UPDATE  report_budget(project_id, budget_group, item, price, quantity) VALUES('{$value['project_id']}', '{$value['budget_group']}', '{$value['item']}', '{$value['price']}', '{$value['quantity']}')";
-                    
-                //     print_pre($sql);
-                //     mysqli_query($conn, $sql);
-                // }
+            // set status ให้เป็น 1 ของงบประมาณ
+            // $budgets = array();
+            // $compensation = $_REQUEST['compensation'] ? $_REQUEST['compensation'] : '';
+            // $budgets = getVal($compensation, 'compensation', $budgets, $project_id);
+
+            // $costs = $_REQUEST['cost'] ? $_REQUEST['cost'] : '';
+            // $budgets = getVal($costs, 'cost', $budgets, $project_id);
+
+            // $material = $_REQUEST['material'] ? $_REQUEST['material'] : '';
+            // $budgets = getVal($material, 'material', $budgets, $project_id);
+
+            // foreach ($budgets as $key => $value) {
+            //     $sql = "UPDATE  report_budget(project_id, budget_group, item, price, quantity) VALUES('{$value['project_id']}', '{$value['budget_group']}', '{$value['item']}', '{$value['price']}', '{$value['quantity']}')";
+
+            //     print_pre($sql);
+            //     mysqli_query($conn, $sql);
+            // }
 
 
             // แผนการดำเนินงาน
@@ -167,7 +159,7 @@ if (isset($_POST['performance_report'])) {
                     $detail = isset($plant_detail[$i]) ? $plant_detail[$i] : "";
                     $time = isset($plant_time[$i]) ? $plant_time[$i] : "";
                     $location = isset($plant_location[$i]) ? $plant_location[$i] : "";
-                    if ($detail && $time&&$location) $valueUpsert[] = "('{$project_id}', '{$detail}', '{$time}','{$progress_id}')";
+                    if ($detail && $time && $location) $valueUpsert[] = "('{$project_id}', '{$detail}', '{$time}','{$progress_id}')";
                 }
                 if ($valueUpsert) {
                     $value = join(",", $valueUpsert);
@@ -176,16 +168,38 @@ if (isset($_POST['performance_report'])) {
                     mysqli_query($conn, $sql);
                 }
             }
+
+
+            // insert attach image
+            $project_attach = @$_POST['events_img'];
+            if ($project_attach) {
+                $values_attach = array();
+                $attach_type = "event/image";
+                foreach ($project_attach as $idx => $attach) {
+                    $values_attach[] = "('{$project_id}', '{$progress_quarter}', '{$attach_type}', '{$attach}')";
+                }
+                if ($values_attach) {
+
+                    // delete attach file project group type
+                    $conn->query("DELETE FROM project_attach WHERE project_id = '{$project_id}' AND quarter = '{$progress_quarter}'");
+
+                    // insert new value attach file
+                    $insertValue = join(",", $values_attach);
+                    $queryString = "INSERT INTO project_attach(project_id, quarter, attach_type, attach_value) VALUES {$insertValue}";
+                    $conn->query($queryString);
+                }
+            }
+
             // send line noti
             line_noti("\nมีการรายงานผลการดำเนินโครงการ\nโครงการ: {$project_id}");
             // header("location:approval_confirm.php");exit;
-            echo("<script>location.href ='/Project_Management_Lib_Kps/performance_confirm.php?';</script>");
+            echo ("<script>location.href ='/Project_Management_Lib_Kps/performance_confirm.php?';</script>");
         }
     }
 }
 
 
-function getVal($datas, $group, $budgets, $project_id,$progress_id)
+function getVal($datas, $group, $budgets, $project_id, $progress_id)
 {
     if ($datas) {
         $item = $datas['item'];
@@ -214,7 +228,7 @@ function line_noti($msn)
     if ($msn) :
 
         $curl = curl_init();
-        $LINE_API_KEY = "LIBWf00oYPIzo4pUDKherAXCQfCiS5NLnE6b8i409eH";//ใส่Key
+        $LINE_API_KEY = "LIBWf00oYPIzo4pUDKherAXCQfCiS5NLnE6b8i409eH"; //ใส่Key
         curl_setopt_array($curl, array(
             CURLOPT_URL => "https://notify-api.line.me/api/notify",
             CURLOPT_RETURNTRANSFER => true,
@@ -246,4 +260,3 @@ function line_noti($msn)
     endif;
     echo json_encode(array('status' => $status, 'message' => $message, 'response' => $response));
 }
-?>

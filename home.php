@@ -2,7 +2,7 @@
 session_start();
 include('config/db.php');
 // ถ้าไม่loginก็จะเข้าหน้านี้ไม่ได้
-if(!isset($_SESSION['user_email'])) { 
+if (!isset($_SESSION['user_email'])) {
     $_SESSION['msg'] = "You must log in first";
     header('location: login.php');
 }
@@ -11,12 +11,13 @@ if (isset($_GET['logout'])) {
     unset($_SESSION['user_email']);
     header('location: login.php');
 }
-$user_email=$_SESSION['user_email'];
+$user_email = $_SESSION['user_email'];
 
 $query = "SELECT * FROM user_details WHERE user_email='$user_email'";
-    $result = mysqli_query($conn, $query) or die("Error in sql : $query". mysqli_error($conn));
-    $row = mysqli_fetch_array($result);
-// ?>
+$result = mysqli_query($conn, $query) or die("Error in sql : $query" . mysqli_error($conn));
+$row = mysqli_fetch_array($result);
+// 
+?>
 
 
 <!DOCTYPE html>
@@ -54,23 +55,21 @@ $query = "SELECT * FROM user_details WHERE user_email='$user_email'";
                 <div class="navbar_right">
                     <div class="profile">
                         <div class="icon_wrap">
-                            <img src="<?php echo $row['user_pic'];?>" alt="profile_pic">
-                            <span class="name"><?php echo $row['user_firstname'];?></span>
+                            <img src="<?php echo $row['user_pic']; ?>" alt="profile_pic">
+                            <span class="name"><?php echo $row['user_firstname']; ?></span>
                             <i class="fas fa-chevron-down"></i>
                         </div>
 
                         <div class="profile_dd">
                             <ul class="profile_ul">
                                 <!-- logged in user information เช็คว่ามีการล็อคอินเข้ามาไหม -->
-                                <?php if (isset($_SESSION['email'])) :?>
-                                <?php endif?>
-                                <li class="profile_li"><a class="profile" href="profile.php"><span class="picon"><i
-                                                class="fas fa-user-alt"></i>
+                                <?php if (isset($_SESSION['email'])) : ?>
+                                <?php endif ?>
+                                <li class="profile_li"><a class="profile" href="profile.php"><span class="picon"><i class="fas fa-user-alt"></i>
                                         </span>Profile</a>
                                     <div class="btn">My Account</div>
                                 </li>
-                                <li><a class="logout" href="home.php?logout='1'"><span class="picon"><i
-                                                class="fas fa-sign-out-alt"></i></span>Logout</a></li>
+                                <li><a class="logout" href="home.php?logout='1'"><span class="picon"><i class="fas fa-sign-out-alt"></i></span>Logout</a></li>
                             </ul>
                         </div>
                     </div>
@@ -86,15 +85,11 @@ $query = "SELECT * FROM user_details WHERE user_email='$user_email'";
         <div class="color-bar">
             <p class="title">แผนปฎิบัติการประจำปีงบประมาณ ปัจจุบัน </p>
         </div>
-
-
-
     </div>
 
     <div class="grid-container">
         <Button onclick="parent.location='approval.php'" class="menuButton"> 1. ขออนุมัติโครงการ</Button>
-        <Button onclick="parent.location='disbursement.php'" class="menuButton">4. ขออนุมัติเบิก-จ่าย
-            รายครั้ง</Button>
+        <Button onclick="parent.location='disbursement.php'" class="menuButton">4. ขออนุมัติเบิก-จ่าย รายครั้ง</Button>
         <Button onclick="parent.location='performance_report.php'" class="menuButton">2. รายงานผลการดำเนินงาน</Button>
         <Button onclick="parent.location='close_project.php'" class="menuButton"> 5. ขอนุมัติปิดโครงการ</Button>
         <Button onclick="parent.location='adjust_project.php'" class="menuButton">3. ขออนุมัติปรับแผนโครงการ</Button>
@@ -114,14 +109,12 @@ $query = "SELECT * FROM user_details WHERE user_email='$user_email'";
         </div>
         <h2 class="subTitle">รายงานผลการดำเนินงานในรอบไตรมาส ........</h2>
         <div>
-            <Button onclick="myFunction()" class="menuButton2">รายงานโครงการตามแผนงานประจำ</Button>
-            <?php include('Table_report.php');?>
+            <?php include('Table_report.php'); ?>
         </div>
 
         <br>
         <div>
-            <Button onclick="myFunction()" class="menuButton2">รายงานสถานะการดำเนินโครงการ</Button>
-            <?php include('BarCharts.php');?>
+            <?php include('BarCharts.php'); ?>
         </div>
 
     </div>

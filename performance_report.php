@@ -50,8 +50,7 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@200;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
     <!-- custom css -->
     <link rel="stylesheet" href="css/style.css">
@@ -68,9 +67,9 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
     <script type="text/javascript" src='jquery-3.4.1.min.js'></script>
 
     <style type="text/css">
-    #preview img {
-        margin: 5px;
-    }
+        #preview img {
+            margin: 5px;
+        }
     </style>
 </head>
 
@@ -107,13 +106,11 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                                 <!-- logged in user information เช็คว่ามีการล็อคอินเข้ามาไหม -->
                                 <?php if (isset($_SESSION['email'])) : ?>
                                 <?php endif ?>
-                                <li class="profile_li"><a class="profile" href="#"><span class="picon"><i
-                                                class="fas fa-user-alt"></i>
+                                <li class="profile_li"><a class="profile" href="#"><span class="picon"><i class="fas fa-user-alt"></i>
                                         </span>Profile</a>
                                     <div class="btn">My Account</div>
                                 </li>
-                                <li><a class="logout" href="home.php?logout='1'"><span class="picon"><i
-                                                class="fas fa-sign-out-alt"></i></span>Logout</a></li>
+                                <li><a class="logout" href="home.php?logout='1'"><span class="picon"><i class="fas fa-sign-out-alt"></i></span>Logout</a></li>
                             </ul>
                         </div>
                     </div>
@@ -135,14 +132,14 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
         <form action="performance_report_db.php" method="post" enctype="multipart/form-data">
             <?php include('errors.php'); ?>
             <?php if (isset($_SESSION['error'])) : ?>
-            <div class="error">
-                <h3>
-                    <?php
+                <div class="error">
+                    <h3>
+                        <?php
                         echo $_SESSION['error'];
                         unset($_SESSION['error']);
                         ?>
-                </h3>
-            </div>
+                    </h3>
+                </div>
             <?php endif ?>
             <div class="grid-item">
                 <div class="row">
@@ -154,9 +151,9 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                         <select name="project_id" class="inputFill-Information" id="pro_name" required>
                             <option value=""> กรุณาเลือก </option>
                             <?php foreach ($result_ProjectName as $results) { ?>
-                            <option value="<?php echo $results["project_id"]; ?>">
-                                <?php echo $results["project_name"]; ?>
-                            </option>
+                                <option value="<?php echo $results["project_id"]; ?>">
+                                    <?php echo $results["project_name"]; ?>
+                                </option>
                             <?php } ?>
                         </select>
 
@@ -203,10 +200,8 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                                     <td>
                                         <input type="text" name="plant_location[]">
                                         <span class="textplant_location"></span>
-                                        <a href="#" data-action="clone-plant" data-target="material"><i
-                                                class="fa fa-plus" aria-hidden="true"></i></a>
-                                        <a href="#" data-action="remove-plant"><i class="fa fa-minus"
-                                                aria-hidden="true"></i></a>
+                                        <a href="#" data-action="clone-plant" data-target="material"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                                        <a href="#" data-action="remove-plant"><i class="fa fa-minus" aria-hidden="true"></i></a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -328,15 +323,13 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                 <div class="row">
                     <div class="col-65">
                         <label for="ลักษณะโครงการ : " class="topic">ค่าเป้าหมาย : </label>
-                        <input type="text" id="indicator_1_value" name="indicator_1_value"
-                            class="inputFill-Information-Datepicker" required>
+                        <input type="text" id="indicator_1_value" name="indicator_1_value" class="inputFill-Information-Datepicker" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-65">
                         <label for="ลักษณะโครงการ : " class="topic">ผลการดำเนินงาน : </label>
-                        <input type="text" id="project_name" name="target_value1"
-                            class="inputFill-Information-Datepicker" required>
+                        <input type="text" id="project_name" name="target_value1" class="inputFill-Information-Datepicker" required>
                     </div>
                 </div>
                 <div class="row">
@@ -349,15 +342,13 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                 <div class="row">
                     <div class="col-65">
                         <label for="ลักษณะโครงการ : " class="topic">ค่าเป้าหมาย : </label>
-                        <input type="text" id="indicator_2_value" name="indicator_2_value"
-                            class="inputFill-Information-Datepicker" required>
+                        <input type="text" id="indicator_2_value" name="indicator_2_value" class="inputFill-Information-Datepicker" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-65">
                         <label for="ลักษณะโครงการ : " class="topic">ผลการดำเนินงาน : </label>
-                        <input type="text" id="project_name" name="progress_performance2"
-                            class="inputFill-Information-Datepicker" required>
+                        <input type="text" id="project_name" name="progress_performance2" class="inputFill-Information-Datepicker" required>
                     </div>
                 </div>
                 <div class="information-container">
@@ -367,7 +358,6 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                     <label-1 for="ลักษณะโครงการ" class="topic">1.ภาพกิจกรรม(5-10 ไฟล์) </label>
                         <!-- <input id="pic-upload" name="filUpload[]" type="file" accept="image/*" multiple /> -->
                         <input type="file" name="files[]" multiple id="files">
-                        <input type="button" id="submit" value='Upload'>
                         <!-- Preview -->
                         <div id='preview'></div>
                 </div>
@@ -386,9 +376,7 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                         <label for="ลักษณะโครงการ : " class="topic">ผู้รับผิดชอบโครงการ : </label>
                     </div>
                     <div class="col-65">
-                        <input type="text" name="responsible_man"
-                            value="<?php foreach ($result_Username as $results) { ?><?php echo $results["user_firstname"]; ?> &nbsp; <?php echo $results["user_lastname"] ?> <?php } ?>"
-                            class="inputFill-Information" readonly>
+                        <input type="text" name="responsible_man" value="<?php foreach ($result_Username as $results) { ?><?php echo $results["user_firstname"]; ?> &nbsp; <?php echo $results["user_lastname"] ?> <?php } ?>" class="inputFill-Information" readonly>
                     </div>
                 </div>
                 <div class="container-button">
@@ -401,8 +389,7 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
             <div id='preview'>
             </div>
 
-            <form id="imageform" method="post" enctype="multipart/form-data" action='ajaxImageUpload.php'
-                style="clear:both">
+            <form id="imageform" method="post" enctype="multipart/form-data" action='ajaxImageUpload.php' style="clear:both">
 
                 <div id='imageloadstatus' style='display:none'>
                     <!-- <img src="loading.gif" alt="Uploading...." /> -->
@@ -413,9 +400,7 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                                     <feDropShadow dx="0" dy="0" stdDeviation="1.5" flood-color="#00766a" />
                                 </filter>
                             </defs>
-                            <circle id="spinner"
-                                style="fill:transparent;stroke:#00766a;stroke-width: 7px;stroke-linecap: round;filter:url(#shadow);"
-                                cx="50" cy="50" r="45" />
+                            <circle id="spinner" style="fill:transparent;stroke:#00766a;stroke-width: 7px;stroke-linecap: round;filter:url(#shadow);" cx="50" cy="50" r="45" />
                         </svg>
                     </div>
                 </div>
@@ -434,40 +419,40 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
     </div>
     <script src="./bahttex.js"></script>
     <script>
-    var quantityAll = 0;
-    var priceAll = 0;
-    $(document).on('click', 'a[data-action="clone"]', function(e) {
-        e.preventDefault();
-        var err = false;
-        var section, tr, item, quantity, price;
-        var group = $(this).data('target');
-        section = $(this).closest('.section-table');
-        tr = $(this).closest('.box-input');
+        var quantityAll = 0;
+        var priceAll = 0;
+        $(document).on('click', 'a[data-action="clone"]', function(e) {
+            e.preventDefault();
+            var err = false;
+            var section, tr, item, quantity, price;
+            var group = $(this).data('target');
+            section = $(this).closest('.section-table');
+            tr = $(this).closest('.box-input');
 
-        item = $(tr).find('input[name="' + group + '[item][]"]').val();
-        quantity = $(tr).find('input[name="' + group + '[quantity][]"]').val();
-        price = $(tr).find('input[name="' + group + '[price][]"]').val();
+            item = $(tr).find('input[name="' + group + '[item][]"]').val();
+            quantity = $(tr).find('input[name="' + group + '[quantity][]"]').val();
+            price = $(tr).find('input[name="' + group + '[price][]"]').val();
 
-        // remove message pop
-        $(section).find('.message-box').remove();
+            // remove message pop
+            $(section).find('.message-box').remove();
 
-        // has error = true -- message alert pop
-        if (item.length == 0 || quantity.length == 0 || price.length == 0) {
-            $(section).append(
-                `<div class="message message-box"><div class="error"><h3>Enter is required</h3></div></div>`
-            )
-            return;
-        }
+            // has error = true -- message alert pop
+            if (item.length == 0 || quantity.length == 0 || price.length == 0) {
+                $(section).append(
+                    `<div class="message message-box"><div class="error"><h3>Enter is required</h3></div></div>`
+                )
+                return;
+            }
 
-        $(tr).find('input').addClass('hiden');
+            $(tr).find('input').addClass('hiden');
 
-        $(tr).find('span.item').text(item);
-        $(tr).find('span.quantity').text(quantity);
-        $(tr).find('span.price').text(price);
+            $(tr).find('span.item').text(item);
+            $(tr).find('span.quantity').text(quantity);
+            $(tr).find('span.price').text(price);
 
-        $(tr).removeClass('act-input');
+            $(tr).removeClass('act-input');
 
-        var dup = `<tr class="box-input act-input">
+            var dup = `<tr class="box-input act-input">
                             <td class="text-left"><input type="text" name="${group}[item][]"><span for="" class="item"></span></td>
                             <td><input type="number" class="input-quantity" name="${group}[quantity][]"><span for="" class="quantity"></span></td>
                             <td>
@@ -480,58 +465,58 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                             </td>
                         </tr>`;
 
-        priceAll += parseFloat(price * quantity);
-        $(section).find('table > tbody').append(dup);
-        var priceTotal = priceAll.toFixed(2);
-        $('#sum-total').html(`${priceTotal}.- บาท`);
-        $('#sum_total').val(priceTotal);
-        $('#bahttex').html('(' + ThaiBaht(priceAll.toFixed(2)) + ')')
-    })
-
-    $(document).on('click', 'a[data-action="remove"]', function(e) {
-        e.preventDefault();
-        // get element tr 
-        var tr = $(this).closest('.box-input');
-        // get price from span
-        var price = $(tr).find('.input-price').val();
-        var quantity = $(tr).find('.input-quantity').val()
-        if (price !== "undefined") {
-            priceAll = parseFloat(priceAll) - parseFloat(price * quantity);
-            priceAll = priceAll < 0 ? 0 : priceAll;
-            $(this).closest('tr').remove();
-            $('#sum-total').html(`${priceAll.toFixed(2)}.- บาท`);
+            priceAll += parseFloat(price * quantity);
+            $(section).find('table > tbody').append(dup);
+            var priceTotal = priceAll.toFixed(2);
+            $('#sum-total').html(`${priceTotal}.- บาท`);
+            $('#sum_total').val(priceTotal);
             $('#bahttex').html('(' + ThaiBaht(priceAll.toFixed(2)) + ')')
-        }
-    })
-    $(document).on('click', 'a[data-action="clone-plant"]', function(e) {
-        e.preventDefault();
-        var err = false;
-        var section, tr, detail, time, location;
-        section = $(this).closest('.section-table');
-        tr = $(this).closest('.box-input');
+        })
 
-        detail = $(tr).find('input[name="plant_detail[]"]').val();
-        time = $(tr).find('input[name="plant_time[]"]').val();
-        location = $(tr).find('input[name="plant_location[]"]').val();
-        // remove message pop
-        $(section).find('.message-box').remove();
+        $(document).on('click', 'a[data-action="remove"]', function(e) {
+            e.preventDefault();
+            // get element tr 
+            var tr = $(this).closest('.box-input');
+            // get price from span
+            var price = $(tr).find('.input-price').val();
+            var quantity = $(tr).find('.input-quantity').val()
+            if (price !== "undefined") {
+                priceAll = parseFloat(priceAll) - parseFloat(price * quantity);
+                priceAll = priceAll < 0 ? 0 : priceAll;
+                $(this).closest('tr').remove();
+                $('#sum-total').html(`${priceAll.toFixed(2)}.- บาท`);
+                $('#bahttex').html('(' + ThaiBaht(priceAll.toFixed(2)) + ')')
+            }
+        })
+        $(document).on('click', 'a[data-action="clone-plant"]', function(e) {
+            e.preventDefault();
+            var err = false;
+            var section, tr, detail, time, location;
+            section = $(this).closest('.section-table');
+            tr = $(this).closest('.box-input');
 
-        // has error = true -- message alert pop
-        if (detail.length == 0 || time.length == 0 || location.length == 0) {
-            $(section).append(
-                `<div class="message message-box"><div class="error"><h3>Enter is required</h3></div></div>`
-            )
-            return;
-        }
+            detail = $(tr).find('input[name="plant_detail[]"]').val();
+            time = $(tr).find('input[name="plant_time[]"]').val();
+            location = $(tr).find('input[name="plant_location[]"]').val();
+            // remove message pop
+            $(section).find('.message-box').remove();
 
-        $(tr).find('input').addClass('hiden');
+            // has error = true -- message alert pop
+            if (detail.length == 0 || time.length == 0 || location.length == 0) {
+                $(section).append(
+                    `<div class="message message-box"><div class="error"><h3>Enter is required</h3></div></div>`
+                )
+                return;
+            }
 
-        $(tr).find('span.textplant_detail').text(detail);
-        $(tr).find('span.textplant_time').text(time);
-        $(tr).find('span.textplant_location').text(location);
+            $(tr).find('input').addClass('hiden');
 
-        $(tr).removeClass('checked');
-        var dup = `<tr class="box-input checked">
+            $(tr).find('span.textplant_detail').text(detail);
+            $(tr).find('span.textplant_time').text(time);
+            $(tr).find('span.textplant_location').text(location);
+
+            $(tr).removeClass('checked');
+            var dup = `<tr class="box-input checked">
                             <td>
                                 <input type="text" name="plant_detail[]">
                                 <span class="textplant_detail"></span>
@@ -549,114 +534,98 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                             </td>
                         </tr>`;
 
-        $(section).find('table > tbody').append(dup);
+            $(section).find('table > tbody').append(dup);
 
-    })
+        })
 
-    $(document).on('click', 'a[data-action="remove-plant"]', function(e) {
-        e.preventDefault();
-        $(this).closest('tr').remove();
-    })
-    // อัพรูป
-    $(document).ready(function() {
+        $(document).on('click', 'a[data-action="remove-plant"]', function(e) {
+            e.preventDefault();
+            $(this).closest('tr').remove();
+        })
 
-        $('#submit').click(function() {
+        $(document).on('change', '#files', function() {
 
-            var form_data = new FormData();
+            const files = $(this)[0].files;
 
-            // Read selected files
-            var totalfiles = document.getElementById('files').files.length;
-            for (var index = 0; index < totalfiles; index++) {
-                form_data.append("files[]", document.getElementById('files').files[index]);
-            }
+            // clear image in box preview
+            $('#preview').html("");
 
-            // AJAX request
-            $.ajax({
-                url: 'ajaxfile.php',
-                type: 'post',
-                data: form_data,
-                dataType: 'json',
-                contentType: false,
-                processData: false,
-                success: function(response) {
-
-                    for (var index = 0; index < response.length; index++) {
-                        var src = response[index];
-                        console.log("path");
-                        console.log(src);
-                        // Add img element in <div id='preview'>
-                        $('#preview').append('<img src="' + src +
-                            '" width="200px;" height="200px">');
-                    }
-
+            // insert input/image in box preview
+            $.each(files, function(index, file) {
+                const src = URL.createObjectURL(file);
+                $('#preview').append('<img src="' + src + '" width="200px;" height="200px">')
+                var reader = new FileReader();
+                reader.onloadend = function() {
+                    $('#preview').append('<input type="hidden" name="events_img[]" value="' + reader.result + '">')
                 }
-            });
-        });
-    });
-    // อัพรูป
-    // auto fill
-    $('#pro_name').click(function() {
-        var id_project = $(this).val();
-        if (id_project == "") {
+                reader.readAsDataURL(file);
+            })
 
-        } else {
-            $.ajax({
-                url: "autofill_report.php",
-                method: "post",
-                data: {
-                    id: id_project,
-                },
-                dataType: "json", //ดาต้าที่จะเอาออกมา
-                success: function(data) {
-                    // console.log(data);
-                    $('#reason').html(data[0].reason)
-                    $('#pro_style').val(data[0].project_style_name)
-                    $('#routine_plan').val(data[0].routine_plan)
-                    $('#pro_strategy').val(data[0].project_strategy)
-                    $('#department').val(data[0].department_name)
-                    $('#pro_objective').val(data[0].objective)
-                    $('#dateStart').val(data[0].period_op)
-                    $('#dateEnd').val(data[0].period_ed)
-                    $('#pro_place').val(data[0].project_place)
-                    $('#indicator_1').val(data[0].indicator_1)
-                    $('#indicator_1_value').val(data[0].indicator_1_value)
-                    $('#indicator_2').val(data[0].indicator_2)
-                    $('#indicator_2_value').val(data[0].indicator_2_value)
-                    var html = '',
-                        html2 = '',
-                        html3 = '';
-                    var i = 0;
-                    var compensation = [];
-                    var cost = [];
-                    var material = [];
-                    for (let index = 0; index < data.length; index++) {
-                        i += 1;
-                        console.log(index);
-                        if (data[index].report_status == 0) {
-                            if (data[index].report_budget_group == "compensation") {
-                                compensation.push({
-                                    items: data[index].report_item,
-                                    quantitys: data[index].report_quantity,
-                                    prices: data[index].report_price
-                                });
-                            } else if (data[index].report_budget_group == "cost") {
-                                cost.push({
-                                    items: data[index].report_item,
-                                    quantitys: data[index].report_quantity,
-                                    prices: data[index].report_price
-                                });
-                            } else if (data[index].report_budget_group == "material") {
-                                material.push({
-                                    items: data[index].report_item,
-                                    quantitys: data[index].report_quantity,
-                                    prices: data[index].report_price
-                                });
+        })
+
+        // auto fill
+        $('#pro_name').click(function() {
+            var id_project = $(this).val();
+            if (id_project == "") {
+
+            } else {
+                $.ajax({
+                    url: "autofill_report.php",
+                    method: "post",
+                    data: {
+                        id: id_project,
+                    },
+                    dataType: "json", //ดาต้าที่จะเอาออกมา
+                    success: function(data) {
+                        // console.log(data);
+                        $('#reason').html(data[0].reason)
+                        $('#pro_style').val(data[0].project_style_name)
+                        $('#routine_plan').val(data[0].routine_plan)
+                        $('#pro_strategy').val(data[0].project_strategy)
+                        $('#department').val(data[0].department_name)
+                        $('#pro_objective').val(data[0].objective)
+                        $('#dateStart').val(data[0].period_op)
+                        $('#dateEnd').val(data[0].period_ed)
+                        $('#pro_place').val(data[0].project_place)
+                        $('#indicator_1').val(data[0].indicator_1)
+                        $('#indicator_1_value').val(data[0].indicator_1_value)
+                        $('#indicator_2').val(data[0].indicator_2)
+                        $('#indicator_2_value').val(data[0].indicator_2_value)
+                        var html = '',
+                            html2 = '',
+                            html3 = '';
+                        var i = 0;
+                        var compensation = [];
+                        var cost = [];
+                        var material = [];
+                        for (let index = 0; index < data.length; index++) {
+                            i += 1;
+                            console.log(index);
+                            if (data[index].report_status == 0) {
+                                if (data[index].report_budget_group == "compensation") {
+                                    compensation.push({
+                                        items: data[index].report_item,
+                                        quantitys: data[index].report_quantity,
+                                        prices: data[index].report_price
+                                    });
+                                } else if (data[index].report_budget_group == "cost") {
+                                    cost.push({
+                                        items: data[index].report_item,
+                                        quantitys: data[index].report_quantity,
+                                        prices: data[index].report_price
+                                    });
+                                } else if (data[index].report_budget_group == "material") {
+                                    material.push({
+                                        items: data[index].report_item,
+                                        quantitys: data[index].report_quantity,
+                                        prices: data[index].report_price
+                                    });
+                                }
                             }
                         }
-                    }
-                    if (compensation != '') {
-                        compensation.forEach(element => {
-                            html += `<tr class="box-input act-input">
+                        if (compensation != '') {
+                            compensation.forEach(element => {
+                                html += `<tr class="box-input act-input">
                             <td class="text-left">
                                 <span for="" class="item">${element.items}</span>
                             </td>
@@ -667,12 +636,12 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                                 <span for="" class="price">${element.prices}</span>
                             </td>
                         </tr>`
-                            $('#tbodyCompensation').html(html);
-                        });
-                    }
-                    if (cost != '') {
-                        cost.forEach(element => {
-                            html2 += `<tr class="box-input act-input">
+                                $('#tbodyCompensation').html(html);
+                            });
+                        }
+                        if (cost != '') {
+                            cost.forEach(element => {
+                                html2 += `<tr class="box-input act-input">
                             <td class="text-left">
                                 <span for="" class="item">${element.items}</span>
                             </td>
@@ -683,12 +652,12 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                                 <span for="" class="price">${element.prices}</span>
                             </td>
                         </tr>`
-                            $('#tbodyCost').html(html2);
-                        });
-                    }
-                    if (material != '') {
-                        material.forEach(element => {
-                            html3 += `<tr class="box-input act-input">
+                                $('#tbodyCost').html(html2);
+                            });
+                        }
+                        if (material != '') {
+                            material.forEach(element => {
+                                html3 += `<tr class="box-input act-input">
                             <td class="text-left">
                                 <span for="" class="item">${element.items}</span>
                             </td>
@@ -699,13 +668,13 @@ $result_ProjectName = mysqli_query($conn, $queryProjectName);
                                 <span for="" class="price">${element.prices}</span>
                             </td>
                         </tr>`
-                            $('#tbodyMaterial').html(html3);
-                        });
+                                $('#tbodyMaterial').html(html3);
+                            });
+                        }
                     }
-                }
-            })
-        }
-    })
+                })
+            }
+        })
     </script>
 
 

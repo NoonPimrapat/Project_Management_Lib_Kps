@@ -1,65 +1,121 @@
 table tbody tr {
-    position: relative;
+  position: relative;
 }
 
 table a {
-    position: absolute;
-    right: -25px;
-    top: 12px;
-    opacity: 0;
-    visibility: hidden;
+  position: absolute;
+  right: -25px;
+  top: 12px;
+  opacity: 0;
+  visibility: hidden;
 }
 
 table input {
-    width: 100%;
+  width: 100%;
 }
 
 .hiden {
-    display: none !important;
-    opacity: 0;
+  display: none !important;
+  opacity: 0;
 }
 
 tr.act-input a {
-    opacity: 1;
-    visibility: initial;
+  opacity: 1;
+  visibility: initial;
 }
 
 tr a[data-action="remove"] {
-    visibility: initial;
-    opacity: 1;
+  visibility: initial;
+  opacity: 1;
 }
 
 tr.act-input a[data-action="remove"] {
-    visibility: hidden;
-    opacity: 0;
+  visibility: hidden;
+  opacity: 0;
 }
 
 .error {
-    margin-bottom: 16px;
+  margin-bottom: 16px;
 }
 
 .p-right {
-    width: 450px;
-    float: right;
+  width: 450px;
+  float: right;
 }
 
 .p-right:after {
-    content: "";
-    clear: both;
-    display: table;
+  content: "";
+  clear: both;
+  display: table;
 }
 
 tr.checked a {
-    opacity: 1;
-    visibility: initial;
+  opacity: 1;
+  visibility: initial;
 }
 
 tr a[data-action="remove-plant"] {
-    visibility: initial;
-    opacity: 1;
+  visibility: initial;
+  opacity: 1;
 }
 
 tr.checked a[data-action="remove-plant"] {
-    visibility: hidden;
-    opacity: 0;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.form-group.type-checkbox {
+  margin-bottom: 0;
+  position: relative;
+}
+.form-group label {
+  font-family: "Prompt", sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  display: inline-block;
+  margin-left: 6.5%;
+  margin-bottom: 0;
+}
+.fix-col-2 {
+  columns: 2;
+}
+.box-change {
+  display: none;
+}
+.box-change.in {
+  display: block;
+}
+.box-change.in.other {
+  display: inline-block;
+}
+.box-change label {
+  font-size: 18px;
+  font-weight: 500;
+  padding-top: 0;
+}
+.box-change input {
+  margin-top: 0;
+}
+.box-change input[type="text"],
+.box-change input[type="number"] {
+  width: 600px;
+}
+.box-change p {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 0;
+}
+.other input {
+  margin-top: 10px;
+}
+.topic-box {
+  width: 87%;
+  margin: auto;
+  margin-bottom: 15px;
+}
+.topic-box h4 {
+  font-size: 24px;
+  border-bottom: 1px dashed #333;
+  font-weight: 600;
+  margin-bottom: 0;
 }
