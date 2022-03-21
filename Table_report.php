@@ -31,8 +31,8 @@ while ($row = mysqli_fetch_array($queryDepartment)) {
 <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@200;400;600&display=swap" rel="stylesheet">
 <!-- <Button onclick="myFunction()" class="menuButton2">รายงานโครงการตามแผนงานประจำ</Button> -->
 <select id="report-plant-type" class="inputFill-Information" style="background: #E5E5E5;margin-left: -50%;">
-    <option value="1" selected>รายงานโครงการตามแผนงานประจำ</option>
-    <option value="2">รายงานโครงการตามแผนยุทธศาสตร์</option>
+    <option value="1" selected>รายงานโครงการตามแผนยุทธศาสตร์</option>
+    <option value="2">รายงานโครงการตามแผนงานประจำ</option>
 </select>
 <table id="pre-table">
     <thead>
@@ -63,8 +63,8 @@ while ($row = mysqli_fetch_array($queryDepartment)) {
 </table>
 
 <script>
-    $(document).on('change', '#report-plant-type', function(e) {
-        var t = $(this).val();
+    $(document).on('change', '#report-plant-type, #change-report-year', function(e) {
+        var t = $('#report-plant-type').val();
         callservice(t)
     })
 
@@ -76,6 +76,7 @@ while ($row = mysqli_fetch_array($queryDepartment)) {
             url: "service.php",
             data: {
                 type: t,
+                year: $('#change-report-year').val(),
                 target: "ReportProject"
             },
             dataType: "json",

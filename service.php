@@ -94,10 +94,14 @@ function GetReportProject()
   $error = false;
   $errorMessage = "Success";
   $type = $_POST['type'];
+  $year = $_POST['year'];
   $queryString = "SELECT * FROM project_info JOIN project_style_info JOIN department_info JOIN user_details 
   ON project_info.user_id=user_details.user_id 
   AND project_info.project_style=project_style_info.project_style_id
   AND project_info.department_id=department_info.department_id WHERE project_style = '{$type}'";
+
+  if ($year) $queryString .= " AND project_fiscal_year = '{$year}'";
+
   $result = $conn->query($queryString);
   $data   = array();
   while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {

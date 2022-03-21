@@ -98,7 +98,14 @@ $row = mysqli_fetch_array($result);
     </div>
     <div class="container">
         <div class="color-bar">
-            <p class="title">แผนปฎิบัติการประจำปีงบประมาณ พ.ศ. </p>
+            <p class="title">
+                แผนปฎิบัติการประจำปีงบประมาณ พ.ศ.
+                <select id="change-report-year" style="font-size: 16px;">
+                    <option value="">กรุณาเลือก พ.ศ.</option>
+                    <option value="2564">2564</option>
+                    <option value="2565">2565</option>
+                </select>
+            </p>
         </div>
     </div>
     <div class="container">
