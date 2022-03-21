@@ -63,9 +63,7 @@ while ($row = mysqli_fetch_array($queryDepartment)) {
 </table>
 
 <script>
-    callservice();
-
-    function callservice(t) {
+    function loadTable(t) {
         $.ajax({
             type: "POST",
             url: "service.php",
@@ -91,4 +89,5 @@ while ($row = mysqli_fetch_array($queryDepartment)) {
             }
         });
     }
+    loadTable();
 </script>

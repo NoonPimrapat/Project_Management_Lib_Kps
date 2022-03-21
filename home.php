@@ -128,7 +128,7 @@ $row = mysqli_fetch_array($result);
 
     <script>
         $(document).on('change', '#report-plant-type, #change-report-year', function(e) {
-            callservice()
+            loadTable()
             loadChart();
         })
     </script>
