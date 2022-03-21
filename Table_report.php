@@ -63,19 +63,14 @@ while ($row = mysqli_fetch_array($queryDepartment)) {
 </table>
 
 <script>
-    $(document).on('change', '#report-plant-type, #change-report-year', function(e) {
-        var t = $('#report-plant-type').val();
-        callservice(t)
-    })
-
-    callservice($('#report-plant-type').val());
+    callservice();
 
     function callservice(t) {
         $.ajax({
             type: "POST",
             url: "service.php",
             data: {
-                type: t,
+                type: $('#report-plant-type').val(),
                 year: $('#change-report-year').val(),
                 target: "ReportProject"
             },
