@@ -169,6 +169,8 @@ if (isset($_POST['performance_report'])) {
                 }
             }
 
+            // delete attach file project group type
+            $conn->query("DELETE FROM project_attach WHERE project_id = '{$project_id}' AND quarter = '{$progress_quarter}'");
 
             // insert attach image
             $project_attach = @$_POST['events_img'];
@@ -179,15 +181,33 @@ if (isset($_POST['performance_report'])) {
                     $values_attach[] = "('{$project_id}', '{$progress_quarter}', '{$attach_type}', '{$attach}')";
                 }
                 if ($values_attach) {
-
-                    // delete attach file project group type
-                    $conn->query("DELETE FROM project_attach WHERE project_id = '{$project_id}' AND quarter = '{$progress_quarter}'");
-
                     // insert new value attach file
                     $insertValue = join(",", $values_attach);
                     $queryString = "INSERT INTO project_attach(project_id, quarter, attach_type, attach_value) VALUES {$insertValue}";
                     $conn->query($queryString);
                 }
+            }
+
+            // echo "<br>";
+
+            $target_dir = "uploads/";
+            // insert file รายงานผลการประเมินความพึงพอใจ/การนำความรู้ไปใช้ประโยชน์
+            // รูปแบบ attach_value : uploads/48b263c497bed859cfccc48472366b7b.jpg
+            $target_file = $target_dir . basename($_FILES["assessment"]["name"]);
+            if (move_uploaded_file($_FILES["assessment"]["tmp_name"], $target_file)) {
+                $queryString = "INSERT INTO project_attach(project_id, quarter, attach_type, attach_value) VALUES ('{$project_id}', '{$progress_quarter}', 'event/file-1', '{$target_file}')";
+                // echo "{$queryString} <br>";
+                $conn->query($queryString);
+            }
+
+
+            // insert file เอกสารการลงทะเบียนเข้าร่วมกิจกรรม(ถ้ามี)
+            // รูปแบบ attach_value : uploads/48b263c497bed859cfccc48472366b7b.jpg
+            $target_file = $target_dir . basename($_FILES["registration"]["name"]);
+            if (move_uploaded_file($_FILES["registration"]["tmp_name"], $target_file)) {
+                $queryString = "INSERT INTO project_attach(project_id, quarter, attach_type, attach_value) VALUES ('{$project_id}', '{$progress_quarter}', 'event/file-2', '{$target_file}')";
+                // echo "{$queryString} <br>";
+                $conn->query($queryString);
             }
 
             // send line noti

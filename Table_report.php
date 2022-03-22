@@ -24,15 +24,21 @@ while ($row = mysqli_fetch_array($queryDepartment)) {
 //     echo "</pre>";
 // }
 
-
+$queryStyle = mysqli_query($conn, "SELECT * FROM `project_style_info`");
 
 ?>
 <link rel="stylesheet" href="css/Table_report.css">
 <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@200;400;600&display=swap" rel="stylesheet">
 <!-- <Button onclick="myFunction()" class="menuButton2">รายงานโครงการตามแผนงานประจำ</Button> -->
 <select id="report-plant-type" class="inputFill-Information" style="background: #E5E5E5;margin-left: -50%;">
-    <option value="1" selected>รายงานโครงการตามแผนยุทธศาสตร์</option>
-    <option value="2">รายงานโครงการตามแผนงานประจำ</option>
+    <?php
+    $i = 0;
+    while ($row = mysqli_fetch_array($queryStyle)) {
+        $selected = $i == 0 ? "selected" : "";
+        echo "<option value=\"{$row['project_style_id']}\" {$selected}>{$row['project_style_name']}</option>";
+        $i++;
+    }
+    ?>
 </select>
 <table id="pre-table">
     <thead>
